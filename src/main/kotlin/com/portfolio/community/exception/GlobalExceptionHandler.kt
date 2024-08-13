@@ -40,11 +40,7 @@ class GlobalExceptionHandler: ResponseEntityExceptionHandler() {
     }
 
     //403 Forbidden
-    @ExceptionHandler(AccessDeniedException::class)
-    fun clientForbidden(ex: AccessDeniedException, request: WebRequest): ResponseEntity<Any> {
-        val errorDetails = ErrorResponse(HttpStatus.FORBIDDEN.value(), ex.localizedMessage, request.getDescription(false))
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(errorDetails as Any)
-    }
+    //CustomAccessDeniedHandler에서 처리한다.
 
     //404 Not Found
     @ExceptionHandler(NotFoundException::class)

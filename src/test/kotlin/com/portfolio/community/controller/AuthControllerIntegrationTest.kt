@@ -187,6 +187,41 @@ class AuthControllerIntegrationTest {
     }
 
     @Test
+    fun given_InvalidUsername_when_Login_then_ReturnOkAndJwtToken() {
+        //Given
+        val loginRequest = LoginRequest(username = "Test User", password = "password")
+
+        //When
+        val result = mockMvc.perform(post("/login")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(objectMapper.writeValueAsString(loginRequest)))
+
+        //Then
+        result.andExpect(status().isUnauthorized)
+            .andExpect(jsonPath("$.status").value(401))
+            .andExpect(jsonPath("$.message").value("Bad credentials"))
+            .andExpect(jsonPath("$.details").exists())
+    }
+
+    @Test
+    fun given_InvalidPassword_when_Login_then_ReturnOkAndJwtToken() {
+        //Given
+        userRepository.save(UserEntity(username = "Test User", password = BCryptPasswordEncoder().encode("password"), role = level0Role))
+        val loginRequest = LoginRequest(username = "Test User", password = "wrongpassword")
+
+        //When
+        val result = mockMvc.perform(post("/login")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(objectMapper.writeValueAsString(loginRequest)))
+
+        //Then
+        result.andExpect(status().isUnauthorized)
+            .andExpect(jsonPath("$.status").value(401))
+            .andExpect(jsonPath("$.message").value("Bad credentials"))
+            .andExpect(jsonPath("$.details").exists())
+    }
+
+    @Test
     fun given_ValidRequest_when_RefreshToken_then_ReturnOkAndNewAccessToken() {
         //Given
         userRepository.save(UserEntity(username = "Test User", password = BCryptPasswordEncoder().encode("password"), role = level0Role))

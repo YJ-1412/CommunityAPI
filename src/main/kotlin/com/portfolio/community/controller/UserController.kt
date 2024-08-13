@@ -22,6 +22,13 @@ class UserController(
     private val jwtTokenProvider: JwtTokenProvider
 ) {
 
+    @PostMapping("/register")
+    fun register(@Valid @RequestBody userCreateRequest: UserCreateRequest) : ResponseEntity<UserResponse> {
+        val user = userService.createUser(userCreateRequest)
+        val location = URI.create("/users/${user.id}")
+        return ResponseEntity.created(location).body(user)
+    }
+
     @PostMapping("/login")
     fun login(@RequestBody loginRequest: LoginRequest): ResponseEntity<*> {
         val authentication = authenticationManager.authenticate(UsernamePasswordAuthenticationToken(loginRequest.username, loginRequest.password))
@@ -35,13 +42,6 @@ class UserController(
         userService.saveRefreshToken(principal.id, refreshToken)
 
         return ResponseEntity.ok(mapOf("accessToken" to accessToken, "refreshToken" to refreshToken))
-    }
-
-    @GetMapping("/users/{userId}")
-    @PreAuthorize("permitAll()")
-    fun getUser(@PathVariable userId: Long): ResponseEntity<UserResponse> {
-        val user = userService.getUserById(userId)
-        return ResponseEntity.ok(user)
     }
 
     @PostMapping("/refresh-token")
@@ -60,11 +60,11 @@ class UserController(
         return ResponseEntity.ok(mapOf("accessToken" to newAccessToken,"refreshToken" to newRefreshToken))
     }
 
-    @PostMapping("/register")
-    fun register(@Valid @RequestBody userCreateRequest: UserCreateRequest) : ResponseEntity<UserResponse> {
-        val user = userService.createUser(userCreateRequest)
-        val location = URI.create("/users/${user.id}")
-        return ResponseEntity.created(location).body(user)
+    @GetMapping("/users/{userId}")
+    @PreAuthorize("permitAll()")
+    fun getUser(@PathVariable userId: Long): ResponseEntity<UserResponse> {
+        val user = userService.getUserById(userId)
+        return ResponseEntity.ok(user)
     }
 
     @PutMapping("/users/{userId}")
