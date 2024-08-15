@@ -13,6 +13,14 @@ class RoleController(
     private val roleService: RoleService
 ) {
 
+    @PostMapping("/roles")
+    @PreAuthorize("@securityService.isAdmin(authentication)")
+    fun createRole(@Valid @RequestBody roleCreateRequest: RoleCreateRequest): ResponseEntity<RoleResponse> {
+        val role = roleService.createRole(roleCreateRequest)
+        val location = URI.create("/roles/${role.id}")
+        return ResponseEntity.created(location).body(role)
+    }
+
     @GetMapping("/roles")
     @PreAuthorize("permitAll()")
     fun getAllRoles(): ResponseEntity<List<RoleResponse>> {
@@ -22,14 +30,6 @@ class RoleController(
         } else {
             ResponseEntity.ok(roles)
         }
-    }
-
-    @PostMapping("/roles")
-    @PreAuthorize("@securityService.isAdmin(authentication)")
-    fun createRole(@Valid @RequestBody roleCreateRequest: RoleCreateRequest): ResponseEntity<RoleResponse> {
-        val role = roleService.createRole(roleCreateRequest)
-        val location = URI.create("/roles/${role.id}")
-        return ResponseEntity.created(location).body(role)
     }
 
     @PutMapping("/roles/{roleId}")
@@ -42,15 +42,15 @@ class RoleController(
     @DeleteMapping("/roles/{roleId}")
     @PreAuthorize("@securityService.isAdmin(authentication)")
     fun deleteRole(@PathVariable roleId: Long): ResponseEntity<RoleResponse> {
-        val role = roleService.deleteRole(roleId)
-        return ResponseEntity.ok(role)
+        val defaultRole = roleService.deleteRole(roleId)
+        return ResponseEntity.ok(defaultRole)
     }
 
     @DeleteMapping("/roles/{sourceRoleId}/transfer/{targetRoleId}")
     @PreAuthorize("@securityService.isAdmin(authentication)")
     fun deleteRoleAndMoveBoardsAndUsers(@PathVariable sourceRoleId: Long, @PathVariable targetRoleId: Long): ResponseEntity<RoleResponse> {
-        val role = roleService.deleteRoleAndMoveBoardsAndUsers(sourceRoleId, targetRoleId)
-        return ResponseEntity.ok(role)
+        val targetRole = roleService.deleteRoleAndMoveBoardsAndUsers(sourceRoleId, targetRoleId)
+        return ResponseEntity.ok(targetRole)
     }
 
     @PutMapping("/roles")
