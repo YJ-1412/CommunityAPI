@@ -67,7 +67,7 @@
     ```
     - `id` (integer): 사용자의 고유 ID.
     - `username` (string): 사용자의 이름.
-    - `role` (object): 사용자의 역할을 나타내는 객체.
+    - `role` (object): 사용자의 역할.
       - `role.id` (integer): 역할의 고유 ID.
       - `role.name` (string): 역할의 이름.
       - `role.level` (integer): 역할의 권한 수준을 나타내는 값.
@@ -180,7 +180,7 @@
     ```
     - `id` (integer): 사용자의 고유 ID.
     - `username` (string): 사용자의 이름.
-    - `role` (object): 사용자의 역할을 나타내는 객체.
+    - `role` (object): 사용자의 역할.
       - `role.id` (integer): 역할의 고유 ID.
       - `role.name` (string): 역할의 이름.
       - `role.level` (integer): 역할의 권한 수준을 나타내는 값.
@@ -237,7 +237,7 @@
     ```
     - `id` (integer): 사용자의 고유 ID.
     - `username` (string): 사용자의 이름.
-    - `role` (object): 사용자의 역할을 나타내는 객체.
+    - `role` (object): 사용자의 역할.
       - `role.id` (integer): 역할의 고유 ID.
       - `role.name` (string): 역할의 이름.
       - `role.level` (integer): 역할의 권한 수준을 나타내는 값.
@@ -295,7 +295,7 @@
     ```
     - `id` (integer): 사용자의 고유 ID.
     - `username` (string): 사용자의 이름.
-    - `role` (object): 사용자의 역할을 나타내는 객체.
+    - `role` (object): 사용자의 역할.
       - `role.id` (integer): 역할의 고유 ID.
       - `role.name` (string): 역할의 이름.
       - `role.level` (integer): 역할의 권한 수준을 나타내는 값.
@@ -349,7 +349,7 @@
     ```
     - `id` (integer): 사용자의 고유 ID.
     - `username` (string): 사용자의 이름.
-    - `role` (object): 사용자의 역할을 나타내는 객체.
+    - `role` (object): 사용자의 역할.
       - `role.id` (integer): 역할의 고유 ID.
       - `role.name` (string): 역할의 이름.
       - `role.level` (integer): 역할의 권한 수준을 나타내는 값.
@@ -400,7 +400,7 @@
     ```
     - `id` (integer): 사용자의 고유 ID.
     - `username` (string): 사용자의 이름.
-    - `role` (object): 사용자의 역할을 나타내는 객체.
+    - `role` (object): 사용자의 역할.
       - `role.id` (integer): 역할의 고유 ID.
       - `role.name` (string): 역할의 이름.
       - `role.level` (integer): 역할의 권한 수준을 나타내는 값.
@@ -500,7 +500,7 @@
     ]
     ```
     ```
-    - 모든 역할 객체의 리스트이 반환된다. 리스트은 `level`의 오름차순으로 정렬되어 있다.
+    - 모든 역할의 리스트가 반환된다. 리스트는 `level`의 오름차순으로 정렬되어 있다.
     - `id` (integer): 역할의 고유 ID. 
     - `name` (string): 역할의 이름. 
     - `level` (integer): 역할의 레벨. 
@@ -571,7 +571,7 @@
     }
     ```
     ```
-    - 기본 역할(가장 낮은 레벨의 역할) 객체가 반환됩니다.
+    - 기본 역할(가장 낮은 레벨의 역할)이 반환됩니다.
     - `id` (integer): 기본 역할의 고유 ID. 
     - `name` (string): 기본 역할의 이름. 
     - `level` (integer): 기본 역할의 레벨.
@@ -605,7 +605,7 @@
     }
     ```
     ```
-    - 목표 역할 객체가 반환됩니다.
+    - 목표 역할이 반환됩니다.
     - `id` (integer): 목표 역할의 고유 ID. 
     - `name` (string): 목표 역할의 이름. 
     - `level` (integer): 목표 역할의 레벨.
@@ -666,17 +666,17 @@
 
     ```
     ```
-    - updates (list): 
-      - first (integer): 
-      - second (object): 
-        - name (string): 
-        - level (integer): 
-    - creates (list): 
-      - name (string): 
-      - level (integer): 
-    - moves (list): 
-      - first (integer): 
-      - second (integer): 
+    - updates (list): 역할을 수정하는 요청의 리스트. 각 항목은 수정할 역할의 ID와 새로운 역할 데이터를 포함합니다.
+      - first (integer): 수정할 역할의 고유 ID. 
+      - second (object): 역할 수정 요청 DTO. 
+        - name (string): 수정할 역할의 새로운 이름. 
+        - level (integer): 수정할 역할의 새로운 레벨. 
+    - creates (list): 새로운 역할을 생성하는 요청의 리스트. 
+      - name (string): 새로운 역할의 이름.
+      - level (integer): 새로운 역할의 레벨. 
+    - moves (list): 역할을 삭제하고 연관 데이터를 이동시키는 요청의 리스트. 각 항목은 삭제할 역할의 ID와 데이터를 이동시킬 목표 역할의 ID를 포함합니다.
+      - first (integer): 삭제할 역할의 고유 ID.
+      - second (integer): 삭제할 역할의 연관 데이터(게시판, 사용자)를 이동시킬 목표 역할의 고유 ID.
     ```
   - **응답 형식:**
     ```json
@@ -704,15 +704,229 @@
     ]
     ```
     ```
-    - 모든 역할 객체의 리스트가 반환된다. 리스트는 `level`의 오름차순으로 정렬되어 있다.
+    - 모든 역할의 리스트가 반환됩니다. 리스트는 `level`의 오름차순으로 정렬되어 있습니다.
     - `id` (integer): 역할의 고유 ID. 
     - `name` (string): 역할의 이름. 
     - `level` (integer): 역할의 레벨. 
     ```
   - **추가 설명:**
     ```
+    - 인증이 필요하며, 관리자 권한이 필요합니다. 
+    - 일괄요청에 포함된 요청 중 하나라도 실패할 경우, 일괄요청에 포함된 모든 요청이 실패합니다.
     ```
 ### 3. 게시판 관리(Board Management)
+- **게시판 생성**
+  - **URI:** `/boards`
+  - **HTTP 메서드:** `POST`
+  - **요청 형식:**
+    ```http request
+    POST /boards
+    ```
+    ```json
+    {
+      "name": "Board 1",
+      "priority": 0, 
+      "readableRoleId": 1
+    }
+    ```
+    ```
+    - `name` (string): 새로운 게시판의 이름. 공백이 아니어야 하며, 다른 게시판과 중복될 수 없습니다.
+    - `priority` (integer): 새로운 게시판의 정렬 우선순위(오름차순). null이 아니어야 하며, 0보다 크거나 같은 정수여야 하고, 다른 게시판과 중복될 수 없습니다. 
+    - `readableRoleId` (integer): 새로운 게시판의 최소 열람 가능 역할. null이 아니어야 합니다. 
+    ```
+  - **응답 형식:**
+    ```json
+    {
+      "id": 1,
+      "name": "Board 1",
+      "priority": 0,
+      "readableRoleId": 1,
+      "postCount": 0
+    }
+    ```
+    ```
+    - 생성된 게시판의 정보가 반환됩니다. 
+    - `id` (integer): 게시판의 고유 ID. 
+    - `name` (string): 게시판의 이름. 
+    - `priority` (integer): 게시판의 정렬 우선순위. 
+    - `readableRoleId` (integer): 게시판의 최소 열람 가능 역할. 
+    - `postCount` (integer): 게시판에 등록된 게시글의 수. 
+    ```
+  - **추가 설명:**
+    ```
+    - 인증이 필요하며, 관리자 또는 스태프 권한이 필요합니다.
+    - 요청 형식의 유효성 검사를 통과하지 못하면 `400 Bad Request` 응답이 반환됩니다. 
+    - 존재하지 않는 `readableRoleId`를 입력하면 `404 Not Found` 응답이 반환됩니다. 
+    ```
+
+- **게시판 전체 조회**
+  - **URI:** `/boards`
+  - **HTTP 메서드:** `GET`
+  - **요청 형식:**
+    ```http request
+    GET /boards
+    ```
+  - **응답 형식:**
+    ```json
+    [
+      {
+        "id": 1,
+        "name": "Board 1",
+        "priority": 0,
+        "readableRoleId": 1, 
+        "postCount": 0
+      }, 
+      {
+        "id": 2,
+        "name": "Board 2",
+        "priority": 1,
+        "readableRoleId": 1, 
+        "postCount": 2
+      }
+    ]
+    ```
+    ```
+    - 모든 게시판의 리스트가 반환됩니다. 리스트는 `priority`의 오름차순으로 정렬되어 있습니다.  
+    - `id` (integer): 게시판의 고유 ID. 
+    - `name` (string): 게시판의 이름. 
+    - `priority` (integer): 게시판의 정렬 우선순위. 
+    - `readableRoleId` (integer): 게시판의 최소 열람 가능 역할. 
+    - `postCount` (integer): 게시판에 등록된 게시글의 수. 
+    ```
+  - **추가 설명:**
+    ```
+    - 인증이 필요하며, 인증된 사용자라면 누구나 접근할 수 있습니다.
+    ```
+
+- **게시판 수정**
+  - **URI:** `/boards/{boardId}`
+  - **HTTP 메서드:** `PUT`
+  - **경로 변수:**
+    ```
+    - `boardId` (integer): 수정할 게시판의 고유 ID. 
+    ```
+  - **요청 형식:**
+    ```http request
+    PUT /boards/2
+    ```
+    ```json
+    {
+      "name": "Updated Board 2",
+      "priority": 2, 
+      "readableRoleId": 2
+    }
+    ```
+    ```
+    - `name` (string): 수정할 게시판의 새로운 이름. 공백이 아니어야 하며, 다른 게시판과 중복될 수 없습니다.
+    - `priority` (integer): 수정할 게시판의 새로운 정렬 우선순위(오름차순). null이 아니어야 하며, 0보다 크거나 같은 정수여야 하고, 다른 게시판과 중복될 수 없습니다. 
+    - `readableRoleId` (integer): 수정할 게시판의 새로운 최소 열람 가능 역할. null이 아니어야 합니다. 
+    ```
+  - **응답 형식:**
+    ```json
+    {
+      "id": 2,
+      "name": "Updated Board 2",
+      "priority": 2,
+      "readableRoleId": 2,
+      "postCount": 2
+    }
+    ```
+    ```
+    - 수정된 게시판의 정보가 반환됩니다. 
+    - `id` (integer): 게시판의 고유 ID. 
+    - `name` (string): 게시판의 이름. 
+    - `priority` (integer): 게시판의 정렬 우선순위. 
+    - `readableRoleId` (integer): 게시판의 최소 열람 가능 역할. 
+    - `postCount` (integer): 게시판에 등록된 게시글의 수. 
+    ```
+  - **추가 설명:**
+    ```
+    - 인증이 필요하며, 관리자 또는 스태프 권한이 필요합니다.
+    - 존재하지 않는 `boardId`를 입력하면 `404 Not Found` 응답이 반환됩니다. 
+    - 요청 형식의 유효성 검사를 통과하지 못하면 `400 Bad Request` 응답이 반환됩니다. 
+    - 존재하지 않는 `readableRoleId`를 입력하면 `404 Not Found` 응답이 반환됩니다. 
+    ```
+
+- **게시판 삭제**
+  - **URI:** `/boards/{boardId}`
+  - **HTTP 메서드:** `DELETE`
+  - **경로 변수:**
+    ```
+    - `boardId` (integer): 삭제할 게시판의 고유 ID. 
+    ```
+  - **요청 형식:**
+    ```http request
+    DELETE /boards/2
+    ```
+  - **추가 설명:**
+    ```
+    - 인증이 필요하며, 관리자 또는 스태프 권한이 필요합니다. 
+    - 존재하지 않는 `boardId`를 입력하면 `404 Not Found` 응답이 반환됩니다. 
+    ```
+
+- **게시판 삭제 및 다른 게시판에 게시글 이동**
+  - **URI:** `/boards/{sourceBoardId}/posts/transfer/{targetBoardId}`
+  - **HTTP 메서드:** `DELETE`
+  - **경로 변수:**
+    ```
+    - `sourceBoardId` (integer): 
+    - `targetBoardId` (integer): 
+    ```
+  - **요청 형식:**
+    ```http request
+    DELETE /boards/2/posts/tranfer/1
+    ```
+  - **응답 형식:**
+    ```json
+    {
+      "id": 1,
+      "name": "Board 1",
+      "priority": 0,
+      "readableRoleId": 1,
+      "postCount": 2
+    }
+    ```
+    ```
+    - 목표 게시판이 반환됩니다. 
+    - `id` (integer): 게시판의 고유 ID. 
+    - `name` (string): 게시판의 이름. 
+    - `priority` (integer): 게시판의 정렬 우선순위. 
+    - `readableRoleId` (integer): 게시판의 최소 열람 가능 역할. 
+    - `postCount` (integer): 게시판에 등록된 게시글의 수. 
+    ```
+  - **추가 설명:**
+    ```
+    - 인증이 필요하며, 관리자 또는 스태프 권한이 필요합니다.
+    - 삭제한 게시판에 등록되어 있던 모든 게시글을 목표 게시판으로 이동시킵니다. 
+    - `sourceBoardId`와 `targetBoardId`가 같으면 `400 Bad Request` 응답이 반환됩니다. 
+    - 존재하지 않는 `sourceBoardId`와 `targetBoardId`를 입력하면 `404 Not Found` 응답이 반환됩니다.
+    ```
+
+- **게시판 일괄 수정**
+  - **URI:** `/boards`
+  - **HTTP 메서드:** `PUT`
+  - **요청 형식:**
+    ```http request
+    PUT /boards
+    ```
+    ```json
+    {
+      
+    }
+    ```
+    ```
+    ```
+  - **응답 형식:**
+    ```json
+    {
+      
+    }
+    ```
+    ```
+    ```
+  - **추가 설명:**
+    ```
+    ```
 ### 4. 게시글 관리(Post Management)
 ### 5. 댓글 관리(Comment Management)
 - **기능**

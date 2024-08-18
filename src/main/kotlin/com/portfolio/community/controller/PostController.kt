@@ -15,6 +15,18 @@ import java.net.URI
 class PostController(
     private val postService: PostService,
 ) {
+
+    @PostMapping("/boards/{boardId}/posts")
+    @PreAuthorize("@securityService.canCreatePost(authentication, #boardId, #postCreateRequest.authorId)")
+    fun createPost(
+        @PathVariable boardId: Long,
+        @Valid @RequestBody postCreateRequest: PostCreateRequest
+    ): ResponseEntity<PostResponse> {
+        val post = postService.createPost(boardId, postCreateRequest)
+        val location = URI.create("/posts/${post.id}")
+        return ResponseEntity.created(location).body(post)
+    }
+
     @GetMapping("/posts")
     @PreAuthorize("permitAll()")
     fun getAllPostInfos(
@@ -74,20 +86,6 @@ class PostController(
         }
     }
 
-    @PostMapping("/posts/{postId}/liked-users")
-    @PreAuthorize("@securityService.canReadPost(authentication, #postId)")
-    fun likePost(@PathVariable postId: Long, @AuthenticationPrincipal user: Principal): ResponseEntity<PostResponse> {
-        val likedPost = postService.likePost(user.id, postId)
-        return ResponseEntity.ok(likedPost)
-    }
-
-    @DeleteMapping("/posts/{postId}/liked-users/{userId}")
-    @PreAuthorize("@securityService.canUnlikePost(authentication, #postId, #userId)")
-    fun unlikePost(@PathVariable postId: Long, @PathVariable userId: Long) : ResponseEntity<PostResponse> {
-        val unlikedPost = postService.unlikePost(userId, postId)
-        return ResponseEntity.ok(unlikedPost)
-    }
-
     /*
     게시글을 요청하면 조회수가 1 증가하는 기능을 구현하는 방법은 2가지가 있음.
     1. 별도에 PATCH /posts/{id}/view-count 엔드포인트를 만든 뒤, 클라이언트에서 게시글 요청과 함께 요청하여 조회수를 증가시키는 방법.
@@ -105,17 +103,6 @@ class PostController(
         return ResponseEntity.ok(updatedPost)
     }
 
-    @PostMapping("/boards/{boardId}/posts")
-    @PreAuthorize("@securityService.canCreatePost(authentication, #boardId, #postCreateRequest.authorId)")
-    fun createPost(
-        @PathVariable boardId: Long,
-        @Valid @RequestBody postCreateRequest: PostCreateRequest
-    ): ResponseEntity<PostResponse> {
-        val post = postService.createPost(boardId, postCreateRequest)
-        val location = URI.create("/posts/${post.id}")
-        return ResponseEntity.created(location).body(post)
-    }
-
     @PutMapping("/posts/{postId}")
     @PreAuthorize("@securityService.canUpdatePost(authentication, #postId, #postUpdateRequest.boardId)")
     fun updatePost(
@@ -123,6 +110,20 @@ class PostController(
         @Valid @RequestBody postUpdateRequest: PostUpdateRequest
     ): ResponseEntity<PostResponse> {
         return ResponseEntity.ok(postService.updatePost(postId, postUpdateRequest))
+    }
+
+    @PostMapping("/posts/{postId}/liked-users")
+    @PreAuthorize("@securityService.canReadPost(authentication, #postId)")
+    fun likePost(@PathVariable postId: Long, @AuthenticationPrincipal user: Principal): ResponseEntity<PostResponse> {
+        val likedPost = postService.likePost(user.id, postId)
+        return ResponseEntity.ok(likedPost)
+    }
+
+    @DeleteMapping("/posts/{postId}/liked-users/{userId}")
+    @PreAuthorize("@securityService.canUnlikePost(authentication, #postId, #userId)")
+    fun unlikePost(@PathVariable postId: Long, @PathVariable userId: Long) : ResponseEntity<PostResponse> {
+        val unlikedPost = postService.unlikePost(userId, postId)
+        return ResponseEntity.ok(unlikedPost)
     }
 
     @DeleteMapping("/posts/{postId}")

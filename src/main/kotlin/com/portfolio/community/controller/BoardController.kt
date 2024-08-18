@@ -13,6 +13,14 @@ class BoardController(
     private val boardService: BoardService,
     ) {
 
+    @PostMapping("/boards")
+    @PreAuthorize("@securityService.isAdminOrStaff(authentication)")
+    fun createBoard(@Valid @RequestBody boardCreateRequest: BoardCreateRequest): ResponseEntity<BoardResponse> {
+        val board = boardService.createBoard(boardCreateRequest)
+        val location = URI.create("/boards/${board.id}")
+        return ResponseEntity.created(location).body(board)
+    }
+
     @GetMapping("/boards")
     @PreAuthorize("permitAll()")
     fun getAllBoards(): ResponseEntity<List<BoardResponse>> {
@@ -22,14 +30,6 @@ class BoardController(
         } else {
             ResponseEntity.ok(boards)
         }
-    }
-
-    @PostMapping("/boards")
-    @PreAuthorize("@securityService.isAdminOrStaff(authentication)")
-    fun createBoard(@Valid @RequestBody boardCreateRequest: BoardCreateRequest): ResponseEntity<BoardResponse> {
-        val board = boardService.createBoard(boardCreateRequest)
-        val location = URI.create("/boards/${board.id}")
-        return ResponseEntity.created(location).body(board)
     }
 
     @PutMapping("/boards/{boardId}")

@@ -68,6 +68,7 @@ class BoardService(
 
     @Transactional
     fun deleteBoardAndMovePosts(sourceBoardId: Long, targetBoardId: Long): BoardResponse {
+        if (sourceBoardId == targetBoardId) throw IllegalArgumentException("Source board and target board must be different")
         val sourceBoard = boardRepository.findByIdOrNull(sourceBoardId) ?: throw NotFoundException("Board", "ID", sourceBoardId)
         val targetBoard = boardRepository.findByIdOrNull(targetBoardId) ?: throw NotFoundException("Board", "ID", targetBoardId)
 
