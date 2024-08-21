@@ -66,9 +66,9 @@
     - `id` (number): 사용자의 ID.
     - `username` (string): 사용자의 이름.
     - `role` (object): 사용자의 역할.
-      - `role.id` (number): 역할의 ID.
-      - `role.name` (string): 역할의 이름.
-      - `role.level` (number): 역할의 권한 수준을 나타내는 값.
+      - `id` (number): 역할의 ID.
+      - `name` (string): 역할의 이름.
+      - `level` (number): 역할의 권한 수준을 나타내는 값.
     - `isStaff` (boolean): 사용자가 스태프인지 여부를 나타냅니다.
     - `isAdmin` (boolean): 사용자가 관리자인지 여부를 나타냅니다.
     - `writtenPostCount` (number): 사용자가 작성한 게시글의 수.
@@ -172,9 +172,9 @@
     - `id` (number): 사용자의 ID.
     - `username` (string): 사용자의 이름.
     - `role` (object): 사용자의 역할.
-      - `role.id` (number): 역할의 ID.
-      - `role.name` (string): 역할의 이름.
-      - `role.level` (number): 역할의 권한 수준을 나타내는 값.
+      - `id` (number): 역할의 ID.
+      - `name` (string): 역할의 이름.
+      - `level` (number): 역할의 권한 수준을 나타내는 값.
     - `isStaff` (boolean): 사용자가 스태프인지 여부를 나타냅니다.
     - `isAdmin` (boolean): 사용자가 관리자인지 여부를 나타냅니다.
     ```
@@ -215,9 +215,9 @@
     - `id` (number): 사용자의 ID.
     - `username` (string): 사용자의 이름.
     - `role` (object): 사용자의 역할.
-      - `role.id` (number): 역할의 ID.
-      - `role.name` (string): 역할의 이름.
-      - `role.level` (number): 역할의 권한 수준을 나타내는 값.
+      - `id` (number): 역할의 ID.
+      - `name` (string): 역할의 이름.
+      - `level` (number): 역할의 권한 수준을 나타내는 값.
     - `isStaff` (boolean): 사용자가 스태프인지 여부를 나타냅니다.
     - `isAdmin` (boolean): 사용자가 관리자인지 여부를 나타냅니다.
     - `writtenPostCount` (number): 사용자가 작성한 게시글의 수.
@@ -272,9 +272,9 @@
     - `id` (number): 사용자의 ID.
     - `username` (string): 사용자의 이름.
     - `role` (object): 사용자의 역할.
-      - `role.id` (number): 역할의 ID.
-      - `role.name` (string): 역할의 이름.
-      - `role.level` (number): 역할의 권한 수준을 나타내는 값.
+      - `id` (number): 역할의 ID.
+      - `name` (string): 역할의 이름.
+      - `level` (number): 역할의 권한 수준을 나타내는 값.
     - `isStaff` (boolean): 사용자가 스태프인지 여부를 나타냅니다.
     - `isAdmin` (boolean): 사용자가 관리자인지 여부를 나타냅니다.
     - `writtenPostCount` (number): 사용자가 작성한 게시글의 수.
@@ -328,9 +328,9 @@
     - `id` (number): 사용자의 ID.
     - `username` (string): 사용자의 이름.
     - `role` (object): 사용자의 역할.
-      - `role.id` (number): 역할의 ID.
-      - `role.name` (string): 역할의 이름.
-      - `role.level` (number): 역할의 권한 수준을 나타내는 값.
+      - `id` (number): 역할의 ID.
+      - `name` (string): 역할의 이름.
+      - `level` (number): 역할의 권한 수준을 나타내는 값.
     - `isStaff` (boolean): 사용자가 스태프인지 여부를 나타냅니다.
     - `isAdmin` (boolean): 사용자가 관리자인지 여부를 나타냅니다.
     - `writtenPostCount` (number): 사용자가 작성한 게시글의 수.
@@ -380,9 +380,9 @@
     - `id` (number): 사용자의 ID.
     - `username` (string): 사용자의 이름.
     - `role` (object): 사용자의 역할.
-      - `role.id` (number): 역할의 ID.
-      - `role.name` (string): 역할의 이름.
-      - `role.level` (number): 역할의 권한 수준을 나타내는 값.
+      - `id` (number): 역할의 ID.
+      - `name` (string): 역할의 이름.
+      - `level` (number): 역할의 권한 수준을 나타내는 값.
     - `isStaff` (boolean): 사용자가 스태프인지 여부를 나타냅니다.
     - `isAdmin` (boolean): 사용자가 관리자인지 여부를 나타냅니다.
     - `writtenPostCount` (number): 사용자가 작성한 게시글의 수.
@@ -431,9 +431,9 @@
     - `id` (number): 사용자의 ID.
     - `username` (string): 사용자의 이름.
     - `role` (object): 사용자의 역할.
-      - `role.id` (number): 역할의 ID.
-      - `role.name` (string): 역할의 이름.
-      - `role.level` (number): 역할의 권한 수준을 나타내는 값.
+      - `id` (number): 역할의 ID.
+      - `name` (string): 역할의 이름.
+      - `level` (number): 역할의 권한 수준을 나타내는 값.
     - `isStaff` (boolean): 사용자가 스태프인지 여부를 나타냅니다.
     - `isAdmin` (boolean): 사용자가 관리자인지 여부를 나타냅니다.
     - `writtenPostCount` (number): 사용자가 작성한 게시글의 수.
