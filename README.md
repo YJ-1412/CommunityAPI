@@ -65,17 +65,17 @@
     }
     ```
     ```
-    - `id` (integer): 사용자의 고유 ID.
+    - `id` (number): 사용자의 ID.
     - `username` (string): 사용자의 이름.
     - `role` (object): 사용자의 역할.
-      - `role.id` (integer): 역할의 고유 ID.
+      - `role.id` (number): 역할의 ID.
       - `role.name` (string): 역할의 이름.
-      - `role.level` (integer): 역할의 권한 수준을 나타내는 값.
+      - `role.level` (number): 역할의 권한 수준을 나타내는 값.
     - `isStaff` (boolean): 사용자가 스태프인지 여부를 나타냅니다.
     - `isAdmin` (boolean): 사용자가 관리자인지 여부를 나타냅니다.
-    - `writtenPostCount` (integer): 사용자가 작성한 게시글의 수.
-    - `writtenCommentCount` (integer): 사용자가 작성한 댓글의 수.
-    - `likedPostCount` (integer): 사용자가 좋아요를 누른 게시글의 수.
+    - `writtenPostCount` (number): 사용자가 작성한 게시글의 수.
+    - `writtenCommentCount` (number): 사용자가 작성한 댓글의 수.
+    - `likedPostCount` (number): 사용자가 좋아요를 누른 게시글의 수.
     ```
   - **추가 설명:**
     ```
@@ -154,7 +154,7 @@
   - **HTTP 메서드:** `GET`
   - **경로 변수:**
     ```
-    - `userId` (integer): 조회할 사용자의 고유 ID
+    - `userId` (number): 조회할 사용자의 ID
     ```
   - **요청 형식:**
     ```http request
@@ -178,17 +178,17 @@
     }
     ```
     ```
-    - `id` (integer): 사용자의 고유 ID.
+    - `id` (number): 사용자의 ID.
     - `username` (string): 사용자의 이름.
     - `role` (object): 사용자의 역할.
-      - `role.id` (integer): 역할의 고유 ID.
+      - `role.id` (number): 역할의 ID.
       - `role.name` (string): 역할의 이름.
-      - `role.level` (integer): 역할의 권한 수준을 나타내는 값.
+      - `role.level` (number): 역할의 권한 수준을 나타내는 값.
     - `isStaff` (boolean): 사용자가 스태프인지 여부를 나타냅니다.
     - `isAdmin` (boolean): 사용자가 관리자인지 여부를 나타냅니다.
-    - `writtenPostCount` (integer): 사용자가 작성한 게시글의 수.
-    - `writtenCommentCount` (integer): 사용자가 작성한 댓글의 수.
-    - `likedPostCount` (integer): 사용자가 좋아요를 누른 게시글의 수.
+    - `writtenPostCount` (number): 사용자가 작성한 게시글의 수.
+    - `writtenCommentCount` (number): 사용자가 작성한 댓글의 수.
+    - `likedPostCount` (number): 사용자가 좋아요를 누른 게시글의 수.
     ```
   - **추가 설명:**
     ```
@@ -201,7 +201,7 @@
   - **HTTP 메서드:** `PUT`
   - **경로 변수:**
     ```
-    - `userId` (integer): 수정할 사용자의 고유 ID
+    - `userId` (number): 수정할 사용자의 ID
     ```
   - **요청 형식:**
     ```http request
@@ -235,17 +235,17 @@
     }
     ```
     ```
-    - `id` (integer): 사용자의 고유 ID.
+    - `id` (number): 사용자의 ID.
     - `username` (string): 사용자의 이름.
     - `role` (object): 사용자의 역할.
-      - `role.id` (integer): 역할의 고유 ID.
+      - `role.id` (number): 역할의 ID.
       - `role.name` (string): 역할의 이름.
-      - `role.level` (integer): 역할의 권한 수준을 나타내는 값.
+      - `role.level` (number): 역할의 권한 수준을 나타내는 값.
     - `isStaff` (boolean): 사용자가 스태프인지 여부를 나타냅니다.
     - `isAdmin` (boolean): 사용자가 관리자인지 여부를 나타냅니다.
-    - `writtenPostCount` (integer): 사용자가 작성한 게시글의 수.
-    - `writtenCommentCount` (integer): 사용자가 작성한 댓글의 수.
-    - `likedPostCount` (integer): 사용자가 좋아요를 누른 게시글의 수.
+    - `writtenPostCount` (number): 사용자가 작성한 게시글의 수.
+    - `writtenCommentCount` (number): 사용자가 작성한 댓글의 수.
+    - `likedPostCount` (number): 사용자가 좋아요를 누른 게시글의 수.
     ```
   - **추가 설명:**
     ```
@@ -261,19 +261,17 @@
   - **HTTP 메서드:** `PATCH`
   - **경로 변수:**
     ```
-    - `userId` (integer): 수정할 사용자의 고유 ID
+    - `userId` (number): 수정할 사용자의 ID
     ```
   - **요청 형식:**
     ```http request
     PATCH /users/3/role
     ```
     ```json
-    {
-      "roleId": "2"
-    }
+    2
     ```
     ```
-    - `roleId` (integer): 변경할 역할의 고유 ID. 기존 역할과 달라야 합니다. 
+    - `roleId` (number): 변경할 역할의 ID. 기존 역할과 달라야 합니다. 
     ```
   - **응답 형식:**
     ```json
@@ -293,17 +291,17 @@
     }
     ```
     ```
-    - `id` (integer): 사용자의 고유 ID.
+    - `id` (number): 사용자의 ID.
     - `username` (string): 사용자의 이름.
     - `role` (object): 사용자의 역할.
-      - `role.id` (integer): 역할의 고유 ID.
+      - `role.id` (number): 역할의 ID.
       - `role.name` (string): 역할의 이름.
-      - `role.level` (integer): 역할의 권한 수준을 나타내는 값.
+      - `role.level` (number): 역할의 권한 수준을 나타내는 값.
     - `isStaff` (boolean): 사용자가 스태프인지 여부를 나타냅니다.
     - `isAdmin` (boolean): 사용자가 관리자인지 여부를 나타냅니다.
-    - `writtenPostCount` (integer): 사용자가 작성한 게시글의 수.
-    - `writtenCommentCount` (integer): 사용자가 작성한 댓글의 수.
-    - `likedPostCount` (integer): 사용자가 좋아요를 누른 게시글의 수.
+    - `writtenPostCount` (number): 사용자가 작성한 게시글의 수.
+    - `writtenCommentCount` (number): 사용자가 작성한 댓글의 수.
+    - `likedPostCount` (number): 사용자가 좋아요를 누른 게시글의 수.
     ```
   - **추가 설명:**
     ```
@@ -322,12 +320,10 @@
     POST /staff
     ```
     ```json
-    {
-      "userId": "3"
-    }
+    3
     ```
     ```
-    - `userId` (integer): 스태프 권한을 부여할 사용자의 고유 ID
+    - `userId` (number): 스태프 권한을 부여할 사용자의 ID
     ```
   - **응답 형식:**
     ```json
@@ -347,17 +343,17 @@
     }
     ```
     ```
-    - `id` (integer): 사용자의 고유 ID.
+    - `id` (number): 사용자의 ID.
     - `username` (string): 사용자의 이름.
     - `role` (object): 사용자의 역할.
-      - `role.id` (integer): 역할의 고유 ID.
+      - `role.id` (number): 역할의 ID.
       - `role.name` (string): 역할의 이름.
-      - `role.level` (integer): 역할의 권한 수준을 나타내는 값.
+      - `role.level` (number): 역할의 권한 수준을 나타내는 값.
     - `isStaff` (boolean): 사용자가 스태프인지 여부를 나타냅니다.
     - `isAdmin` (boolean): 사용자가 관리자인지 여부를 나타냅니다.
-    - `writtenPostCount` (integer): 사용자가 작성한 게시글의 수.
-    - `writtenCommentCount` (integer): 사용자가 작성한 댓글의 수.
-    - `likedPostCount` (integer): 사용자가 좋아요를 누른 게시글의 수.
+    - `writtenPostCount` (number): 사용자가 작성한 게시글의 수.
+    - `writtenCommentCount` (number): 사용자가 작성한 댓글의 수.
+    - `likedPostCount` (number): 사용자가 좋아요를 누른 게시글의 수.
     ```
   - **추가 설명:**
     ```
@@ -374,7 +370,7 @@
   - **HTTP 메서드:** `DELETE`
   - **경로 변수:**
     ```
-    - `userId` (integer): 스태프 권한을 박탈할 사용자의 고유 ID
+    - `userId` (number): 스태프 권한을 박탈할 사용자의 ID
     ```
   - **요청 형식:**
     ```http request
@@ -398,17 +394,17 @@
     }
     ```
     ```
-    - `id` (integer): 사용자의 고유 ID.
+    - `id` (number): 사용자의 ID.
     - `username` (string): 사용자의 이름.
     - `role` (object): 사용자의 역할.
-      - `role.id` (integer): 역할의 고유 ID.
+      - `role.id` (number): 역할의 ID.
       - `role.name` (string): 역할의 이름.
-      - `role.level` (integer): 역할의 권한 수준을 나타내는 값.
+      - `role.level` (number): 역할의 권한 수준을 나타내는 값.
     - `isStaff` (boolean): 사용자가 스태프인지 여부를 나타냅니다.
     - `isAdmin` (boolean): 사용자가 관리자인지 여부를 나타냅니다.
-    - `writtenPostCount` (integer): 사용자가 작성한 게시글의 수.
-    - `writtenCommentCount` (integer): 사용자가 작성한 댓글의 수.
-    - `likedPostCount` (integer): 사용자가 좋아요를 누른 게시글의 수.
+    - `writtenPostCount` (number): 사용자가 작성한 게시글의 수.
+    - `writtenCommentCount` (number): 사용자가 작성한 댓글의 수.
+    - `likedPostCount` (number): 사용자가 좋아요를 누른 게시글의 수.
     ```
     - **추가 설명:**
     ```
@@ -425,7 +421,7 @@
   - **HTTP 메서드:** `DELETE`
   - **경로 변수:**
     ```
-    - `userId` (integer): 삭제할 사용자의 고유 ID
+    - `userId` (number): 삭제할 사용자의 ID
     ```
   - **요청 형식:**
     ```http request
@@ -456,7 +452,7 @@
     ```
     ```
     - `name` (string): 새로운 역할의 이름. 공백이 아니어야 하며, 기존 역할과 중복될 수 없습니다.
-    - `level` (integer): 새로운 역할의 레벨. null이 아니어야 하며, 0보다 크거나 같은 정수여야 하고, 기존 역할과 중복될 수 없습니다.
+    - `level` (number): 새로운 역할의 레벨. null이 아니어야 하며, 0보다 크거나 같은 정수여야 하고, 기존 역할과 중복될 수 없습니다.
     ```
   - **응답 형식:**
     ```json
@@ -467,9 +463,9 @@
     }
     ```
     ```
-    - `id` (integer): 역할의 고유 ID.
+    - `id` (number): 역할의 ID.
     - `name` (string): 역할의 이름.
-    - `level` (integer): 역할의 레벨.
+    - `level` (number): 역할의 레벨.
     ```
   - **추가 설명:**
     ```
@@ -501,9 +497,9 @@
     ```
     ```
     - 모든 역할의 리스트가 반환된다. 리스트는 `level`의 오름차순으로 정렬되어 있다.
-    - `id` (integer): 역할의 고유 ID. 
+    - `id` (number): 역할의 ID. 
     - `name` (string): 역할의 이름. 
-    - `level` (integer): 역할의 레벨. 
+    - `level` (number): 역할의 레벨. 
     ```
   - **추가 설명:**
     ```
@@ -515,7 +511,7 @@
   - **HTTP 메서드:** `PUT`
   - **경로 변수:**
     ```
-    - `roleId` (integer): 수정하려는 역할의 고유 ID.
+    - `roleId` (number): 수정하려는 역할의 ID.
     ```
   - **요청 형식:**
     ```http request
@@ -529,7 +525,7 @@
     ```
     ```
     - `name` (string): 역할의 새로운 이름. 공백이 아니어야 하며, 다른 역할과 중복될 수 없습니다.
-    - `level` (integer): 역할의 새로운 레벨. null이 아니어야 하며, 0보다 크거나 같은 정수여야 하고, 다른 역할과 중복될 수 없습니다.
+    - `level` (number): 역할의 새로운 레벨. null이 아니어야 하며, 0보다 크거나 같은 정수여야 하고, 다른 역할과 중복될 수 없습니다.
     ```
   - **응답 형식:**
     ```json
@@ -540,9 +536,9 @@
     }
     ```
     ```
-    - `id` (integer): 변경된 역할의 고유 ID. 
+    - `id` (number): 변경된 역할의 ID. 
     - `name` (string): 변경된 역할의 이름. 
-    - `level` (integer): 변경된 역할의 레벨.
+    - `level` (number): 변경된 역할의 레벨.
     ```
   - **추가 설명:**
     ```
@@ -556,7 +552,7 @@
   - **HTTP 메서드:** `DELETE`
   - **경로 변수:** 
     ```
-    - `roleId` (integer): 삭제하려는 역할의 고유 ID.
+    - `roleId` (number): 삭제하려는 역할의 ID.
     ```
   - **요청 형식:**
     ```http request
@@ -572,9 +568,9 @@
     ```
     ```
     - 기본 역할(가장 낮은 레벨의 역할)이 반환됩니다.
-    - `id` (integer): 기본 역할의 고유 ID. 
+    - `id` (number): 기본 역할의 ID. 
     - `name` (string): 기본 역할의 이름. 
-    - `level` (integer): 기본 역할의 레벨.
+    - `level` (number): 기본 역할의 레벨.
     ```
   - **추가 설명:**
     ```
@@ -589,8 +585,8 @@
   - **HTTP 메서드:** `DELETE`
   - **경로 변수:**
     ```
-    - `sourceRoleId` (integer): 삭제하려는 역할의 고유 ID.
-    - `targetRoleId` (integer): 삭제하려는 역할과 연결된 게시판과 사용자를 이동시킬 목표 역할의 고유 ID.
+    - `sourceRoleId` (number): 삭제하려는 역할의 ID.
+    - `targetRoleId` (number): 삭제하려는 역할과 연결된 게시판과 사용자를 이동시킬 목표 역할의 ID.
     ```
   - **요청 형식:**
     ```http request
@@ -606,9 +602,9 @@
     ```
     ```
     - 목표 역할이 반환됩니다.
-    - `id` (integer): 목표 역할의 고유 ID. 
+    - `id` (number): 목표 역할의 ID. 
     - `name` (string): 목표 역할의 이름. 
-    - `level` (integer): 목표 역할의 레벨.
+    - `level` (number): 목표 역할의 레벨.
     ```
   - **추가 설명:**
     ```
@@ -666,17 +662,17 @@
 
     ```
     ```
-    - updates (list): 역할을 수정하는 요청의 리스트. 각 항목은 수정할 역할의 ID와 새로운 역할 데이터를 포함합니다.
-      - first (integer): 수정할 역할의 고유 ID. 
-      - second (object): 역할 수정 요청 DTO. 
-        - name (string): 수정할 역할의 새로운 이름. 
-        - level (integer): 수정할 역할의 새로운 레벨. 
-    - creates (list): 새로운 역할을 생성하는 요청의 리스트. 
-      - name (string): 새로운 역할의 이름.
-      - level (integer): 새로운 역할의 레벨. 
-    - moves (list): 역할을 삭제하고 연관 데이터를 이동시키는 요청의 리스트. 각 항목은 삭제할 역할의 ID와 데이터를 이동시킬 목표 역할의 ID를 포함합니다.
-      - first (integer): 삭제할 역할의 고유 ID.
-      - second (integer): 삭제할 역할의 연관 데이터(게시판, 사용자)를 이동시킬 목표 역할의 고유 ID.
+    - `updates` (array): 역할을 수정하는 요청의 리스트. 각 항목은 수정할 역할의 ID와 새로운 역할 데이터를 포함합니다.
+      - `first` (number): 수정할 역할의 ID. 
+      - `second` (object): 역할 수정 요청 DTO. 
+        - `name` (string): 수정할 역할의 새로운 이름. 
+        - `level` (number): 수정할 역할의 새로운 레벨. 
+    - `creates` (array): 새로운 역할을 생성하는 요청의 리스트. 
+      - `name` (string): 새로운 역할의 이름.
+      - `level` (number): 새로운 역할의 레벨. 
+    - `moves` (array): 역할을 삭제하고 연관 데이터를 이동시키는 요청의 리스트. 각 항목은 삭제할 역할의 ID와 데이터를 이동시킬 목표 역할의 ID를 포함합니다.
+      - `first` (number): 삭제할 역할의 ID.
+      - `second` (number): 삭제할 역할의 연관 데이터(게시판, 사용자)를 이동시킬 목표 역할의 ID.
     ```
   - **응답 형식:**
     ```json
@@ -705,14 +701,14 @@
     ```
     ```
     - 모든 역할의 리스트가 반환됩니다. 리스트는 `level`의 오름차순으로 정렬되어 있습니다.
-    - `id` (integer): 역할의 고유 ID. 
+    - `id` (number): 역할의 ID. 
     - `name` (string): 역할의 이름. 
-    - `level` (integer): 역할의 레벨. 
+    - `level` (number): 역할의 레벨. 
     ```
   - **추가 설명:**
     ```
     - 인증이 필요하며, 관리자 권한이 필요합니다. 
-    - 일괄요청에 포함된 요청 중 하나라도 실패할 경우, 일괄요청에 포함된 모든 요청이 실패합니다.
+    - 일괄요청에 포함된 요청 중 하나라도 실패할 경우, 일괄요청에 포함된 모든 요청이 실패하며 실패한 요청의 실패사유에 해당하는 응답이 반환됩니다. 
     ```
 ### 3. 게시판 관리(Board Management)
 - **게시판 생성**
@@ -731,8 +727,8 @@
     ```
     ```
     - `name` (string): 새로운 게시판의 이름. 공백이 아니어야 하며, 다른 게시판과 중복될 수 없습니다.
-    - `priority` (integer): 새로운 게시판의 정렬 우선순위(오름차순). null이 아니어야 하며, 0보다 크거나 같은 정수여야 하고, 다른 게시판과 중복될 수 없습니다. 
-    - `readableRoleId` (integer): 새로운 게시판의 최소 열람 가능 역할. null이 아니어야 합니다. 
+    - `priority` (number): 새로운 게시판의 정렬 우선순위(오름차순). null이 아니어야 하며, 0보다 크거나 같은 정수여야 하고, 다른 게시판과 중복될 수 없습니다. 
+    - `readableRoleId` (number): 새로운 게시판의 최소 열람 가능 역할. null이 아니어야 합니다. 
     ```
   - **응답 형식:**
     ```json
@@ -746,11 +742,11 @@
     ```
     ```
     - 생성된 게시판의 정보가 반환됩니다. 
-    - `id` (integer): 게시판의 고유 ID. 
+    - `id` (number): 게시판의 ID. 
     - `name` (string): 게시판의 이름. 
-    - `priority` (integer): 게시판의 정렬 우선순위. 
-    - `readableRoleId` (integer): 게시판의 최소 열람 가능 역할. 
-    - `postCount` (integer): 게시판에 등록된 게시글의 수. 
+    - `priority` (number): 게시판의 정렬 우선순위. 
+    - `readableRoleId` (number): 게시판의 최소 열람 가능 역할. 
+    - `postCount` (number): 게시판에 등록된 게시글의 수. 
     ```
   - **추가 설명:**
     ```
@@ -787,11 +783,11 @@
     ```
     ```
     - 모든 게시판의 리스트가 반환됩니다. 리스트는 `priority`의 오름차순으로 정렬되어 있습니다.  
-    - `id` (integer): 게시판의 고유 ID. 
+    - `id` (number): 게시판의 ID. 
     - `name` (string): 게시판의 이름. 
-    - `priority` (integer): 게시판의 정렬 우선순위. 
-    - `readableRoleId` (integer): 게시판의 최소 열람 가능 역할. 
-    - `postCount` (integer): 게시판에 등록된 게시글의 수. 
+    - `priority` (number): 게시판의 정렬 우선순위. 
+    - `readableRoleId` (number): 게시판의 최소 열람 가능 역할. 
+    - `postCount` (number): 게시판에 등록된 게시글의 수. 
     ```
   - **추가 설명:**
     ```
@@ -803,7 +799,7 @@
   - **HTTP 메서드:** `PUT`
   - **경로 변수:**
     ```
-    - `boardId` (integer): 수정할 게시판의 고유 ID. 
+    - `boardId` (number): 수정할 게시판의 ID. 
     ```
   - **요청 형식:**
     ```http request
@@ -818,8 +814,8 @@
     ```
     ```
     - `name` (string): 수정할 게시판의 새로운 이름. 공백이 아니어야 하며, 다른 게시판과 중복될 수 없습니다.
-    - `priority` (integer): 수정할 게시판의 새로운 정렬 우선순위(오름차순). null이 아니어야 하며, 0보다 크거나 같은 정수여야 하고, 다른 게시판과 중복될 수 없습니다. 
-    - `readableRoleId` (integer): 수정할 게시판의 새로운 최소 열람 가능 역할. null이 아니어야 합니다. 
+    - `priority` (number): 수정할 게시판의 새로운 정렬 우선순위(오름차순). null이 아니어야 하며, 0보다 크거나 같은 정수여야 하고, 다른 게시판과 중복될 수 없습니다. 
+    - `readableRoleId` (number): 수정할 게시판의 새로운 최소 열람 가능 역할. null이 아니어야 합니다. 
     ```
   - **응답 형식:**
     ```json
@@ -833,11 +829,11 @@
     ```
     ```
     - 수정된 게시판의 정보가 반환됩니다. 
-    - `id` (integer): 게시판의 고유 ID. 
+    - `id` (number): 게시판의 ID. 
     - `name` (string): 게시판의 이름. 
-    - `priority` (integer): 게시판의 정렬 우선순위. 
-    - `readableRoleId` (integer): 게시판의 최소 열람 가능 역할. 
-    - `postCount` (integer): 게시판에 등록된 게시글의 수. 
+    - `priority` (number): 게시판의 정렬 우선순위. 
+    - `readableRoleId` (number): 게시판의 최소 열람 가능 역할. 
+    - `postCount` (number): 게시판에 등록된 게시글의 수. 
     ```
   - **추가 설명:**
     ```
@@ -852,7 +848,7 @@
   - **HTTP 메서드:** `DELETE`
   - **경로 변수:**
     ```
-    - `boardId` (integer): 삭제할 게시판의 고유 ID. 
+    - `boardId` (number): 삭제할 게시판의 ID. 
     ```
   - **요청 형식:**
     ```http request
@@ -869,8 +865,8 @@
   - **HTTP 메서드:** `DELETE`
   - **경로 변수:**
     ```
-    - `sourceBoardId` (integer): 
-    - `targetBoardId` (integer): 
+    - `sourceBoardId` (number): 
+    - `targetBoardId` (number): 
     ```
   - **요청 형식:**
     ```http request
@@ -888,11 +884,11 @@
     ```
     ```
     - 목표 게시판이 반환됩니다. 
-    - `id` (integer): 게시판의 고유 ID. 
+    - `id` (number): 게시판의 ID. 
     - `name` (string): 게시판의 이름. 
-    - `priority` (integer): 게시판의 정렬 우선순위. 
-    - `readableRoleId` (integer): 게시판의 최소 열람 가능 역할. 
-    - `postCount` (integer): 게시판에 등록된 게시글의 수. 
+    - `priority` (number): 게시판의 정렬 우선순위. 
+    - `readableRoleId` (number): 게시판의 최소 열람 가능 역할. 
+    - `postCount` (number): 게시판에 등록된 게시글의 수. 
     ```
   - **추가 설명:**
     ```
@@ -911,28 +907,872 @@
     ```
     ```json
     {
-      
+      "updates": [
+        {
+          "first": 1,
+          "second": {
+            "name": "Updated Board 1",
+            "priority": 0,
+            "readableRoleId": 1
+          }
+        },
+        {
+          "first": 2,
+          "second": {
+            "name": "Updated Board 2",
+            "priority": 2,
+            "readableRoleId": 2
+          }
+        }
+      ],
+      "creates": [
+        {
+          "name": "New Board 1",
+          "priority": 3,
+          "readableRoleId": 1
+        },
+        {
+          "name": "New Board 2",
+          "priority": 1,
+          "readableRoleId": 2
+        }
+      ],
+      "deletes": [ 3, 4 ],
+      "moves": [
+        {
+          "first": 5,
+          "second": 1
+        },
+        {
+          "first": 6,
+          "second": 2
+        }
+      ]
     }
     ```
     ```
+    - `updates` (array): 게시판을 수정하는 요청의 리스트. 각 항목은 수정할 게시판의 ID와 새로운 게시판 데이터를 포함합니다.
+      - `first` (number): 수정할 게시판의 ID. 
+      - `second` (object): 게시판 수정 요청 DTO. 
+        - `name` (string): 수정할 게시판의 새로운 이름. 
+        - `priority` (number): 수정할 게시판의 새로운 정렬 우선순위(오름차순).
+        - `readableRoleId` (number): 수정할 게시판의 새로운 최소 열람 가능 역할.
+    - `creates` (array): 새로운 게시판을 생성하는 요청의 리스트. 
+      - `name` (string): 새로운 게시판의 이름.
+      - `priority` (number): 새로운 게시판의 정렬 우선순위(오름차순).
+      - `readableRoleId` (number): 새로운 게시판의 최소 열람 가능 역할. 
+    - `deletes` (array): 게시판을 삭제하는 요청의 리스트
+    - `moves` (array): 게시판을 삭제하고 등록된 게시글을 이동시키는 요청의 리스트. 각 항목은 삭제할 게시판의 ID와 게시글을 이동시킬 목표 게시판의 ID를 포함합니다.
+      - `first` (number): 삭제할 게시판의 ID.
+      - `second` (number): 삭제할 게시판에 등록된 게시글을 이동시킬 목표 게시판의 ID.
+    ```
+  - **응답 형식:**
+    ```json
+    [
+      {
+        "id": 1,
+        "name": "Updated Board 1",
+        "priority": 0,
+        "readableRoleId": 1, 
+        "postCount": 3
+      }, 
+      {
+        "id": 8,
+        "name": "New Board 2",
+        "priority": 1,
+        "readableRoleId": 2, 
+        "postCount": 0
+      },
+      {
+        "id": 2,
+        "name": "Updated Board 2",
+        "priority": 2,
+        "readableRoleId": 1, 
+        "postCount": 4
+      },
+      {
+        "id": 7,
+        "name": "New Board 1",
+        "priority": 3,
+        "readableRoleId": 1, 
+        "postCount": 0
+      }
+    ]
+    ```
+    ```
+    - 모든 게시판의 리스트가 반환됩니다. 리스트는 `priority`의 오름차순으로 정렬되어 있습니다.  
+    - `id` (number): 게시판의 ID. 
+    - `name` (string): 게시판의 이름. 
+    - `priority` (number): 게시판의 정렬 우선순위. 
+    - `readableRoleId` (number): 게시판의 최소 열람 가능 역할. 
+    - `postCount` (number): 게시판에 등록된 게시글의 수. 
+    ```
+  - **추가 설명:**
+    ```
+    - 인증이 필요하며, 관리자 또는 스태프 권한이 필요합니다. 
+    - 일괄요청에 포함된 요청 중 하나라도 실패할 경우, 일괄요청에 포함된 모든 요청이 실패하며 실패한 요청의 실패사유에 해당하는 응답이 반환됩니다. 
+    ```
+### 4. 게시글 관리(Post Management)
+- **게시글 생성**
+  - **URI:** `/boards/{boardId}/posts`
+  - **HTTP 메서드:** `POST`
+  - **경로 변수:**
+    ```
+    - `boardId` (number): 새로운 게시글이 등록될 게시판의 ID. 
+    ```
+  - **요청 형식:**
+    ```http request
+    POST /boards/1/posts
+    ```
+    ```json
+    {
+      "title": "Post 1",
+      "content": "Content 1",
+      "authorId": 2
+    }
+    ```
+    ```
+    - `title` (string): 새로운 게시글의 제목. 공백이 아니어야 합니다. 
+    - `content` (string): 새로운 게시글의 본문. 공백이 아니어야 합니다. 
+    - `authorId` (number): 새로운 게시글의 작성자. null이 아니어야 하며, 요청자의 JWT 정보와 일치해야 합니다. 
     ```
   - **응답 형식:**
     ```json
     {
-      
+      "id": 1,
+      "title": "Post 1",
+      "content": "Content 1",
+      "author": {
+        "id": 2, 
+        "username": "User 1",
+        "role": {
+          "id": 1, 
+          "name": "LV0",
+          "level": 0
+        },
+        "isStaff": false, 
+        "isAdmin": false
+      }, 
+      "board": {
+        "id": 1,
+        "name": "Board 1", 
+        "priority": 0,
+        "readableRole": {
+          "id": 1, 
+          "name": "LV0",
+          "level": 0
+        },
+        "postCount": 1
+      },
+      "createdDate": "2024-08-20T17:34:30.4288789",
+      "viewCount": 0,
+      "likeCount": 0,
+      "commentCount": 0
     }
     ```
     ```
+    - 새로운 게시글의 정보를 반환한다. 
+    - `id` (number): 게시글의 ID. 
+    - `title` (string): 게시글의 제목. 
+    - `content` (string): 게시글의 본문. 
+    - `author` (object): 게시글의 작성자 정보. 
+    - `board` (object): 게시글이 등록되어 있는 게시판 정보. 
+    - `createdDate` (string, ISO 8601): 게시글이 생성된 날짜 및 시간. 
+    - `viewCount` (number): 게시글의 조회수. 
+    - `likeCount` (number): 게시글을 좋아요한 사용자의 수. 
+    - `commentCount` (number): 게시글에 달린 댓글의 수. 
     ```
   - **추가 설명:**
     ```
+    - 인증이 필요하며, 관리자 또는 스태프 권한을 가지고 있거나 게시판의 최소 가능 열람 역할의 레벨보다 사용자의 역할의 레벨이 더 높아야 합니다.
+    - 존재하지 않는 `boardId`를 입력하거나, 요청자의 jwt 정보와 `authorId`가 일치하지 않으면 `403 Forbidden` 응답을 반환합니다. 
+    - 요청 형식의 유효성 검사를 통과하지 못하면 `400 Bad Request` 응답을 반환합니다.   
     ```
-### 4. 게시글 관리(Post Management)
+
+- **게시글 요약 전체 조회**
+  - **URI:** `/posts`
+  - **HTTP 메서드:** `GET`
+  - **쿼리 파라미터:**
+    ```
+    - `page` (optional): 요청할 페이지 번호, 기본값은 `0`입니다.
+    - `size` (optional): 한 페이지에 포함될 게시글의 수, 기본값은 `20`입니다.
+    ```
+  - **요청 형식:**
+    ```http request
+    GET /posts
+    ```
+  - **응답 형식:**
+    ```json
+    {
+      "content": [
+        {
+          "id": 2,
+          "title": "Post 2",
+          "author": {
+            "id": 3,
+            "username": "User 2",
+            "role": {
+              "id": 2,
+              "name": "LV1",
+              "level": 1
+            },
+            "isStaff": false,
+            "isAdmin": false
+          },
+          "board": {
+            "id": 2,
+            "name": "Board 2",
+            "priority": 1,
+            "readableRole": {
+              "id": 2,
+              "name": "LV1",
+              "level": 1
+            },
+            "postCount": 1
+          },
+          "createdDate": "2024-08-20T20:37:04.428879",
+          "viewCount": 0,
+          "likeCount": 0,
+          "commentCount": 0
+        },
+        {
+          "id": 1,
+          "title": "Post 1",
+          "author": {
+            "id": 2,
+            "username": "User 1",
+            "role": {
+              "id": 1,
+              "name": "LV0",
+              "level": 0
+            },
+            "isStaff": false,
+            "isAdmin": false
+          },
+          "board": {
+            "id": 1,
+            "name": "Board 1",
+            "priority": 0,
+            "readableRole": {
+              "id": 1,
+              "name": "LV0",
+              "level": 0
+            },
+            "postCount": 1
+          },
+          "createdDate": "2024-08-20T17:34:30.109282",
+          "viewCount": 0,
+          "likeCount": 0,
+          "commentCount": 0
+        }
+      ],
+      "pageable": {
+        "pageNumber": 0,
+        "pageSize": 20,
+        "sort": {
+          "empty": true,
+          "sorted": false,
+          "unsorted": true
+        },
+        "offset": 0,
+        "paged": true,
+        "unpaged": false
+      },
+      "last": true,
+      "totalElements": 2,
+      "totalPages": 1,
+      "size": 20,
+      "number": 0,
+      "sort": {
+        "empty": true,
+        "sorted": false,
+        "unsorted": true
+      },
+      "first": true,
+      "numberOfElements": 2,
+      "empty": false
+    }
+    ```
+    ```
+    - `content`: 모든 게시글 요약의 배열입니다. 배열은 생성시간의 내림차순으로 정렬되어 있습니다. 게시글 요약에는 본문이 제외되어 있습니다. 
+    - `pageable`: 페이지네이션 관련 정보를 포함하는 객체입니다.
+      - `pageNumber` (number): 현재 페이지 번호.
+      - `pageSize` (number): 한 페이지당 표시되는 항목의 수.
+      - `sort` (object): 정렬 정보. 
+        - `empty` (boolean): 정렬 기준이 비어있는지 여부.
+        - `sorted` (boolean): 정렬이 되었는지 여부.
+        - `unsorted` (boolean): 정렬되지 않았는지 여부.
+      - `offset` (number): 페이지의 시작점 오프셋.
+      - `paged` (boolean): 페이지네이션이 활성화되었는지 여부.
+      - `unpaged` (boolean): 페이지네이션이 비활성화되었는지 여부.
+    - `last` (boolean): 마지막 페이지인지 여부를 나타냅니다.
+    - `totalElements` (number): 전체 게시물 수.
+    - `totalPages` (number): 전체 페이지 수.
+    - `size` (number): 한 페이지에 표시되는 게시물 수
+    ```
+  - **추가 설명:**
+    ```
+    - 인증이 필요하며, 인증된 사용자라면 누구나 접근 가능합니다. 
+    - jpa의 정렬 기능을 사용하여 정렬된 데이터를 가져오기 때문에 페이지네이션에서 제공하는 정렬 기능은 사용하지 않습니다. 
+    ```
+
+- **특정 게시판에 등록된 게시글 요약 페이지 조회**
+  - **URI:** `/boards/{boardId}/posts`
+  - **HTTP 메서드:** `GET`
+  - **경로 변수:**
+    ```
+    - `boardId` (number): 게시판의 ID. 
+    ```
+  - **쿼리 파라미터:**
+    ```
+    - `page` (optional): 요청할 페이지 번호, 기본값은 `0`입니다.
+    - `size` (optional): 한 페이지에 포함될 게시글의 수, 기본값은 `20`입니다.
+    ```
+  - **요청 형식:**
+    ```http request
+    GET /boards/1/posts
+    ```
+  - **응답 형식:**
+    ```json
+    {
+      "content": [
+        {
+          "id": 1,
+          "title": "Post 1",
+          "author": {
+            "id": 2,
+            "username": "User 1",
+            "role": {
+              "id": 1,
+              "name": "LV0",
+              "level": 0
+            },
+            "isStaff": false,
+            "isAdmin": false
+          },
+          "board": {
+            "id": 1,
+            "name": "Board 1",
+            "priority": 0,
+            "readableRole": {
+              "id": 1,
+              "name": "LV0",
+              "level": 0
+            },
+            "postCount": 1
+          },
+          "createdDate": "2024-08-20T17:34:30.109282",
+          "viewCount": 0,
+          "likeCount": 0,
+          "commentCount": 0
+        }
+      ],
+      "pageable": {
+        "pageNumber": 0,
+        "pageSize": 20,
+        "sort": {
+          "empty": true,
+          "sorted": false,
+          "unsorted": true
+        },
+        "offset": 0,
+        "paged": true,
+        "unpaged": false
+      },
+      "last": true,
+      "totalElements": 1,
+      "totalPages": 1,
+      "size": 20,
+      "number": 0,
+      "sort": {
+        "empty": true,
+        "sorted": false,
+        "unsorted": true
+      },
+      "first": true,
+      "numberOfElements": 1,
+      "empty": false
+    }
+    ```
+    ```
+    - `content`: 해당 게시판에 등록된 모든 게시글 요약의 배열입니다. 배열은 생성시간의 내림차순으로 정렬되어 있습니다. 게시글 요약에는 본문이 제외되어 있습니다.
+    ```
+  - **추가 설명:**
+    ```
+    - 인증이 필요하며, 인증된 사용자라면 누구나 접근 가능합니다. 
+    - jpa의 정렬 기능을 사용하여 정렬된 데이터를 가져오기 때문에 페이지네이션에서 제공하는 정렬 기능은 사용하지 않습니다.
+    - 존재하지 않는 `boardId`를 입력하면 `404 Not Found` 응답을 반환합니다. 
+    ```
+
+- **특정 사용자가 작성한 게시글 요약 페이지 조회**
+  - **URI:** `/users/{userId}/posts`
+  - **HTTP 메서드:** `GET`
+  - **경로 변수:**
+    ```
+    - `userId` (number): 사용자의 ID. 
+    ```
+  - **쿼리 파라미터:**
+    ```
+    - `page` (optional): 요청할 페이지 번호, 기본값은 `0`입니다.
+    - `size` (optional): 한 페이지에 포함될 게시글의 수, 기본값은 `20`입니다.
+    ```
+  - **요청 형식:**
+    ```http request
+    GET /users/2/posts
+    ```
+  - **응답 형식:**
+    ```json
+    {
+      "content": [
+        {
+          "id": 2,
+          "title": "Post 2",
+          "author": {
+            "id": 3,
+            "username": "User 2",
+            "role": {
+              "id": 2,
+              "name": "LV1",
+              "level": 1
+            },
+            "isStaff": false,
+            "isAdmin": false
+          },
+          "board": {
+            "id": 2,
+            "name": "Board 2",
+            "priority": 1,
+            "readableRole": {
+              "id": 2,
+              "name": "LV1",
+              "level": 1
+            },
+            "postCount": 1
+          },
+          "createdDate": "2024-08-20T20:37:04.428879",
+          "viewCount": 0,
+          "likeCount": 0,
+          "commentCount": 0
+        }
+      ],
+      "pageable": {
+        "pageNumber": 0,
+        "pageSize": 20,
+        "sort": {
+          "empty": true,
+          "sorted": false,
+          "unsorted": true
+        },
+        "offset": 0,
+        "paged": true,
+        "unpaged": false
+      },
+      "last": true,
+      "totalElements": 1,
+      "totalPages": 1,
+      "size": 20,
+      "number": 0,
+      "sort": {
+        "empty": true,
+        "sorted": false,
+        "unsorted": true
+      },
+      "first": true,
+      "numberOfElements": 1,
+      "empty": false
+    }
+    ```
+    ```
+    - `content`: 해당 사용자가 작성한 모든 게시글 요약의 배열입니다. 배열은 생성시간의 내림차순으로 정렬되어 있습니다. 게시글 요약에는 본문이 제외되어 있습니다.
+    ```
+  - **추가 설명:**
+    ```
+    - 인증이 필요하며, 인증된 사용자라면 누구나 접근 가능합니다. 
+    - jpa의 정렬 기능을 사용하여 정렬된 데이터를 가져오기 때문에 페이지네이션에서 제공하는 정렬 기능은 사용하지 않습니다.
+    - 존재하지 않는 `userId`를 입력하면 `404 Not Found` 응답을 반환합니다. 
+    ```
+
+- **특정 사용자가 좋아요한 게시글 요약 페이지 조회**
+  - **URI:** `/users/{userId}/liked-posts`
+  - **HTTP 메서드:** `GET`
+  - **경로 변수:**
+    ```
+    - `userId` (number): 사용자의 ID. 
+    ```
+  - **쿼리 파라미터:**
+    ```
+    - `page` (optional): 요청할 페이지 번호, 기본값은 `0`입니다.
+    - `size` (optional): 한 페이지에 포함될 게시글의 수, 기본값은 `20`입니다.
+    ```
+  - **요청 형식:**
+    ```http request
+    GET /users/2/liked-posts
+    ```
+  - **응답 형식:**
+    ```json
+    {
+      "content": [
+        {
+          "id": 1,
+          "title": "Post 1",
+          "author": {
+            "id": 2,
+            "username": "User 1",
+            "role": {
+              "id": 1,
+              "name": "User",
+              "level": 0
+            },
+            "isStaff": false,
+            "isAdmin": false
+          },
+          "board": {
+            "id": 1,
+            "name": "Board 1",
+            "priority": 0,
+            "readableRole": {
+              "id": 1,
+              "name": "LV0",
+              "level": 0
+            },
+            "postCount": 1
+          },
+          "createdDate": "2024-08-20T17:34:30.109282",
+          "viewCount": 0,
+          "likeCount": 1,
+          "commentCount": 0
+        }
+      ],
+      "pageable": {
+        "pageNumber": 0,
+        "pageSize": 20,
+        "sort": {
+          "empty": true,
+          "sorted": false,
+          "unsorted": true
+        },
+        "offset": 0,
+        "paged": true,
+        "unpaged": false
+      },
+      "last": true,
+      "totalElements": 1,
+      "totalPages": 1,
+      "size": 20,
+      "number": 0,
+      "sort": {
+        "empty": true,
+        "sorted": false,
+        "unsorted": true
+      },
+      "first": true,
+      "numberOfElements": 1,
+      "empty": false
+    }
+    ```
+    ```
+    - `content`: 해당 사용자가 좋아요한 모든 게시글 요약의 배열입니다. 배열은 좋아요를 누른 순서의 내림차순으로 정렬되어 있습니다. 게시글 요약에는 본문이 제외되어 있습니다.
+    ```
+  - **추가 설명:**
+    ```
+    - 인증이 필요하며, 인증된 사용자라면 누구나 접근 가능합니다. 
+    - jpa의 정렬 기능을 사용하여 정렬된 데이터를 가져오기 때문에 페이지네이션에서 제공하는 정렬 기능은 사용하지 않습니다.
+    - 존재하지 않는 `userId`를 입력하면 `404 Not Found` 응답을 반환합니다. 
+    ```
+
+- **게시글 조회**
+  - **URI:** `/posts/{postId}`
+  - **HTTP 메서드:** `GET`
+  - **경로 변수:**
+    ```
+    - `postId` (number): 조회하려는 게시글의 ID. 
+    ```
+  - **요청 형식:**
+    ```http request
+    GET /posts/1
+    ```
+  - **응답 형식:**
+    ```json
+    {
+      "id": 1,
+      "title": "Post 1",
+      "content": "Content 1",
+      "author": {
+        "id": 2, 
+        "username": "User 1",
+        "role": {
+          "id": 1, 
+          "name": "LV0",
+          "level": 0
+        },
+        "isStaff": false, 
+        "isAdmin": false
+      }, 
+      "board": {
+        "id": 1,
+        "name": "Board 1", 
+        "priority": 0,
+        "readableRole": {
+          "id": 1, 
+          "name": "LV0",
+          "level": 0
+        },
+        "postCount": 1
+      },
+      "createdDate": "2024-08-20T20:37:04.428879",
+      "viewCount": 1,
+      "likeCount": 0,
+      "commentCount": 0
+    }
+    ```
+    ```
+    - 수정된 게시글의 정보를 반환합니다. 
+    - `id` (number): 게시글의 ID. 
+    - `title` (string): 게시글의 제목. 
+    - `content` (string): 게시글의 본문. 
+    - `author` (object): 게시글의 작성자 정보. 
+    - `board` (object): 게시글이 등록되어 있는 게시판 정보. 
+    - `createdDate` (string, ISO 8601): 게시글이 생성된 날짜 및 시간. 
+    - `viewCount` (number): 게시글의 조회수. 
+    - `likeCount` (number): 게시글을 좋아요한 사용자의 수. 
+    - `commentCount` (number): 게시글에 달린 댓글의 수. 
+    ```
+  - **추가 설명:**
+    ```
+    - 인증이 필요하며, 관리자 또는 스태프이거나 게시글이 등록된 게시판의 최소 열람 가능 역할의 레벨보다 사용자의 역할의 레벨이 높아야합니다. 
+    - 존재하지 않는 `postId`를 입력하면 `403 Forbidden` 응답을 반환합니다. 
+    - 해당 엔드포인트에 접근하여 게시글의 정보를 반환받는데 성공하면 해당 게시글의 조회수가 +1 됩니다. 
+      - 이러한 구현 방식은 GET 메소드의 멱등성을 어기므로 REST를 위배합니다.
+      - REST를 엄격하게 지키는 것보다 클라이언트와 서버의 분리가 더 중요하다고 판단하여 이렇게 구현했습니다. 
+    ```
+
+- **게시글 수정**
+  - **URI:** `/posts/{postId}`
+  - **HTTP 메서드:** `PUT`
+  - **경로 변수:**
+    ```
+    - `postId` (number): 수정할 게시글의 ID.
+    ```
+  - **요청 형식:**
+    ```http request
+    PUT /posts/2
+    ```
+    ```json
+    {
+      "title": "Updated Post 2", 
+      "content": "Updated Content 2",
+      "boardId": 1
+    }
+    ```
+    ```
+    - `title` (string): 수정할 게시글의 새로운 제목. 공백이 아니어야 합니다. 
+    - `content` (string): 수정할 게시글의 새로운 본문. 공백이 아니어야 합니다. 
+    - `boardId` (number): 수정할 게시글의 새로운 게시판의 ID. null이 아니어야 합니다. 
+    ```
+  - **응답 형식:**
+    ```json
+    {
+      "id": 2,
+      "title": "Updated Post 2",
+      "content": "Updated Content 2",
+      "author": {
+        "id": 3, 
+        "username": "User 2",
+        "role": {
+          "id": 2, 
+          "name": "LV1",
+          "level": 1
+        },
+        "isStaff": false, 
+        "isAdmin": false
+      }, 
+      "board": {
+        "id": 1,
+        "name": "Board 1", 
+        "priority": 0,
+        "readableRole": {
+          "id": 1, 
+          "name": "LV0",
+          "level": 0
+        },
+        "postCount": 2
+      },
+      "createdDate": "2024-08-20T17:34:30.4288789",
+      "viewCount": 1,
+      "likeCount": 1,
+      "commentCount": 0
+    }
+    ```
+    ```
+    - 게시글의 정보를 반환합니다. 
+    - `id` (number): 게시글의 ID. 
+    - `title` (string): 게시글의 제목. 
+    - `content` (string): 게시글의 본문. 
+    - `author` (object): 게시글의 작성자 정보. 
+    - `board` (object): 게시글이 등록되어 있는 게시판 정보. 
+    - `createdDate` (string, ISO 8601): 게시글이 생성된 날짜 및 시간. 
+    - `viewCount` (number): 게시글의 조회수. 
+    - `likeCount` (number): 게시글을 좋아요한 사용자의 수. 
+    - `commentCount` (number): 게시글에 달린 댓글의 수. 
+    ```
+  - **추가 설명:**
+    ```
+    - 인증이 필요하며, 게시글의 작성자이어야 하고, 게시판을 이동시킬 경우 이동시킬 게시판에 글을 작성할 권한이 있어야 합니다. 
+    - 존재하지 않는 `postId` 또는 `boardId`를 입력하면 `403 Forbidden` 응답을 반환합니다. 
+    - 요청 형식의 유효성 검사를 통과하지 못하면 `400 Bad Request` 응답을 반환합니다. 
+    ```
+
+- **게시글 좋아요 등록**
+  - **URI:** `/posts/{postId}/liked-users`
+  - **HTTP 메서드:** `POST`
+  - **경로 변수:**
+    ```
+    - `postId` (number): 좋아요할 게시글의 ID. 
+    ```
+  - **요청 형식:**
+    ```http request
+    POST /posts/1/liked-users
+    ```
+  - **응답 형식:**
+    ```json
+    {
+      "id": 1,
+      "title": "Post 1",
+      "content": "Content 1",
+      "author": {
+        "id": 2, 
+        "username": "User 1",
+        "role": {
+          "id": 1, 
+          "name": "LV0",
+          "level": 0
+        },
+        "isStaff": false, 
+        "isAdmin": false
+      }, 
+      "board": {
+        "id": 1,
+        "name": "Board 1", 
+        "priority": 0,
+        "readableRole": {
+          "id": 1, 
+          "name": "LV0",
+          "level": 0
+        },
+        "postCount": 1
+      },
+      "createdDate": "2024-08-20T20:37:04.428879",
+      "viewCount": 1,
+      "likeCount": 1,
+      "commentCount": 0
+    }
+    ```
+    ```
+    - 게시글의 정보를 반환합니다. 
+    - `id` (number): 게시글의 ID. 
+    - `title` (string): 게시글의 제목. 
+    - `content` (string): 게시글의 본문. 
+    - `author` (object): 게시글의 작성자 정보. 
+    - `board` (object): 게시글이 등록되어 있는 게시판 정보. 
+    - `createdDate` (string, ISO 8601): 게시글이 생성된 날짜 및 시간. 
+    - `viewCount` (number): 게시글의 조회수. 
+    - `likeCount` (number): 게시글을 좋아요한 사용자의 수. 
+    - `commentCount` (number): 게시글에 달린 댓글의 수. 
+    ```
+  - **추가 설명:**
+    ```
+    - 인증이 필요하며, 해당 게시글의 작성자가 아니어야 하고, 해당 게시글을 읽을 권한이 필요합니다. 
+    - 요청자가 이미 해당 게시글을 좋아요하고 있거나 해당 게시글의 작성자이면 `409 Conflict` 응답을 반환합니다. 
+    ```
+
+- **게시글 좋아요 취소**
+  - **URI:** `/posts/{postId}/liked-users/{userId}`
+  - **HTTP 메서드:** `DELETE`
+  - **경로 변수:**
+    ```
+    - `postId` (number): 좋아요를 취소할 게시글의 ID. 
+    - `userId` (number): 좋아요를 취소할 사용자의 ID. 
+    ```
+  - **요청 형식:**
+    ```http request
+    DELETE /posts/1/liked-users/3
+    ```
+  - **응답 형식:**
+    ```json
+    {
+      "id": 1,
+      "title": "Post 1",
+      "content": "Content 1",
+      "author": {
+        "id": 2, 
+        "username": "User 1",
+        "role": {
+          "id": 1, 
+          "name": "LV0",
+          "level": 0
+        },
+        "isStaff": false, 
+        "isAdmin": false
+      }, 
+      "board": {
+        "id": 1,
+        "name": "Board 1", 
+        "priority": 0,
+        "readableRole": {
+          "id": 1, 
+          "name": "LV0",
+          "level": 0
+        },
+        "postCount": 1
+      },
+      "createdDate": "2024-08-20T20:37:04.428879",
+      "viewCount": 1,
+      "likeCount": 0,
+      "commentCount": 0
+    }
+    ```
+    ```
+    - 게시글의 정보를 반환합니다. 
+    - `id` (number): 게시글의 ID. 
+    - `title` (string): 게시글의 제목. 
+    - `content` (string): 게시글의 본문. 
+    - `author` (object): 게시글의 작성자 정보. 
+    - `board` (object): 게시글이 등록되어 있는 게시판 정보. 
+    - `createdDate` (string, ISO 8601): 게시글이 생성된 날짜 및 시간. 
+    - `viewCount` (number): 게시글의 조회수. 
+    - `likeCount` (number): 게시글을 좋아요한 사용자의 수. 
+    - `commentCount` (number): 게시글에 달린 댓글의 수. 
+    ```
+  - **추가 설명:**
+    ```
+    - 인증이 필요하며, 요청자의 ID와 `userId`가 일치해야 하고, 해당 게시글을 읽을 권한이 필요합니다. 
+    - 요청자가 해당 게시글을 좋아요하고 있지 않으면 `409 Conflict` 응답을 반환합니다. 
+    ```
+
+- **게시글 삭제**
+  - **URI:** `/posts/{postId}`
+  - **HTTP 메서드:** `DELETE`
+  - **경로 변수:**
+    ```
+    - `postId` (number): 삭제할 게시글의 ID.
+    ```
+  - **요청 형식:**
+    ```http request
+    DELETE /posts/1
+    ```
+  - **추가 설명:**
+    ```
+    - 인증이 필요하며, 해당 게시글의 작성자이거나 관리자 또는 스태프 권한이 필요합니다. 
+    - 존재하지 않는 `postId`를 입력하면 `403 Forbidden` 응답이 반환됩니다.
+    ```
 ### 5. 댓글 관리(Comment Management)
 - **기능**
   - **URI:** `/`
   - **HTTP 메서드:** ``
   - **경로 변수:**
+    ```
+    ```
+  - **쿼리 파라미터:**
     ```
     ```
   - **요청 형식:**
