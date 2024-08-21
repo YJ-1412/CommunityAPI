@@ -81,8 +81,8 @@ class PostService(
     }
 
     @Transactional
-    fun createPost(boardId: Long, postCreateRequest: PostCreateRequest): PostResponse {
-        val author = userRepository.findByIdOrNull(postCreateRequest.authorId) ?: throw NotFoundException("User", "ID", postCreateRequest.authorId!!)
+    fun createPost(boardId: Long, authorId:Long, postCreateRequest: PostCreateRequest): PostResponse {
+        val author = userRepository.findByIdOrNull(authorId) ?: throw NotFoundException("User", "ID", authorId)
         val board = boardRepository.findByIdOrNull(boardId) ?: throw NotFoundException("Board", "ID", boardId)
 
         val post = PostEntity(

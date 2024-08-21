@@ -5,15 +5,13 @@
 ## API 개요 (Overview)
 - **이름:** 커뮤니티 API
 - **목적:** 여러 게시판에 사용자들이 글을 작성하고, 댓글을 달며, 좋아요를 누를 수 있는 커뮤니티 플랫폼 제공
-- **대상 사용자:** 일반 사용자, 관리자
+- **대상 사용자:** 일반 사용자, 관리자, 스태프
 
 ## 기술 스택 (Technical Stack)
 - **프로그래밍 언어:** Kotlin
 - **프레임워크:** Spring Boot, Spring Security
 - **데이터베이스:** MySQL
 - **기타 기술:** JPA, Docker
-
-이하 내용 수정 필요
 
 ## 아키텍처 (Architecture)
 - **시스템 구조도:**
@@ -147,6 +145,42 @@
     ```
     - 인증이 필요하지 않으며, 누구나 접근할 수 있습니다.
     - 유효하지 않은 `refreshToken`으로 요청하면 `401 Unauthorized` 응답이 반환됩니다.
+    ```
+
+- **프로필 요청**
+  - **URI:** `/profile`
+  - **HTTP 메서드:** `GET`
+  - **요청 형식:**
+    ```http request
+    GET /profile
+    ```
+  - **응답 형식:**
+    ```json
+    {
+      "id": 3,
+      "username": "example",
+      "role": {
+        "id": 1,
+        "name": "LV0",
+        "level": 0
+      },
+      "isStaff": false,
+      "isAdmin": false
+    }
+    ```
+    ```
+    - `id` (number): 사용자의 ID.
+    - `username` (string): 사용자의 이름.
+    - `role` (object): 사용자의 역할.
+      - `role.id` (number): 역할의 ID.
+      - `role.name` (string): 역할의 이름.
+      - `role.level` (number): 역할의 권한 수준을 나타내는 값.
+    - `isStaff` (boolean): 사용자가 스태프인지 여부를 나타냅니다.
+    - `isAdmin` (boolean): 사용자가 관리자인지 여부를 나타냅니다.
+    ```
+  - **추가 설명:**
+    ```
+    - 인증이 필요하며, 인증된 사용자라면 누구나 접근할 수 있습니다. 
     ```
     
 - **사용자 조회**
@@ -1013,7 +1047,7 @@
     - 일괄요청에 포함된 요청 중 하나라도 실패할 경우, 일괄요청에 포함된 모든 요청이 실패하며 실패한 요청의 실패사유에 해당하는 응답이 반환됩니다. 
     ```
 ### 4. 게시글 관리(Post Management)
-- **게시글 생성**
+- **게시글 작성**
   - **URI:** `/boards/{boardId}/posts`
   - **HTTP 메서드:** `POST`
   - **경로 변수:**
@@ -1027,14 +1061,12 @@
     ```json
     {
       "title": "Post 1",
-      "content": "Content 1",
-      "authorId": 2
+      "content": "Content 1"
     }
     ```
     ```
     - `title` (string): 새로운 게시글의 제목. 공백이 아니어야 합니다. 
     - `content` (string): 새로운 게시글의 본문. 공백이 아니어야 합니다. 
-    - `authorId` (number): 새로운 게시글의 작성자. null이 아니어야 하며, 요청자의 JWT 정보와 일치해야 합니다. 
     ```
   - **응답 형식:**
     ```json
@@ -1085,7 +1117,7 @@
   - **추가 설명:**
     ```
     - 인증이 필요하며, 관리자 또는 스태프 권한을 가지고 있거나 게시판의 최소 가능 열람 역할의 레벨보다 사용자의 역할의 레벨이 더 높아야 합니다.
-    - 존재하지 않는 `boardId`를 입력하거나, 요청자의 jwt 정보와 `authorId`가 일치하지 않으면 `403 Forbidden` 응답을 반환합니다. 
+    - 존재하지 않는 `boardId`를 입력하면 `403 Forbidden` 응답을 반환합니다. 
     - 요청 형식의 유효성 검사를 통과하지 못하면 `400 Bad Request` 응답을 반환합니다.   
     ```
 
@@ -1526,7 +1558,7 @@
     }
     ```
     ```
-    - 수정된 게시글의 정보를 반환합니다. 
+    - 게시글의 정보를 반환합니다. 
     - `id` (number): 게시글의 ID. 
     - `title` (string): 게시글의 제목. 
     - `content` (string): 게시글의 본문. 
@@ -1604,7 +1636,7 @@
     }
     ```
     ```
-    - 게시글의 정보를 반환합니다. 
+    - 수정된 게시글의 정보를 반환합니다. 
     - `id` (number): 게시글의 ID. 
     - `title` (string): 게시글의 제목. 
     - `content` (string): 게시글의 본문. 
@@ -1686,16 +1718,15 @@
     ```
 
 - **게시글 좋아요 취소**
-  - **URI:** `/posts/{postId}/liked-users/{userId}`
+  - **URI:** `/posts/{postId}/liked-users`
   - **HTTP 메서드:** `DELETE`
   - **경로 변수:**
     ```
-    - `postId` (number): 좋아요를 취소할 게시글의 ID. 
-    - `userId` (number): 좋아요를 취소할 사용자의 ID. 
+    - `postId` (number): 좋아요를 취소할 게시글의 ID.
     ```
   - **요청 형식:**
     ```http request
-    DELETE /posts/1/liked-users/3
+    DELETE /posts/1/liked-users
     ```
   - **응답 형식:**
     ```json
@@ -1745,7 +1776,7 @@
     ```
   - **추가 설명:**
     ```
-    - 인증이 필요하며, 요청자의 ID와 `userId`가 일치해야 하고, 해당 게시글을 읽을 권한이 필요합니다. 
+    - 인증이 필요하며, 해당 게시글을 읽을 권한이 필요합니다. 
     - 요청자가 해당 게시글을 좋아요하고 있지 않으면 `409 Conflict` 응답을 반환합니다. 
     ```
 
@@ -1766,36 +1797,348 @@
     - 존재하지 않는 `postId`를 입력하면 `403 Forbidden` 응답이 반환됩니다.
     ```
 ### 5. 댓글 관리(Comment Management)
-- **기능**
-  - **URI:** `/`
-  - **HTTP 메서드:** ``
+- **댓글 작성**
+  - **URI:** `/posts/{postId}/comments`
+  - **HTTP 메서드:** `POST`
   - **경로 변수:**
     ```
-    ```
-  - **쿼리 파라미터:**
-    ```
+    - `postId` (number): 댓글을 작성할 게시글의 ID.
     ```
   - **요청 형식:**
     ```http request
-    
+    POST /posts/1/comments
     ```
     ```json
     {
-      
+      "content": "Post 1 - Comment 1"
     }
     ```
     ```
+    - `content` (string): 새로운 댓글의 내용. 공백이 아니어야 합니다. 
     ```
   - **응답 형식:**
     ```json
     {
-      
+      "id": 1,
+      "content": "Post 1 - Comment 1",
+      "createdDate": "2024-08-21T15:03:12.728634",
+      "author": {
+        "id": 2, 
+        "username": "User 1",
+        "role": {
+          "id": 1, 
+          "name": "LV0",
+          "level": 0
+        },
+        "isStaff": false, 
+        "isAdmin": false
+      },
+      "post": {
+        "id": 1,
+        "title": "Post 1",
+        "content": "Content 1",
+        "author": {
+          "id": 2, 
+          "username": "User 1",
+          "role": {
+            "id": 1, 
+            "name": "LV0",
+            "level": 0
+          },
+          "isStaff": false, 
+          "isAdmin": false
+        }, 
+        "board": {
+          "id": 1,
+          "name": "Board 1", 
+          "priority": 0,
+          "readableRole": {
+            "id": 1, 
+            "name": "LV0",
+            "level": 0
+          },
+          "postCount": 1
+        },
+        "createdDate": "2024-08-20T20:37:04.428879",
+        "viewCount": 1,
+        "likeCount": 0,
+        "commentCount": 1
+      }
     }
     ```
     ```
+    - `id` (integer): 새로운 댓글의 ID. 
+    - `content` (string): 새로운 댓글이 내용. 
+    - `createdDate` (string, ISO 8601): 새로운 댓글이 생성된 날짜와 시간. 
+    - `author` (object): 새로운 댓글의 작성자 정보. 
+    - `post` (object): 새로운 댓글이 등록된 게시글의 정보. 
     ```
   - **추가 설명:**
     ```
+    - 인증이 필요하며, `postId`가 가리키는 게시글을 읽을 권한이 필요합니다. 
+    - 요청 형식의 유효성 검사를 통과하지 못하면 `400 Bad Request` 응답을 반환합니다. 
+    ```
+
+- **특정 게시글에 등록된 댓글 페이지 조회**
+  - **URI:** `/posts/{postId}/comments`
+  - **HTTP 메서드:** `GET`
+  - **경로 변수:**
+    ```
+    - `postId` (number): 게시글의 ID. 
+    ```
+  - **쿼리 파라미터:**
+    ```
+    - `page` (optional): 요청할 페이지 번호, 기본값은 `0`입니다.
+    - `size` (optional): 한 페이지에 포함될 게시글의 수, 기본값은 `100`입니다.
+    ```
+  - **요청 형식:**
+    ```http request
+    GET /posts/1/comments
+    ```
+  - **응답 형식:**
+    ```json
+    {
+      "content": [
+        {
+          "id": 1,
+          "content": "Post 1 - Comment 1",
+          "createdDate": "2024-08-21T15:03:12.728634",
+          "author": {
+            "id": 2, 
+            "username": "User 1",
+            "role": {
+              "id": 1, 
+              "name": "LV0",
+              "level": 0
+            },
+            "isStaff": false, 
+            "isAdmin": false
+          }
+        }
+      ],
+      "pageable": {
+        "pageNumber": 0,
+        "pageSize": 100,
+        "sort": {
+          "empty": true,
+          "sorted": false,
+          "unsorted": true
+        },
+        "offset": 0,
+        "paged": true,
+        "unpaged": false
+      },
+      "last": true,
+      "totalElements": 1,
+      "totalPages": 1,
+      "size": 100,
+      "number": 0,
+      "sort": {
+        "empty": true,
+        "sorted": false,
+        "unsorted": true
+      },
+      "first": true,
+      "numberOfElements": 1,
+      "empty": false
+    }
+    ```
+    ```
+    - `content`: 해당 게시글에 등록된 모든 댓글의 배열입니다. 배열은 생성시간의 오름차순으로 정렬되어 있습니다. 댓글의 정보에는 게시글 정보가 제외되어 있습니다. 
+    - `pageable`: 페이지네이션 관련 정보를 포함하는 객체입니다.
+      - `pageNumber` (number): 현재 페이지 번호.
+      - `pageSize` (number): 한 페이지당 표시되는 항목의 수.
+      - `sort` (object): 정렬 정보. 
+        - `empty` (boolean): 정렬 기준이 비어있는지 여부.
+        - `sorted` (boolean): 정렬이 되었는지 여부.
+        - `unsorted` (boolean): 정렬되지 않았는지 여부.
+      - `offset` (number): 페이지의 시작점 오프셋.
+      - `paged` (boolean): 페이지네이션이 활성화되었는지 여부.
+      - `unpaged` (boolean): 페이지네이션이 비활성화되었는지 여부.
+    - `last` (boolean): 마지막 페이지인지 여부를 나타냅니다.
+    - `totalElements` (number): 전체 게시물 수.
+    - `totalPages` (number): 전체 페이지 수.
+    - `size` (number): 한 페이지에 표시되는 게시물 수
+    ```
+  - **추가 설명:**
+    ```
+    - 인증이 필요하며, `postId`가 가리키는 게시글을 읽을 권한이 필요합니다. 
+    - jpa의 정렬 기능을 사용하여 정렬된 데이터를 가져오기 때문에 페이지네이션에서 제공하는 정렬 기능은 사용하지 않습니다. 
+    - 존재하지 않는 `postId`를 입력하면 `403 Forbidden` 응답을 반환합니다. 
+    ```
+
+- **특정 사용자가 작성한 댓글 페이지 조회**
+  - **URI:** `/users/{userId}/comments`
+  - **HTTP 메서드:** `GET`
+  - **경로 변수:**
+    ```
+    - `userId` (number): 사용자의 ID.
+    ```
+  - **쿼리 파라미터:**
+    ```
+    - `page` (optional): 요청할 페이지 번호, 기본값은 `0`입니다.
+    - `size` (optional): 한 페이지에 포함될 게시글의 수, 기본값은 `100`입니다.
+    ```
+  - **요청 형식:**
+    ```http request
+    GET /users/2/comments
+    ```
+  - **응답 형식:**
+    ```json
+    {
+      "content": [
+        {
+          "id": 1,
+          "content": "Post 1 - Comment 1",
+          "createdDate": "2024-08-21T15:03:12.728634",
+          "author": {
+            "id": 2, 
+            "username": "User 1",
+            "role": {
+              "id": 1, 
+              "name": "LV0",
+              "level": 0
+            },
+            "isStaff": false, 
+            "isAdmin": false
+          }
+        }
+      ],
+      "pageable": {
+        "pageNumber": 0,
+        "pageSize": 100,
+        "sort": {
+          "empty": true,
+          "sorted": false,
+          "unsorted": true
+        },
+        "offset": 0,
+        "paged": true,
+        "unpaged": false
+      },
+      "last": true,
+      "totalElements": 1,
+      "totalPages": 1,
+      "size": 100,
+      "number": 0,
+      "sort": {
+        "empty": true,
+        "sorted": false,
+        "unsorted": true
+      },
+      "first": true,
+      "numberOfElements": 1,
+      "empty": false
+    }
+    ```
+    ```
+    - `content`: 해당 사용자가 작성한 모든 댓글의 배열입니다. 배열은 생성시간의 오름차순으로 정렬되어 있습니다. 댓글의 정보에는 작성자 정보가 제외되어 있습니다. 
+    ```
+  - **추가 설명:**
+    ```
+    - 인증이 필요하며, 인증된 사용자라면 누구나 접근할 수 있습니다.
+    - jpa의 정렬 기능을 사용하여 정렬된 데이터를 가져오기 때문에 페이지네이션에서 제공하는 정렬 기능은 사용하지 않습니다. 
+    - 존재하지 않는 `userId`를 입력하면 `404 Not Found` 응답을 반환합니다. 
+    ```
+
+- **댓글 수정**
+  - **URI:** `/comments/{commentId}`
+  - **HTTP 메서드:** `PUT`
+  - **경로 변수:**
+    ```
+    - `commentId` (number): 수정할 댓글의 ID. 
+    ```
+  - **요청 형식:**
+    ```http request
+    PUT /comments/1
+    ```
+    ```json
+    {
+      "content": "Updated Post 1 - Comment 1"
+    }
+    ```
+    ```
+    - `content` (string): 수정할 댓글의 새로운 내용. 공백이 아니어야 합니다. 
+    ```
+  - **응답 형식:**
+    ```json
+    {
+      "id": 1,
+      "content": "Updated Post 1 - Comment 1",
+      "createdDate": "2024-08-21T15:03:12.728634",
+      "author": {
+        "id": 2, 
+        "username": "User 1",
+        "role": {
+          "id": 1, 
+          "name": "LV0",
+          "level": 0
+        },
+        "isStaff": false, 
+        "isAdmin": false
+      },
+      "post": {
+        "id": 1,
+        "title": "Post 1",
+        "content": "Content 1",
+        "author": {
+          "id": 2, 
+          "username": "User 1",
+          "role": {
+            "id": 1, 
+            "name": "LV0",
+            "level": 0
+          },
+          "isStaff": false, 
+          "isAdmin": false
+        }, 
+        "board": {
+          "id": 1,
+          "name": "Board 1", 
+          "priority": 0,
+          "readableRole": {
+            "id": 1, 
+            "name": "LV0",
+            "level": 0
+          },
+          "postCount": 1
+        },
+        "createdDate": "2024-08-20T20:37:04.428879",
+        "viewCount": 1,
+        "likeCount": 0,
+        "commentCount": 1
+      }
+    }
+    ```
+    ```
+    - `id` (integer): 새로운 댓글의 ID. 
+    - `content` (string): 새로운 댓글이 내용. 
+    - `createdDate` (string, ISO 8601): 새로운 댓글이 생성된 날짜와 시간. 
+    - `author` (object): 새로운 댓글의 작성자 정보. 
+    - `post` (object): 새로운 댓글이 등록된 게시글의 정보. 
+    ```
+  - **추가 설명:**
+    ```
+    - 인증이 필요하며, 수정할 댓글의 작성자여야 합니다. 
+    - 요청 형식의 유효성 검사를 통과하지 못하면 `400 Bad Request` 응답을 반환합니다. 
+    - 존재하지 않는 `commentId`를 입력하면 `403 Forbidden` 응답을 반환합니다. 
+    ```
+
+- **댓글 삭제**
+  - **URI:** `/comments/{commentId}`
+  - **HTTP 메서드:** `DELETE`
+  - **경로 변수:**
+    ```
+    - `commentId` (number): 수정할 댓글의 ID. 
+    ```
+  - **요청 형식:**
+    ```http request
+    DELETE /comments/1
+    ```
+  - **추가 설명:**
+    ```
+    - 인증이 필요하며, 해당 댓글의 작성자이거나 관리자 또는 스태프 권한이 필요합니다. 
+    - 존재하지 않는 `commentId`를 입력하면 `403 Forbidden` 응답이 반환됩니다.
     ```
 
 ## 인증 및 보안 (Authentication & Security)

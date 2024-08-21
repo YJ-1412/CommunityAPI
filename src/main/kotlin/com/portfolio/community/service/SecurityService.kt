@@ -42,15 +42,10 @@ class SecurityService(
         return isAdminOrStaff(authentication) || post.board.readableRole.level <= principal.role.level
     }
 
-    fun canUnlikePost(authentication: Authentication, postId: Long, userId: Long): Boolean{
-        val principal = authentication.principal as Principal
-        return principal.id == userId && canReadPost(authentication, postId)
-    }
-
-    fun canCreatePost(authentication: Authentication, boardId: Long, authorId: Long): Boolean{
+    fun canCreatePost(authentication: Authentication, boardId: Long): Boolean{
         val principal = authentication.principal as Principal
         val board = boardRepository.findByIdOrNull(boardId) ?: return false
-        return principal.id == authorId && (isAdminOrStaff(authentication) || board.readableRole.level <= principal.role.level)
+        return isAdminOrStaff(authentication) || board.readableRole.level <= principal.role.level
     }
 
     fun canUpdatePost(authentication: Authentication, postId: Long, boardId: Long): Boolean{
@@ -64,9 +59,8 @@ class SecurityService(
         return isAuthorOfPost(principal, postId) || isAdminOrStaff(authentication)
     }
 
-    fun canCreateComment(authentication: Authentication, postId: Long, authorId: Long): Boolean{
-        val principal = authentication.principal as Principal
-        return principal.id == authorId && canReadPost(authentication, postId)
+    fun canCreateComment(authentication: Authentication, postId: Long): Boolean{
+        return canReadPost(authentication, postId)
     }
 
     fun canUpdateComment(authentication: Authentication, commentId: Long): Boolean{

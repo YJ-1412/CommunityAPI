@@ -5,8 +5,5 @@ import jakarta.validation.constraints.NotNull
 
 data class CommentCreateRequest(
     @field:NotBlank(message = "Content must not be blank")
-    val content: String?,
-
-    @field:NotNull(message = "AuthorId must not be blank")
-    val authorId: Long?,
+    val content: String?
 )

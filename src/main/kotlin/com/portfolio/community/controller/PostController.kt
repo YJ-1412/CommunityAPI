@@ -17,12 +17,13 @@ class PostController(
 ) {
 
     @PostMapping("/boards/{boardId}/posts")
-    @PreAuthorize("@securityService.canCreatePost(authentication, #boardId, #postCreateRequest.authorId)")
+    @PreAuthorize("@securityService.canCreatePost(authentication, #boardId)")
     fun createPost(
         @PathVariable boardId: Long,
-        @Valid @RequestBody postCreateRequest: PostCreateRequest
+        @Valid @RequestBody postCreateRequest: PostCreateRequest,
+        @AuthenticationPrincipal author: Principal
     ): ResponseEntity<PostResponse> {
-        val post = postService.createPost(boardId, postCreateRequest)
+        val post = postService.createPost(boardId, author.id, postCreateRequest)
         val location = URI.create("/posts/${post.id}")
         return ResponseEntity.created(location).body(post)
     }
@@ -119,10 +120,10 @@ class PostController(
         return ResponseEntity.ok(likedPost)
     }
 
-    @DeleteMapping("/posts/{postId}/liked-users/{userId}")
-    @PreAuthorize("@securityService.canUnlikePost(authentication, #postId, #userId)")
-    fun unlikePost(@PathVariable postId: Long, @PathVariable userId: Long) : ResponseEntity<PostResponse> {
-        val unlikedPost = postService.unlikePost(userId, postId)
+    @DeleteMapping("/posts/{postId}/liked-users")
+    @PreAuthorize("@securityService.canReadPost(authentication, #postId)")
+    fun unlikePost(@PathVariable postId: Long, @AuthenticationPrincipal user: Principal) : ResponseEntity<PostResponse> {
+        val unlikedPost = postService.unlikePost(user.id, postId)
         return ResponseEntity.ok(unlikedPost)
     }
 

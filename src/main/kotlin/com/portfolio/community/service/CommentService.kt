@@ -20,20 +20,20 @@ class CommentService(
 ) {
 
     @Transactional(readOnly = true)
-    fun getCommentsByPost(postId: Long, page: Int, size: Int): Page<CommentResponse> {
+    fun getCommentsByPost(postId: Long, page: Int, size: Int): Page<CommentByPostResponse> {
         if(!postRepository.existsById(postId)) throw NotFoundException("Post", "ID", postId)
-        return commentRepository.findByPostIdOrderByIdAsc(postId, PageRequest.of(page, size)).map { CommentResponse(it) }
+        return commentRepository.findByPostIdOrderByIdAsc(postId, PageRequest.of(page, size)).map { CommentByPostResponse(it) }
     }
 
     @Transactional(readOnly = true)
-    fun getCommentsByAuthor(authorId: Long, page: Int, size: Int): Page<CommentResponse> {
+    fun getCommentsByAuthor(authorId: Long, page: Int, size: Int): Page<CommentByAuthorResponse> {
         if(!userRepository.existsById(authorId)) throw NotFoundException("User", "ID", authorId)
-        return commentRepository.findByAuthorIdOrderByIdAsc(authorId, PageRequest.of(page, size)).map { CommentResponse(it) }
+        return commentRepository.findByAuthorIdOrderByIdAsc(authorId, PageRequest.of(page, size)).map { CommentByAuthorResponse(it) }
     }
 
     @Transactional
-    fun createComment(postId: Long, commentCreateRequest: CommentCreateRequest): CommentResponse {
-        val author = userRepository.findByIdOrNull(commentCreateRequest.authorId) ?: throw NotFoundException("User", "ID", commentCreateRequest.authorId!!)
+    fun createComment(postId: Long, authorId: Long, commentCreateRequest: CommentCreateRequest): CommentResponse {
+        val author = userRepository.findByIdOrNull(authorId) ?: throw NotFoundException("User", "ID", authorId)
         val post = postRepository.findByIdOrNull(postId) ?: throw NotFoundException("Post", "ID", postId)
 
         val comment = CommentEntity(

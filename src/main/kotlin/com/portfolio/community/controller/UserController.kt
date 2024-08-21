@@ -11,6 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.bind.annotation.*
 import java.net.URI
@@ -58,6 +59,12 @@ class UserController(
         userService.saveRefreshToken(principal.id, newRefreshToken)
 
         return ResponseEntity.ok(mapOf("accessToken" to newAccessToken,"refreshToken" to newRefreshToken))
+    }
+
+    @GetMapping("/profile")
+    @PreAuthorize("permitAll()")
+    fun getProfile(@AuthenticationPrincipal user: Principal): ResponseEntity<Principal> {
+        return ResponseEntity.ok(user)
     }
 
     @GetMapping("/users/{userId}")
