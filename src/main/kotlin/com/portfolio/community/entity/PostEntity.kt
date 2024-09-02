@@ -27,10 +27,6 @@ class PostEntity (
     var viewCount: Int = 0
         protected set
 
-    @Column(nullable = false)
-    var isAnnouncement: Boolean = false
-        protected set
-
     @ManyToOne(optional = false)
     @JoinColumn(name = "author_id")
     var author: UserEntity = author

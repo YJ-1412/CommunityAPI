@@ -25,7 +25,7 @@ class DataInitializer(
 
             var defaultRole = roleRepository.findFirstByOrderByLevel()
             if (defaultRole == null) {
-                defaultRole = roleRepository.save(Role(name = "User", level = 0))
+                defaultRole = roleRepository.save(Role(name = "LV0", level = 0))
             }
 
             val adminId = appConfigRepository.findByKey("admin_id")

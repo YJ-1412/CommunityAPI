@@ -1,21 +1,19 @@
 # Community API
 
-백엔드를 공부하고 연습하기 위하여 개발한 커뮤니티 RESTful API 토이 프로젝트
+## 1. API 개요 (Overview)
+### 1. 프로젝트 배경
+### 2. 프로젝트 목표
+### 3. 주요 기능
 
-## API 개요 (Overview)
-- **이름:** 커뮤니티 API
-- **목적:** 여러 게시판에 사용자들이 글을 작성하고, 댓글을 달며, 좋아요를 누를 수 있는 커뮤니티 플랫폼 제공
-- **대상 사용자:** 일반 사용자, 관리자, 스태프
-
-## 기술 스택 (Technical Stack)
+## 2. 기술 스택 (Technical Stack)
 - **프로그래밍 언어:** Kotlin
 - **프레임워크:** Spring Boot, Spring Security
 - **데이터베이스:** MySQL
-- **기타 기술:** JPA, Docker
+- **기타 기술:** JPA
 
-## 아키텍처 (Architecture)
-- **시스템 구조도:**
-  ![Architecture Diagram](링크)
+## 3. 시스템 아키텍처 (System Architecture)
+![Component Diagram]
+- **레이어드 아키텍쳐:** 
 - **주요 컴포넌트:**
   - **사용자 관리(User Management):** 회원가입, 로그인, JWT 토큰 재발급, 수정, 삭제
   - **역할 관리(Role Management):** 역할 생성, 조회, 수정, 삭제
@@ -26,7 +24,43 @@
   - **예외 처리(Exception Handling):** 예외 처리, HTTP 실패 코드 반환
   - **로깅 / 모니터링(Logging / Monitoring):** 함수 호출 및 종료 로그 기록
 
-## 엔드포인트 (Endpoints)
+## 4. 데이터베이스 (Database)
+![ERD](./docs/ERD.png)
+
+## 5. 초기 설정 (Initial State)
+### 기본 관리자 계정
+- **username:** `Admin`
+- **password:** `00000000`
+
+**Note:** `초기 비밀번호는 반드시 첫 로그인 후 변경해야 합니다.`
+
+### 기본 역할
+- **name:** `LV0`
+- **level:** `0`
+
+## 6. 기능 상세 설명
+### 1. 사용자 관리
+### 2. 역할 관리
+### 3. 게시판 관리
+### 4. 게시글 관리
+### 5. 댓글 관리
+
+## 7. 인증 및 보안 (Authentication & Security)
+- **인증 방식:** JWT (JSON Web Tokens)
+- **권한 관리:** 사용자 등급과 역할에 따른 접근 제어 (등급: 사용자/스태프/관리자)
+
+## 8. 에러 처리 (Error Handling)
+- **에러 코드와 메시지:**
+  - `400 Bad Request`: 잘못된 요청
+  - `401 Unauthorized`: 인증 실패
+  - `403 Forbbiden`: 권한 없음
+  - `404 Not Found`: 리소스를 찾을 수 없음
+  - `409 Conflict`: 기존 상태와 충돌
+  - `500 Internal Server Error`: 서버 내부 오류
+- **예외 처리 방식:**
+  - 글로벌 예외 처리기 (`@ControllerAdvice`)를 사용하여 예외를 처리하고, 사용자에게 적절한 메시지 반환
+
+## 9. API 엔드포인트 (API Endpoints)
 ### 1. 사용자 관리(User Management)
 - **회원가입**
   - **URI:** `/register`
@@ -2140,29 +2174,6 @@
     - 인증이 필요하며, 해당 댓글의 작성자이거나 관리자 또는 스태프 권한이 필요합니다. 
     - 존재하지 않는 `commentId`를 입력하면 `403 Forbidden` 응답이 반환됩니다.
     ```
-
-## 인증 및 보안 (Authentication & Security)
-- **인증 방식:** JWT (JSON Web Tokens)
-- **권한 관리:** 사용자 등급과 역할에 따른 접근 제어 (등급: 사용자/스태프/관리자)
-
-## 에러 처리 (Error Handling)
-- **에러 코드와 메시지:**
-  - `400 Bad Request`: 잘못된 요청
-  - `401 Unauthorized`: 인증 실패
-  - `403 Forbbiden`: 권한 없음
-  - `404 Not Found`: 리소스를 찾을 수 없음
-  - `409 Conflict`: 기존 상태와 충돌
-  - `500 Internal Server Error`: 서버 내부 오류
-- **예외 처리 방식:**
-  - 글로벌 예외 처리기 (`@ControllerAdvice`)를 사용하여 예외를 처리하고, 사용자에게 적절한 메시지 반환
-
-## 성능 및 확장성 (Performance & Scalability)
-- **성능 최적화 방안:**
-  - 데이터베이스 인덱싱
-  - 캐싱 (예: Redis)
-- **확장성 고려 사항:**
-  - 마이크로서비스 아키텍처 도입
-  - 수평적 확장 지원
 
 ## 테스트 및 문서화 (Testing & Documentation)
 - **테스트 방법:**

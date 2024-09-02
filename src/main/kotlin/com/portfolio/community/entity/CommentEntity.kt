@@ -14,7 +14,7 @@ class CommentEntity (
     var id: Long = id
         protected set
 
-    @Column(nullable = false)
+    @Column(columnDefinition = "TEXT", nullable = false)
     var content: String = content
         protected set
 
