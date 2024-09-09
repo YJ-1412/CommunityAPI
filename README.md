@@ -25,7 +25,7 @@
 - **로깅 / 모니터링(Logging / Monitoring):** 함수 호출 및 종료 로그 기록
 
 ## 4. 데이터베이스 (Database)
-![ERD](./docs/ERD.png)
+![ERD](./docs/ERD.png) 
 ### 주요 테이블:
 - **Role:**
 ```
