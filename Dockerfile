@@ -19,4 +19,4 @@ ENV SERVER_SSL_KEY_STORE_TYPE=${SERVER_SSL_KEY_STORE_TYPE}
 ENV SERVER_SSL_KEY_ALIAS=${SERVER_SSL_KEY_ALIAS}
 
 # 컨테이너 시작 시 실행될 명령어
-ENTRYPOINT ["java", "-jar", "/app/your-application.jar"]
+ENTRYPOINT ["java", "-jar", "/app/Community.jar"]
