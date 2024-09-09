@@ -5,6 +5,7 @@ import com.portfolio.community.dto.user.UserUpdateRequest
 import com.portfolio.community.entity.Role
 import com.portfolio.community.entity.UserEntity
 import com.portfolio.community.exception.NotFoundException
+import com.portfolio.community.repository.BoardRepository
 import com.portfolio.community.repository.RoleRepository
 import com.portfolio.community.repository.UserRepository
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -25,6 +26,7 @@ class UserServiceIntegrationTest {
     @Autowired private lateinit var userService: UserService
 
     @Autowired private lateinit var userRepository: UserRepository
+    @Autowired private lateinit var boardRepository: BoardRepository
     @Autowired private lateinit var roleRepository: RoleRepository
 
     private lateinit var defaultRole: Role
@@ -32,6 +34,7 @@ class UserServiceIntegrationTest {
     @BeforeEach
     fun setup() {
         userRepository.deleteAll()
+        boardRepository.deleteAll()
         roleRepository.deleteAll()
         defaultRole = roleRepository.save(Role(name = "User LV0", level = 0))
     }
