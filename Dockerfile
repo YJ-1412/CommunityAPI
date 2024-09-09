@@ -5,7 +5,7 @@ FROM openjdk:17-slim
 WORKDIR /app
 
 # 호스트의 JAR 파일을 컨테이너로 복사
-COPY build/libs/* /app/Community.jar
+COPY build/libs/*.jar /app/Community.jar
 
 # 환경 변수 설정 (환경 변수로 설정된 민감한 정보 처리)
 ENV SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL}
