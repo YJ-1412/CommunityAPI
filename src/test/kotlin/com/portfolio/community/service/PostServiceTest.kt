@@ -181,14 +181,14 @@ class PostServiceTest {
     @Test
     fun given_ValidData_when_CreatePost_then_CreateAndReturnNewPost() {
         //Given
-        val postCreateRequest = PostCreateRequest(title = "New Post", content = "Content", authorId = 1L)
+        val postCreateRequest = PostCreateRequest(title = "New Post", content = "Content")
         val newPost = PostEntity(title = "New Post", content = "Content", author = author, board = board)
         every { userRepository.findByIdOrNull(1L) } returns author
         every { boardRepository.findByIdOrNull(1L) } returns board
         every { postRepository.save(any()) } returns newPost
 
         //When
-        val result = postService.createPost(1L, postCreateRequest)
+        val result = postService.createPost(1L, 1L, postCreateRequest)
 
         //Then
         assertEquals("New Post", result.title)
@@ -199,12 +199,12 @@ class PostServiceTest {
     @Test
     fun given_InvalidAuthorId_when_CreatePost_then_ThrowNotFoundException() {
         //Given
-        val postCreateRequest = PostCreateRequest(title = "New Post", content = "Content", authorId = 1L)
+        val postCreateRequest = PostCreateRequest(title = "New Post", content = "Content")
         every { userRepository.findByIdOrNull(1L) } returns null
 
         //When & Then
         val ex = assertThrows<NotFoundException> {
-            postService.createPost(1L, postCreateRequest)
+            postService.createPost(1L, 1L, postCreateRequest)
         }
         assertEquals("User with ID 1 Not Found", ex.message)
     }
@@ -212,13 +212,13 @@ class PostServiceTest {
     @Test
     fun given_InvalidBoardId_when_CreatePost_then_ThrowNotFoundException() {
         //Given
-        val postCreateRequest = PostCreateRequest(title = "New Post", content = "Content", authorId = 1L)
+        val postCreateRequest = PostCreateRequest(title = "New Post", content = "Content")
         every { userRepository.findByIdOrNull(1L) } returns author
         every { boardRepository.findByIdOrNull(1L) } returns null
 
         //When & Then
         val ex = assertThrows<NotFoundException> {
-            postService.createPost(1L, postCreateRequest)
+            postService.createPost(1L, 1L, postCreateRequest)
         }
         assertEquals("Board with ID 1 Not Found", ex.message)
     }

@@ -4,6 +4,7 @@ import com.portfolio.community.dto.post.PostCreateRequest
 import com.portfolio.community.dto.post.PostInfoResponse
 import com.portfolio.community.dto.post.PostResponse
 import com.portfolio.community.dto.post.PostUpdateRequest
+import com.portfolio.community.dto.user.Principal
 import com.portfolio.community.entity.BoardEntity
 import com.portfolio.community.entity.PostEntity
 import com.portfolio.community.entity.Role
@@ -144,12 +145,12 @@ class PostControllerTest {
     @Test
     fun given_ValidData_when_CreatePost_then_ReturnCreatedAndNewPost() {
         //Given
-        val postCreateRequest = PostCreateRequest(title = "New Post", content = "New Content", authorId = 1)
+        val postCreateRequest = PostCreateRequest(title = "New Post", content = "New Content")
         val post = PostResponse(PostEntity(title = "New Post", content = "New Content", author = author, board = board, id = 1))
-        every { postService.createPost(1, postCreateRequest) } returns post
+        every { postService.createPost(1, 1, postCreateRequest) } returns post
 
         //When
-        val result = postController.createPost(1, postCreateRequest)
+        val result = postController.createPost(1, postCreateRequest, Principal(author))
 
         //Then
         assertEquals(HttpStatus.CREATED, result.statusCode)

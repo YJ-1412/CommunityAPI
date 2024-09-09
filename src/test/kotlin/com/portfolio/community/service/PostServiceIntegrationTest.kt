@@ -272,10 +272,10 @@ class PostServiceIntegrationTest {
     @Test
     fun given_ValidData_when_CreatePost_then_CreateAndReturnNewPost() {
         //Given
-        val postCreateRequest = PostCreateRequest(title = "New Post", content = "Content", authorId = author.id)
+        val postCreateRequest = PostCreateRequest(title = "New Post", content = "Content")
 
         //When
-        val result = postService.createPost(board.id, postCreateRequest)
+        val result = postService.createPost(board.id, author.id, postCreateRequest)
 
         //Then
         assertEquals("New Post", result.title)
@@ -284,11 +284,11 @@ class PostServiceIntegrationTest {
     @Test
     fun given_InvalidBoardId_when_CreatePost_then_ThrowNotFoundException() {
         //Given
-        val postCreateRequest = PostCreateRequest(title = "New Post", content = "Content", authorId = author.id)
+        val postCreateRequest = PostCreateRequest(title = "New Post", content = "Content")
 
         //When & Then
         val ex = assertThrows<NotFoundException> {
-            postService.createPost(-1, postCreateRequest)
+            postService.createPost(-1, author.id, postCreateRequest)
         }
         assertEquals("Board with ID -1 Not Found", ex.message)
     }
@@ -296,11 +296,11 @@ class PostServiceIntegrationTest {
     @Test
     fun given_InvalidAuthorId_when_CreatePost_then_ThrowNotFoundException() {
         //Given
-        val postCreateRequest = PostCreateRequest(title = "New Post", content = "Content", authorId = -1)
+        val postCreateRequest = PostCreateRequest(title = "New Post", content = "Content")
 
         //When & Then
         val ex = assertThrows<NotFoundException> {
-            postService.createPost(board.id, postCreateRequest)
+            postService.createPost(board.id, -1, postCreateRequest)
         }
         assertEquals("User with ID -1 Not Found", ex.message)
     }

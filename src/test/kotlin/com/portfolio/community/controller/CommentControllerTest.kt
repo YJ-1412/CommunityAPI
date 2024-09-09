@@ -1,8 +1,7 @@
 package com.portfolio.community.controller
 
-import com.portfolio.community.dto.comment.CommentCreateRequest
-import com.portfolio.community.dto.comment.CommentResponse
-import com.portfolio.community.dto.comment.CommentUpdateRequest
+import com.portfolio.community.dto.comment.*
+import com.portfolio.community.dto.user.Principal
 import com.portfolio.community.entity.*
 import com.portfolio.community.service.CommentService
 import io.mockk.Runs
@@ -36,7 +35,7 @@ class CommentControllerTest {
     fun given_CommentExists_when_GetCommentsByPost_then_ReturnOkAndCommentList() {
         //Given
         val pageable = PageRequest.of(0, 10)
-        val comments = (1..10).map { CommentResponse(CommentEntity(content = "Comment $it", author = author, post = post, id = 1L)) }
+        val comments = (1..10).map { CommentByPostResponse(CommentEntity(content = "Comment $it", author = author, post = post, id = 1L)) }
         val commentPage = PageImpl(comments, pageable, comments.size.toLong())
         every { commentService.getCommentsByPost(1, 0, 10) } returns commentPage
 
@@ -65,7 +64,7 @@ class CommentControllerTest {
     fun given_CommentExists_when_GetCommentsByAuthor_then_ReturnOkAndCommentList() {
         //Given
         val pageable = PageRequest.of(0, 10)
-        val comments = (1..10).map { CommentResponse(CommentEntity(content = "Comment $it", author = author, post = post, id = 1L)) }
+        val comments = (1..10).map { CommentByAuthorResponse(CommentEntity(content = "Comment $it", author = author, post = post, id = 1L)) }
         val commentPage = PageImpl(comments, pageable, comments.size.toLong())
         every { commentService.getCommentsByAuthor(1, 0, 10) } returns commentPage
 
@@ -93,12 +92,12 @@ class CommentControllerTest {
     @Test
     fun given_ValidData_when_CreateComment_then_ReturnCreatedAndNewComment() {
         //Given
-        val commentCreateRequest = CommentCreateRequest(content = "New Comment", authorId = 1)
+        val commentCreateRequest = CommentCreateRequest(content = "New Comment")
         val newComment = CommentResponse(CommentEntity(content = "New Comment", author = author, post = post, id = 1L))
-        every { commentService.createComment(1, commentCreateRequest) } returns newComment
+        every { commentService.createComment(1, 1, commentCreateRequest) } returns newComment
 
         //When
-        val result = commentController.createComment(1, commentCreateRequest)
+        val result = commentController.createComment(1, commentCreateRequest, Principal(author))
 
         //Then
         assertEquals(HttpStatus.CREATED, result.statusCode)

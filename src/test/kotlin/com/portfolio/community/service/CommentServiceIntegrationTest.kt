@@ -98,10 +98,10 @@ class CommentServiceIntegrationTest {
     @Test
     fun given_ValidData_when_CreateComment_then_CreateAndReturnNewComment() {
         //Given
-        val commentCreateRequest = CommentCreateRequest(content = "New Comment", authorId = authorOfComment.id)
+        val commentCreateRequest = CommentCreateRequest(content = "New Comment")
 
         //When
-        val result = commentService.createComment(post.id, commentCreateRequest)
+        val result = commentService.createComment(post.id, authorOfComment.id, commentCreateRequest)
 
         //Then
         assertEquals("New Comment", result.content)
@@ -110,11 +110,11 @@ class CommentServiceIntegrationTest {
     @Test
     fun given_InvalidAuthorId_when_CreateComment_then_ThrowNotFoundException() {
         //Given
-        val commentCreateRequest = CommentCreateRequest(content = "New Comment", authorId = -1)
+        val commentCreateRequest = CommentCreateRequest(content = "New Comment")
 
         //When & Then
         val ex = assertThrows<NotFoundException> {
-            commentService.createComment(post.id, commentCreateRequest)
+            commentService.createComment(post.id, -1, commentCreateRequest)
         }
         assertEquals("User with ID -1 Not Found", ex.message)
     }
@@ -122,11 +122,11 @@ class CommentServiceIntegrationTest {
     @Test
     fun given_InvalidPostId_when_CreateComment_then_ThrowNotFoundException() {
         //Given
-        val commentCreateRequest = CommentCreateRequest(content = "New Comment", authorId = authorOfComment.id)
+        val commentCreateRequest = CommentCreateRequest(content = "New Comment")
 
         //When & Then
         val ex = assertThrows<NotFoundException> {
-            commentService.createComment(-1, commentCreateRequest)
+            commentService.createComment(-1, authorOfComment.id, commentCreateRequest)
         }
         assertEquals("Post with ID -1 Not Found", ex.message)
     }

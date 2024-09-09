@@ -271,7 +271,7 @@ class PostControllerIntegrationTest {
         postService.likePost(level2User.id, testPost.id)
 
         //When
-        val result = mockMvc.perform(delete("/posts/{postId}/liked-users/{userId}", testPost.id, level2User.id)
+        val result = mockMvc.perform(delete("/posts/{postId}/liked-users", testPost.id)
             .header(HttpHeaders.AUTHORIZATION, "Bearer $jwtLV2"))
 
         //Then
@@ -287,7 +287,7 @@ class PostControllerIntegrationTest {
         val testPost = postRepository.save(PostEntity(title = "Test Post", content = "Test Content", author = level1User, board = board))
 
         //When
-        val result = mockMvc.perform(delete("/posts/{postId}/liked-users/{userId}", testPost.id, level2User.id)
+        val result = mockMvc.perform(delete("/posts/{postId}/liked-users", testPost.id)
             .header(HttpHeaders.AUTHORIZATION, "Bearer $jwtLV2"))
 
         //Then
@@ -300,24 +300,7 @@ class PostControllerIntegrationTest {
     @Test
     fun given_InvalidPostId_when_UnlikePost_then_ReturnForbidden() {
         //When
-        val result = mockMvc.perform(delete("/posts/{postId}/liked-users/{userId}", -1, level2User.id)
-            .header(HttpHeaders.AUTHORIZATION, "Bearer $jwtLV2"))
-
-        //Then
-        result.andExpect(status().isForbidden)
-            .andExpect(jsonPath("$.status").value(403))
-            .andExpect(jsonPath("$.message").value("Access Denied"))
-            .andExpect(jsonPath("$.details").exists())
-    }
-
-    @Test
-    fun given_InvalidUserId_when_UnlikePost_then_ReturnForbidden() {
-        //Given
-        val testPost = postRepository.save(PostEntity(title = "Test Post", content = "Test Content", author = level1User, board = board))
-        postService.likePost(level2User.id, testPost.id)
-
-        //When
-        val result = mockMvc.perform(delete("/posts/{postId}/liked-users/{userId}", testPost.id, -1)
+        val result = mockMvc.perform(delete("/posts/{postId}/liked-users", -1)
             .header(HttpHeaders.AUTHORIZATION, "Bearer $jwtLV2"))
 
         //Then
@@ -333,7 +316,7 @@ class PostControllerIntegrationTest {
         val testPost = postRepository.save(PostEntity(title = "Test Post", content = "Test Content", author = level1User, board = board))
 
         //When
-        val result = mockMvc.perform(delete("/posts/{postId}/liked-users/{userId}", testPost.id, level0User.id)
+        val result = mockMvc.perform(delete("/posts/{postId}/liked-users", testPost.id)
             .header(HttpHeaders.AUTHORIZATION, "Bearer $jwtLV0"))
 
         //Then
@@ -391,7 +374,7 @@ class PostControllerIntegrationTest {
     @Test
     fun given_ValidRequest_when_CreatePost_then_ReturnCreatedAndNewPost() {
         //Given
-        val postCreateRequest = PostCreateRequest(title = "New Post", content = "New Content", authorId = level1User.id)
+        val postCreateRequest = PostCreateRequest(title = "New Post", content = "New Content")
 
         //When
         val result = mockMvc.perform(post("/boards/{boardId}/posts", board.id)
@@ -408,45 +391,9 @@ class PostControllerIntegrationTest {
     }
 
     @Test
-    fun given_UserAndAuthorIdMismatch_when_CreatePost_then_ReturnForbidden() {
-        //Given
-        val postCreateRequest = PostCreateRequest(title = "New Post", content = "New Content", authorId = level2User.id)
-
-        //When
-        val result = mockMvc.perform(post("/boards/{boardId}/posts", board.id)
-            .header(HttpHeaders.AUTHORIZATION, "Bearer $jwtLV1")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(postCreateRequest)))
-
-        //Then
-        result.andExpect(status().isForbidden)
-            .andExpect(jsonPath("$.status").value(403))
-            .andExpect(jsonPath("$.message").value("Access Denied"))
-            .andExpect(jsonPath("$.details").exists())
-    }
-
-    @Test
-    fun given_InvalidAuthorId_when_CreatePost_then_ReturnForbidden() {
-        //Given
-        val postCreateRequest = PostCreateRequest(title = "New Post", content = "New Content", authorId = -1)
-
-        //When
-        val result = mockMvc.perform(post("/boards/{boardId}/posts", board.id)
-            .header(HttpHeaders.AUTHORIZATION, "Bearer $jwtLV1")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(postCreateRequest)))
-
-        //Then
-        result.andExpect(status().isForbidden)
-            .andExpect(jsonPath("$.status").value(403))
-            .andExpect(jsonPath("$.message").value("Access Denied"))
-            .andExpect(jsonPath("$.details").exists())
-    }
-
-    @Test
     fun given_InvalidBoardId_when_CreatePost_then_ReturnForbidden() {
         //Given
-        val postCreateRequest = PostCreateRequest(title = "New Post", content = "New Content", authorId = level1User.id)
+        val postCreateRequest = PostCreateRequest(title = "New Post", content = "New Content")
 
         //When
         val result = mockMvc.perform(post("/boards/{boardId}/posts", -1)
@@ -464,7 +411,7 @@ class PostControllerIntegrationTest {
     @Test
     fun given_UserCanNotCreatePost_when_CreatePost_then_ReturnForbidden() {
         //Given
-        val postCreateRequest = PostCreateRequest(title = "New Post", content = "New Content", authorId = level0User.id)
+        val postCreateRequest = PostCreateRequest(title = "New Post", content = "New Content")
 
         //When
         val result = mockMvc.perform(post("/boards/{boardId}/posts", board.id)

@@ -1,8 +1,6 @@
 package com.portfolio.community.service
 
-import com.portfolio.community.dto.comment.CommentCreateRequest
-import com.portfolio.community.dto.comment.CommentResponse
-import com.portfolio.community.dto.comment.CommentUpdateRequest
+import com.portfolio.community.dto.comment.*
 import com.portfolio.community.entity.*
 import com.portfolio.community.exception.NotFoundException
 import com.portfolio.community.repository.CommentRepository
@@ -59,7 +57,7 @@ class CommentServiceTest {
         //Then
         assertEquals(10, result.totalElements)
         assertEquals(1, result.totalPages)
-        assertEquals(comments.map { CommentResponse(it) }, result.content)
+        assertEquals(comments.map { CommentByPostResponse(it) }, result.content)
     }
 
     @Test
@@ -89,7 +87,7 @@ class CommentServiceTest {
         //Then
         assertEquals(10, result.totalElements)
         assertEquals(1, result.totalPages)
-        assertEquals(comments.map { CommentResponse(it) }, result.content)
+        assertEquals(comments.map { CommentByAuthorResponse(it) }, result.content)
     }
 
     @Test
@@ -107,14 +105,14 @@ class CommentServiceTest {
     @Test
     fun given_ValidData_when_CreateComment_then_CreateAndReturnNewComment() {
         //Given
-        val commentCreateRequest = CommentCreateRequest(content = "New Comment", authorId = 1L)
+        val commentCreateRequest = CommentCreateRequest(content = "New Comment")
         val newComment = CommentEntity(content = "New Comment", author = author, post = post, id = 1L)
         every { userRepository.findByIdOrNull(1L) } returns author
         every { postRepository.findByIdOrNull(1L) } returns post
         every { commentRepository.save(any()) } returns newComment
 
         //When
-        val result = commentService.createComment(1L, commentCreateRequest)
+        val result = commentService.createComment(1L, 1L, commentCreateRequest)
 
         //Then
         assertEquals("New Comment", result.content)
@@ -125,12 +123,12 @@ class CommentServiceTest {
     @Test
     fun given_InvalidAuthorId_when_CreateComment_then_ThrowNotFoundException() {
         //Given
-        val commentCreateRequest = CommentCreateRequest(content = "New Comment", authorId = 1L)
+        val commentCreateRequest = CommentCreateRequest(content = "New Comment")
         every { userRepository.findByIdOrNull(1L) } returns null
 
         //When & Then
         val ex = assertThrows<NotFoundException> {
-            commentService.createComment(1L, commentCreateRequest)
+            commentService.createComment(1L, 1L, commentCreateRequest)
         }
         assertEquals("User with ID 1 Not Found", ex.message)
     }
@@ -138,13 +136,13 @@ class CommentServiceTest {
     @Test
     fun given_InvalidPostId_when_CreateComment_then_ThrowNotFoundException() {
         //Given
-        val commentCreateRequest = CommentCreateRequest(content = "New Comment", authorId = 1L)
+        val commentCreateRequest = CommentCreateRequest(content = "New Comment")
         every { userRepository.findByIdOrNull(1L) } returns author
         every { postRepository.findByIdOrNull(1L) } returns null
 
         //When & Then
         val ex = assertThrows<NotFoundException> {
-            commentService.createComment(1L, commentCreateRequest)
+            commentService.createComment(1L, 1L, commentCreateRequest)
         }
         assertEquals("Post with ID 1 Not Found", ex.message)
     }

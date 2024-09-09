@@ -159,7 +159,7 @@ class CommentControllerIntegrationTest {
     @Test
     fun given_ValidRequest_when_CreateComment_then_ReturnCreatedAndNewComment() {
         //Given
-        val commentCreateRequest = CommentCreateRequest(content = "New Comment", authorId = level1User.id)
+        val commentCreateRequest = CommentCreateRequest(content = "New Comment")
 
         //When
         val result = mockMvc.perform(post("/posts/{postId}/comments", post.id)
@@ -177,7 +177,7 @@ class CommentControllerIntegrationTest {
     @Test
     fun given_InvalidPostId_when_CreateComment_then_ReturnForbidden() {
         //Given
-        val commentCreateRequest = CommentCreateRequest(content = "New Comment", authorId = level1User.id)
+        val commentCreateRequest = CommentCreateRequest(content = "New Comment")
 
         //When
         val result = mockMvc.perform(post("/posts/{postId}/comments", -1)
@@ -193,27 +193,9 @@ class CommentControllerIntegrationTest {
     }
 
     @Test
-    fun given_InvalidAuthorId_when_CreateComment_then_ReturnForbidden() {
-        //Given
-        val commentCreateRequest = CommentCreateRequest(content = "New Comment", authorId = -1)
-
-        //When
-        val result = mockMvc.perform(post("/posts/{postId}/comments", post.id)
-            .header(HttpHeaders.AUTHORIZATION, "Bearer $jwtLV1")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(commentCreateRequest)))
-
-        //Then
-        result.andExpect(status().isForbidden)
-            .andExpect(jsonPath("$.status").value(403))
-            .andExpect(jsonPath("$.message").value("Access Denied"))
-            .andExpect(jsonPath("$.details").exists())
-    }
-
-    @Test
     fun given_NotReadableUser_when_CreateComment_then_ReturnForbidden() {
         //Given
-        val commentCreateRequest = CommentCreateRequest(content = "New Comment", authorId = level0User.id)
+        val commentCreateRequest = CommentCreateRequest(content = "New Comment")
 
         //When
         val result = mockMvc.perform(post("/posts/{postId}/comments", post.id)
