@@ -9,32 +9,51 @@
 - **프로그래밍 언어:** Kotlin
 - **프레임워크:** Spring Boot, Spring Security
 - **데이터베이스:** MySQL
-- **기타 기술:** JPA
+- **기타 기술:** JPA, Docker
 
 ## 3. 시스템 아키텍처 (System Architecture)
 ![Component Diagram]
-- **레이어드 아키텍쳐:** 
-- **주요 컴포넌트:**
-  - **사용자 관리(User Management):** 회원가입, 로그인, JWT 토큰 재발급, 수정, 삭제
-  - **역할 관리(Role Management):** 역할 생성, 조회, 수정, 삭제
-  - **게시판 관리(Board Management):** 게시판 생성, 조회, 수정, 삭제
-  - **게시글 관리(Post Management):** 게시글 작성, 조회, 수정, 삭제
-  - **댓글 관리(Comment Management):** 댓글 작성, 조회, 수정, 삭제
-  - **보안(Security):** 인증, JWT 발급, JWT 검증, 인가
-  - **예외 처리(Exception Handling):** 예외 처리, HTTP 실패 코드 반환
-  - **로깅 / 모니터링(Logging / Monitoring):** 함수 호출 및 종료 로그 기록
+![레이어드 아키텍처]
+### 주요 컴포넌트:
+- **사용자 관리(User Management):** 회원가입, 로그인, JWT 토큰 재발급, 수정, 삭제
+- **역할 관리(Role Management):** 역할 생성, 조회, 수정, 삭제
+- **게시판 관리(Board Management):** 게시판 생성, 조회, 수정, 삭제
+- **게시글 관리(Post Management):** 게시글 작성, 조회, 수정, 삭제
+- **댓글 관리(Comment Management):** 댓글 작성, 조회, 수정, 삭제
+- **보안(Security):** 인증, JWT 발급, JWT 검증, 인가
+- **예외 처리(Exception Handling):** 예외 처리, HTTP 실패 코드 반환
+- **로깅 / 모니터링(Logging / Monitoring):** 함수 호출 및 종료 로그 기록
 
 ## 4. 데이터베이스 (Database)
 ![ERD](./docs/ERD.png)
+### 주요 테이블:
+- **Role:**
+```
+```
+- **UserEntity:**
+```
+```
+- **BoardEntity:**
+```
+```
+- **PostEntity:**
+```
+```
+- **CommentEntity:**
+```
+```
+- **User_Like_Post:**
+```
+```
 
 ## 5. 초기 설정 (Initial State)
-### 기본 관리자 계정
+### 1. 기본 관리자 계정
 - **username:** `Admin`
 - **password:** `00000000`
 
 **Note:** `초기 비밀번호는 반드시 첫 로그인 후 변경해야 합니다.`
 
-### 기본 역할
+### 2. 기본 역할
 - **name:** `LV0`
 - **level:** `0`
 
@@ -46,19 +65,35 @@
 ### 5. 댓글 관리
 
 ## 7. 인증 및 보안 (Authentication & Security)
-- **인증 방식:** JWT (JSON Web Tokens)
-- **권한 관리:** 사용자 등급과 역할에 따른 접근 제어 (등급: 사용자/스태프/관리자)
+### 1. 인증 방식
+### 2. JWT 설명
+- **JWT 구성:**
+- **토큰 발급:**
+- **토큰 검증:**
+### 3. 권한 관리
+- **속성 기반 접근 제어(ABAC):**
+  - **사용자 속성:**
+    - **관리자:** 
+    - **역할:**
+  - **리소스 속성:** 
+  - **접근 제어:**
+- **권한 매핑:**
+### 4. 보안 적용 방법
+- **비밀번호 암호화:**
+- **HTTPS 사용:**
 
 ## 8. 에러 처리 (Error Handling)
-- **에러 코드와 메시지:**
-  - `400 Bad Request`: 잘못된 요청
-  - `401 Unauthorized`: 인증 실패
-  - `403 Forbbiden`: 권한 없음
-  - `404 Not Found`: 리소스를 찾을 수 없음
-  - `409 Conflict`: 기존 상태와 충돌
-  - `500 Internal Server Error`: 서버 내부 오류
-- **예외 처리 방식:**
-  - 글로벌 예외 처리기 (`@ControllerAdvice`)를 사용하여 예외를 처리하고, 사용자에게 적절한 메시지 반환
+### 1. 예외 처리 전략
+### 2. 커스텀 에러 메시지
+### 3. HTTP 상태 코드
+- `200 OK`: 
+- `201 Created`: 
+- `400 Bad Request`: 잘못된 요청
+- `401 Unauthorized`: 인증 실패
+- `403 Forbbiden`: 권한 없음
+- `404 Not Found`: 리소스를 찾을 수 없음
+- `409 Conflict`: 기존 상태와 충돌
+- `500 Internal Server Error`: 서버 내부 오류
 
 ## 9. API 엔드포인트 (API Endpoints)
 ### 1. 사용자 관리(User Management)
@@ -2175,7 +2210,9 @@
     - 존재하지 않는 `commentId`를 입력하면 `403 Forbidden` 응답이 반환됩니다.
     ```
 
-## 테스트 및 문서화 (Testing & Documentation)
+## 10. 테스트 및 검증
 - **테스트 방법:**
   - 유닛 테스트 (JUnit)
   - 통합 테스트 (Spring Boot Test)
+
+## 11. 배포 및 운영
