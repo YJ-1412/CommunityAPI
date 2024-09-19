@@ -91,7 +91,7 @@ class UserService(
     @Transactional
     fun setRegular(userId: Long): UserResponse {
         val user = userRepository.findByIdOrNull(userId) ?: throw NotFoundException("User", "ID", userId)
-        if (!user.isAdminOrStaff()) throw IllegalStateException("User is already regular")
+        if (!user.isStaff) throw IllegalStateException("User is admin or already regular")
 
         user.setRegular()
         user.invalidateRefreshToken()

@@ -88,11 +88,6 @@ class SecurityService(
         return isAdminOrStaff(authentication)
     }
 
-    fun canChangeStaff(authentication: Authentication, userId: Long): Boolean{
-        val user = userRepository.findByIdOrNull(userId) ?: return false
-        return isAdmin(authentication) && !user.isAdmin
-    }
-
     private fun isAuthorOfPost(user: Principal, postId: Long): Boolean {
         val post = postRepository.findByIdOrNull(postId) ?: return false
         return user.id == post.author.id

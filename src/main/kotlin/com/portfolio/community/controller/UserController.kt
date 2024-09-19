@@ -89,14 +89,14 @@ class UserController(
     }
 
     @PostMapping("/staff")
-    @PreAuthorize("@securityService.canChangeStaff(authentication, #userId)")
+    @PreAuthorize("@securityService.isAdmin(authentication)")
     fun setStaff(@RequestBody userId: Long) : ResponseEntity<UserResponse> {
         val updatedUser = userService.setStaff(userId)
         return ResponseEntity.ok(updatedUser)
     }
 
     @DeleteMapping("/staff/{userId}")
-    @PreAuthorize("@securityService.canChangeStaff(authentication, #userId)")
+    @PreAuthorize("@securityService.isAdmin(authentication)")
     fun setRegular(@PathVariable userId: Long) : ResponseEntity<UserResponse> {
         val updatedUser = userService.setRegular(userId)
         return ResponseEntity.ok(updatedUser)

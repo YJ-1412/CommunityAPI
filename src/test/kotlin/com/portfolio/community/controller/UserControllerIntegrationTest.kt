@@ -297,9 +297,9 @@ class UserControllerIntegrationTest {
             .content(objectMapper.writeValueAsString(-1)))
 
         //Then
-        result.andExpect(status().isForbidden)
-            .andExpect(jsonPath("$.status").value(403))
-            .andExpect(jsonPath("$.message").value("Access Denied"))
+        result.andExpect(status().isNotFound)
+            .andExpect(jsonPath("$.status").value(404))
+            .andExpect(jsonPath("$.message").value("User with ID -1 Not Found"))
             .andExpect(jsonPath("$.details").exists())
     }
 
@@ -312,9 +312,9 @@ class UserControllerIntegrationTest {
             .content(objectMapper.writeValueAsString(admin.id)))
 
         //Then
-        result.andExpect(status().isForbidden)
-            .andExpect(jsonPath("$.status").value(403))
-            .andExpect(jsonPath("$.message").value("Access Denied"))
+        result.andExpect(status().isConflict)
+            .andExpect(jsonPath("$.status").value(409))
+            .andExpect(jsonPath("$.message").value("User is already admin or staff"))
             .andExpect(jsonPath("$.details").exists())
     }
 
@@ -362,9 +362,9 @@ class UserControllerIntegrationTest {
             .header(HttpHeaders.AUTHORIZATION, "Bearer $jwtAdmin"))
 
         //Then
-        result.andExpect(status().isForbidden)
-            .andExpect(jsonPath("$.status").value(403))
-            .andExpect(jsonPath("$.message").value("Access Denied"))
+        result.andExpect(status().isNotFound)
+            .andExpect(jsonPath("$.status").value(404))
+            .andExpect(jsonPath("$.message").value("User with ID -1 Not Found"))
             .andExpect(jsonPath("$.details").exists())
     }
 
@@ -375,9 +375,9 @@ class UserControllerIntegrationTest {
             .header(HttpHeaders.AUTHORIZATION, "Bearer $jwtAdmin"))
 
         //Then
-        result.andExpect(status().isForbidden)
-            .andExpect(jsonPath("$.status").value(403))
-            .andExpect(jsonPath("$.message").value("Access Denied"))
+        result.andExpect(status().isConflict)
+            .andExpect(jsonPath("$.status").value(409))
+            .andExpect(jsonPath("$.message").value("User is admin or already regular"))
             .andExpect(jsonPath("$.details").exists())
     }
 
