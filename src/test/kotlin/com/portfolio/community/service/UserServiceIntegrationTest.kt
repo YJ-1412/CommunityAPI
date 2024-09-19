@@ -257,7 +257,7 @@ class UserServiceIntegrationTest {
         val ex = assertThrows<IllegalStateException> {
             userService.setRegular(testUser.id)
         }
-        assertEquals("User is already regular", ex.message)
+        assertEquals("User is admin or already regular", ex.message)
     }
 
     @Test
