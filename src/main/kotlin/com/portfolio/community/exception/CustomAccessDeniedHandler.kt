@@ -17,7 +17,13 @@ class CustomAccessDeniedHandler : AccessDeniedHandler {
     ) {
         response.status = HttpServletResponse.SC_FORBIDDEN
         response.contentType = "application/json"
-        val errorDetails = ErrorResponse(HttpStatus.FORBIDDEN.value(), accessDeniedException.localizedMessage, request.requestURI)
-        response.writer.write(errorDetails.toString())
+        val body = """
+            {
+                "status": 403,
+                "message": "Access Denied",
+                "details": "uri=request.requestURI"
+            }
+        """.trimIndent()
+        response.writer.write(body)
     }
 }
