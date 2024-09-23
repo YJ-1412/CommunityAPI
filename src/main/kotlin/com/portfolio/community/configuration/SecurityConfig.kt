@@ -37,7 +37,7 @@ class SecurityConfig(
             .httpBasic { it.disable() }
             .exceptionHandling { it.accessDeniedHandler(customAccessDeniedHandler) }
             .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
-            //.addFilterBefore(JwtTokenFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter::class.java)
+            .addFilterBefore(JwtTokenFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter::class.java)
 
         return http.build()
     }
