@@ -1,6 +1,7 @@
 package com.portfolio.community.configuration
 
 import com.portfolio.community.exception.CustomAccessDeniedHandler
+import com.portfolio.community.exception.CustomAuthenticationEntryPoint
 import com.portfolio.community.service.UserService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -21,6 +22,7 @@ class SecurityConfig(
     private val jwtTokenProvider: JwtTokenProvider,
     private val userService: UserService,
     private val customAccessDeniedHandler: CustomAccessDeniedHandler,
+    private val customAuthenticationEntryPoint: CustomAuthenticationEntryPoint,
     private val passwordEncoder: PasswordEncoder
 ) {
 
@@ -35,7 +37,10 @@ class SecurityConfig(
             }
             .formLogin { it.disable() }
             .httpBasic { it.disable() }
-            .exceptionHandling { it.accessDeniedHandler(customAccessDeniedHandler) }
+            .exceptionHandling { it
+                .accessDeniedHandler(customAccessDeniedHandler)
+                .authenticationEntryPoint(customAuthenticationEntryPoint)
+            }
             .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
             .addFilterBefore(JwtTokenFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter::class.java)
 

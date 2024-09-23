@@ -21,7 +21,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
-import org.springframework.security.test.context.support.WithMockUser
 import org.springframework.test.context.TestPropertySource
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.servlet.MockMvc
@@ -495,7 +494,23 @@ class BoardControllerIntegrationTest {
     }
 
     @Test
-    @WithMockUser(username = "User", roles = ["USER"])
+    fun given_Unauthorized_when_CreateBoard_then_ReturnForbidden() {
+        //Given
+        val boardCreateRequest = BoardCreateRequest(name = "New Board", priority = 0, readableRoleId = level0Role.id)
+
+        //When
+        val result = mockMvc.perform(post("/boards")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(objectMapper.writeValueAsString(boardCreateRequest)))
+
+        //Then
+        result.andExpect(status().isUnauthorized)
+            .andExpect(jsonPath("$.status").value(401))
+            .andExpect(jsonPath("$.message").value("Unauthorized"))
+            .andExpect(jsonPath("$.details").exists())
+    }
+
+    @Test
     fun given_RegularUser_when_CreateBoard_then_ReturnForbidden() {
         //Given
         val boardCreateRequest = BoardCreateRequest(name = "New Board", priority = 0, readableRoleId = level0Role.id)
@@ -514,7 +529,6 @@ class BoardControllerIntegrationTest {
     }
 
     @Test
-    @WithMockUser(username = "User", roles = ["USER"])
     fun given_RegularUser_when_UpdateBoard_then_ReturnForbidden() {
         //When
         val testBoard = boardRepository.save(BoardEntity(name = "Test Board", priority = 0, readableRole = level0Role))
@@ -529,12 +543,11 @@ class BoardControllerIntegrationTest {
         //Then
         result.andExpect(status().isForbidden)
             .andExpect(jsonPath("$.status").value(403))
-            .andExpect(jsonPath("$.message").exists())
+            .andExpect(jsonPath("$.message").value("Access Denied"))
             .andExpect(jsonPath("$.details").exists())
     }
 
     @Test
-    @WithMockUser(username = "Admin", authorities = ["USER","ADMIN"])
     fun given_ValidRequest_when_BatchUpdateBoard_then_ReturnOkAndBoardList() {
         //Given
         //priority 5를 삭제하고 0~4를 1씩 올린 뒤 새로운 0을 생성, 그리고 6은 삭제한 뒤 0에 move
