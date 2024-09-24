@@ -22,7 +22,6 @@ class RoleController(
     }
 
     @GetMapping("/roles")
-    @PreAuthorize("permitAll()")
     fun getAllRoles(): ResponseEntity<List<RoleResponse>> {
         val roles = roleService.getAllRoles()
         return if(roles.isEmpty()) {
