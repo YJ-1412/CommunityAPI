@@ -197,9 +197,9 @@ class AuthControllerIntegrationTest {
             .content(objectMapper.writeValueAsString(loginRequest)))
 
         //Then
-        result.andExpect(status().isUnauthorized)
-            .andExpect(jsonPath("$.status").value(401))
-            .andExpect(jsonPath("$.message").value("Bad credentials"))
+        result.andExpect(status().isNotFound)
+            .andExpect(jsonPath("$.status").value(404))
+            .andExpect(jsonPath("$.message").value("User with Username Test User Not Found"))
             .andExpect(jsonPath("$.details").exists())
     }
 
