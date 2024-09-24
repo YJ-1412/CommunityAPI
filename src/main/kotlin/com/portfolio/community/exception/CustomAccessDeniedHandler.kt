@@ -19,7 +19,7 @@ class CustomAccessDeniedHandler : AccessDeniedHandler {
             {
                 "status": 403,
                 "message": "Access Denied",
-                "details": "uri=request.requestURI"
+                "details": "uri=${request.requestURI}"
             }
         """.trimIndent()
         response.writer.write(body)

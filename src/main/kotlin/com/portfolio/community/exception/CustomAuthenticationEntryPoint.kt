@@ -20,7 +20,7 @@ class CustomAuthenticationEntryPoint : AuthenticationEntryPoint {
             {
                 "status": 401,
                 "message": "Unauthorized",
-                "details": "uri=request.requestURI"
+                "details": "uri=${request.requestURI}"
             }
         """.trimIndent()
         response.writer.write(body)
