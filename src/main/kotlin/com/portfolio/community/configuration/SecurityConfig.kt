@@ -9,9 +9,7 @@ import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
-import org.springframework.security.config.annotation.web.builders.WebSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
@@ -33,12 +31,12 @@ class SecurityConfig(
         http
             .csrf{ it.disable() }
             .authorizeHttpRequests { authorizeHttpRequests -> authorizeHttpRequests
-                .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html", "/register", "/login", "/refresh-token").permitAll()
+                .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html", "/webjars", "/register", "/login", "/refresh-token").permitAll()
                 .anyRequest().authenticated()
             }
             .formLogin { it.disable() }
             .httpBasic { it.disable() }
-            .exceptionHandling { it
+            .exceptionHandling { exceptionHandling -> exceptionHandling
                 .accessDeniedHandler(customAccessDeniedHandler)
                 .authenticationEntryPoint(customAuthenticationEntryPoint)
             }
@@ -53,14 +51,5 @@ class SecurityConfig(
         val auth = http.getSharedObject(AuthenticationManagerBuilder::class.java)
         auth.userDetailsService(userService).passwordEncoder(passwordEncoder)
         return auth.build()
-    }
-
-    @Bean
-    fun webSecurityCustomizer(): WebSecurityCustomizer {
-        return WebSecurityCustomizer { web: WebSecurity ->
-            web.ignoring().requestMatchers(
-                "/swagger-ui/**", "/v3/api-docs/**"
-            )
-        }
     }
 }

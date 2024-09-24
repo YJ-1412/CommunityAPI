@@ -1,8 +1,6 @@
 package com.portfolio.community.entity
 
 import jakarta.persistence.*
-import org.springframework.security.core.GrantedAuthority
-import org.springframework.security.core.userdetails.UserDetails
 
 @Entity
 class UserEntity (
@@ -10,17 +8,17 @@ class UserEntity (
     password: String,
     role: Role,
     id: Long = 0
-) : BaseTimeEntity(), UserDetails {
+) : BaseTimeEntity() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = id
         protected set
 
     @Column(unique = true, nullable = false)
-    private var username: String = username
+    var username: String = username
 
     @Column(nullable = false)
-    private var password: String = password
+    var password: String = password
 
     @Column(nullable = false)
     var isAdmin: Boolean = false
@@ -80,34 +78,6 @@ class UserEntity (
 
     fun invalidateRefreshToken() {
         refreshToken = null
-    }
-
-    override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
-        return mutableSetOf()
-    }
-
-    override fun getPassword(): String {
-        return password
-    }
-
-    override fun getUsername(): String {
-        return username
-    }
-
-    override fun isAccountNonExpired(): Boolean {
-        return true
-    }
-
-    override fun isAccountNonLocked(): Boolean {
-        return true
-    }
-
-    override fun isCredentialsNonExpired(): Boolean {
-        return true
-    }
-
-    override fun isEnabled(): Boolean {
-        return true
     }
 
 }

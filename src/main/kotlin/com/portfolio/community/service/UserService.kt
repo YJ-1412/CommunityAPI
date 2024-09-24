@@ -6,7 +6,6 @@ import com.portfolio.community.exception.NotFoundException
 import com.portfolio.community.repository.RoleRepository
 import com.portfolio.community.repository.UserRepository
 import org.springframework.data.repository.findByIdOrNull
-import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -119,6 +118,7 @@ class UserService(
 
     @Transactional(readOnly = true)
     override fun loadUserByUsername(username: String): UserDetails {
-        return userRepository.findByUsername(username) ?: throw BadCredentialsException("Bad credentials")
+        val user = userRepository.findByUsername(username) ?: throw NotFoundException("User", "Username", username)
+        return Principal(user)
     }
 }
