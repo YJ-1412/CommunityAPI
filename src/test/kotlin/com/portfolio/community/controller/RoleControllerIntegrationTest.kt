@@ -73,8 +73,7 @@ class RoleControllerIntegrationTest {
         roleRepository.saveAll((1..5).map { Role(name = "LV$it", level = it) })
 
         //When
-        val result = mockMvc.perform(get("/roles")
-            .header(HttpHeaders.AUTHORIZATION, "Bearer $jwtLV0"))
+        val result = mockMvc.perform(get("/roles"))
 
         //Then
         result.andExpect(status().isOk)

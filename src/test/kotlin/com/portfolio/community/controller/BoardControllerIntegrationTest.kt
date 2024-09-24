@@ -94,6 +94,18 @@ class BoardControllerIntegrationTest {
     }
 
     @Test
+    fun given_Unauthenticated_when_GetAllBoards_then_ReturnOk() {
+        //Given
+        boardRepository.saveAll((1..5).map { BoardEntity(name = "Board $it", priority = it-1, readableRole = level0Role) })
+
+        //When
+        val result = mockMvc.perform(get("/boards"))
+
+        //Then
+        result.andExpect(status().isOk)
+    }
+
+    @Test
     fun given_ValidRequest_when_CreateBoard_then_ReturnCreatedAndNewBoard() {
         //Given
         val boardCreateRequest = BoardCreateRequest(name = "New Board", priority = 0, readableRoleId = level0Role.id)

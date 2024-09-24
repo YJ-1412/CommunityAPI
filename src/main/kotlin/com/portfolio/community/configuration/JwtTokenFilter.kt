@@ -3,7 +3,6 @@ package com.portfolio.community.configuration
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
-import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.filter.OncePerRequestFilter
 
@@ -21,7 +20,7 @@ class JwtTokenFilter(private val jwtTokenProvider: JwtTokenProvider): OncePerReq
                 SecurityContextHolder.getContext().authentication = auth // SecurityContext에 Authentication 설정
             }
             filterChain.doFilter(request, response) // 다음 필터로 요청 전달
-        } catch (e: BadCredentialsException) {
+        } catch (e: Exception) {
             response.status = HttpServletResponse.SC_UNAUTHORIZED
             response.contentType = "application/json"
             val body = """
