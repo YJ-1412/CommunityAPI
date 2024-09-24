@@ -32,7 +32,6 @@ class SecurityConfig(
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http
             .csrf{ it.disable() }
-            .cors{ it.disable() }
             .authorizeHttpRequests { authorizeHttpRequests -> authorizeHttpRequests
                 .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html", "/register", "/login", "/refresh-token").permitAll()
                 .anyRequest().authenticated()
