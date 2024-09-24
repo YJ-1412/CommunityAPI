@@ -37,6 +37,7 @@ class SecurityConfig(
             }
             .formLogin { it.disable() }
             .httpBasic { it.disable() }
+            .anonymous { it.disable() }
             .exceptionHandling { exceptionHandling -> exceptionHandling
                 .accessDeniedHandler(customAccessDeniedHandler)
                 .authenticationEntryPoint(customAuthenticationEntryPoint)
