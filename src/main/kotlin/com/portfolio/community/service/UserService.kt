@@ -119,6 +119,6 @@ class UserService(
     @Transactional(readOnly = true)
     override fun loadUserByUsername(username: String): UserDetails {
         val user = userRepository.findByUsername(username) ?: throw NotFoundException("User", "Username", username)
-        return Principal(user)
+        return user
     }
 }

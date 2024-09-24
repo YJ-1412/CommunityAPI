@@ -3,6 +3,7 @@ package com.portfolio.community.controller
 import com.portfolio.community.configuration.JwtTokenProvider
 import com.portfolio.community.dto.RefreshTokenRequest
 import com.portfolio.community.dto.user.*
+import com.portfolio.community.entity.UserEntity
 import com.portfolio.community.service.UserService
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
@@ -34,7 +35,7 @@ class UserController(
         val authentication = authenticationManager.authenticate(UsernamePasswordAuthenticationToken(loginRequest.username, loginRequest.password))
         SecurityContextHolder.getContext().authentication = authentication
 
-        val principal = authentication.principal as Principal
+        val principal = Principal(authentication.principal as UserEntity)
 
         val accessToken = jwtTokenProvider.createAccessToken(principal)
         val refreshToken = jwtTokenProvider.createRefreshToken(principal)
