@@ -30,7 +30,7 @@ class DataInitializer(
 
             val adminId = appConfigRepository.findByKey("admin_id")
             if (adminId == null || userRepository.findByIdOrNull(adminId.value.toLong())==null) {
-                val admin = userRepository.save(UserEntity("Admin", passwordEncoder.encode("00000000"), role = defaultRole).apply { setAdmin() })
+                val admin = userRepository.save(UserEntity("Admin", passwordEncoder.encode("00000001"), role = defaultRole).apply { setAdmin() })
                 appConfigRepository.save(AppConfig(key = "admin_id", value = "${admin.id}"))
             }
         }
