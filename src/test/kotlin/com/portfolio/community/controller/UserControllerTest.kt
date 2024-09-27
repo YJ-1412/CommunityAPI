@@ -30,7 +30,7 @@ class UserControllerTest {
         userService = mockk()
         jwtTokenProvider = mockk()
         authenticationManager = mockk()
-        userController = UserController(userService, authenticationManager, jwtTokenProvider)
+        userController = UserController(userService)
     }
 
     @Test

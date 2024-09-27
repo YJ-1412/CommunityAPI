@@ -5,6 +5,7 @@ import com.portfolio.community.exception.CustomAuthenticationEntryPoint
 import com.portfolio.community.service.UserService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity
@@ -31,9 +32,12 @@ class SecurityConfig(
         http
             .csrf{ it.disable() }
             .authorizeHttpRequests { authorizeHttpRequests -> authorizeHttpRequests
-                //.requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html", "/webjars", "/register", "/login", "/refresh-token").permitAll()
-                //.anyRequest().authenticated()
-                .anyRequest().permitAll()
+                .requestMatchers(
+                    "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html",
+                    "/register", "/login", "/refresh-token"
+                ).permitAll()
+                .requestMatchers(HttpMethod.GET, "/boards", "/roles", "/boards/{boardId}/posts").permitAll()
+                .anyRequest().authenticated()
             }
             .formLogin { it.disable() }
             .httpBasic { it.disable() }

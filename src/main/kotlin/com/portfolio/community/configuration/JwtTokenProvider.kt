@@ -18,17 +18,16 @@ import java.util.*
 @Component
 class JwtTokenProvider(
     private val objectMapper: ObjectMapper = jacksonObjectMapper(),
-    @Value("\${jwt.secret}") private val secretKey: String
+    @Value("\${jwt.secret}") private val secretKey: String,
+    @Value("\${jwt.access-token-validity}") private val accessTokenValidity: Long,
+    @Value("\${jwt.refresh-token-validity}") private val refreshTokenValidity: Long,
 ) {
-    private val accessTokenValidityInMilliseconds: Long = 60 * 60 * 1000            //1시간
-    private val refreshTokenValidityInMilliseconds: Long = 7 * 24 * 60 * 60 * 1000  //7일
-
     fun createAccessToken(principal: Principal): String {
-        return createToken(principal, accessTokenValidityInMilliseconds)
+        return createToken(principal, accessTokenValidity * 1000)
     }
 
     fun createRefreshToken(principal: Principal): String {
-        return createToken(principal, refreshTokenValidityInMilliseconds)
+        return createToken(principal, refreshTokenValidity * 1000)
     }
 
     private fun createToken(principal: Principal, validityInMilliseconds: Long): String {
