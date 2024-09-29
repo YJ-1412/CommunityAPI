@@ -131,7 +131,7 @@ class SecurityServiceTest {
     }
 
     @Test
-    fun given_InvalidBoardId_when_CanReadBoard_then_ReturnFalse() {
+    fun given_UserIsRegularAndInvalidBoardId_when_CanReadBoard_then_ReturnFalse() {
         //Given
         every { boardRepository.findByIdOrNull(1L) } returns null
 
@@ -142,8 +142,8 @@ class SecurityServiceTest {
         val resultLV2 = securityService.canReadBoard(level2Auth, 1)
 
         //Then
-        assertThat(resultAdmin).isFalse()
-        assertThat(resultStaff).isFalse()
+        assertThat(resultAdmin).isTrue()
+        assertThat(resultStaff).isTrue()
         assertThat(resultLV1).isFalse()
         assertThat(resultLV2).isFalse()
     }
@@ -170,7 +170,7 @@ class SecurityServiceTest {
     }
 
     @Test
-    fun given_InvalidPostId_when_CanReadPost_then_ReturnFalse() {
+    fun given_UserIsRegularAndInvalidPostId_when_CanReadPost_then_ReturnFalse() {
         //Given
         every { postRepository.findByIdOrNull(1L) } returns null
 
@@ -181,8 +181,8 @@ class SecurityServiceTest {
         val resultLV2 = securityService.canReadPost(level2Auth, 1)
 
         //Then
-        assertThat(resultAdmin).isFalse()
-        assertThat(resultStaff).isFalse()
+        assertThat(resultAdmin).isTrue()
+        assertThat(resultStaff).isTrue()
         assertThat(resultLV1).isFalse()
         assertThat(resultLV2).isFalse()
     }
@@ -207,7 +207,7 @@ class SecurityServiceTest {
     }
 
     @Test
-    fun given_InvalidBoardId_when_CanCreatePost_then_ReturnFalse() {
+    fun given_UserIsRegularAndInvalidBoardId_when_CanCreatePost_then_ReturnFalse() {
         //Given
         every { boardRepository.findByIdOrNull(1L) } returns null
 
@@ -218,8 +218,8 @@ class SecurityServiceTest {
         val resultLV2 = securityService.canCreatePost(level2Auth, 1)
 
         //Then
-        assertThat(resultAdmin).isFalse()
-        assertThat(resultStaff).isFalse()
+        assertThat(resultAdmin).isTrue()
+        assertThat(resultStaff).isTrue()
         assertThat(resultLV1).isFalse()
         assertThat(resultLV2).isFalse()
     }
@@ -315,7 +315,7 @@ class SecurityServiceTest {
     }
 
     @Test
-    fun given_InvalidPostId_when_CanDeletePost_then_ReturnFalse() {
+    fun given_UserIsRegularAndInvalidPostId_when_CanDeletePost_then_ReturnFalse() {
         //Given
         every { postRepository.findByIdOrNull(1L) } returns null
 
@@ -326,8 +326,8 @@ class SecurityServiceTest {
         val resultLV2 = securityService.canDeletePost(level2Auth, 1)
 
         //Then
-        assertThat(resultAdmin).isFalse()
-        assertThat(resultStaff).isFalse()
+        assertThat(resultAdmin).isTrue()
+        assertThat(resultStaff).isTrue()
         assertThat(resultLV1).isFalse()
         assertThat(resultLV2).isFalse()
     }
@@ -354,7 +354,7 @@ class SecurityServiceTest {
     }
 
     @Test
-    fun given_InvalidPostId_when_CanCreateComment_then_ReturnFalse() {
+    fun given_UserIsRegularAndInvalidPostId_when_CanCreateComment_then_ReturnFalse() {
         //Given
         every { postRepository.findByIdOrNull(1L) } returns null
 
@@ -365,8 +365,8 @@ class SecurityServiceTest {
         val resultLV2 = securityService.canCreateComment(level2Auth, 1)
 
         //Then
-        assertThat(resultAdmin).isFalse()
-        assertThat(resultStaff).isFalse()
+        assertThat(resultAdmin).isTrue()
+        assertThat(resultStaff).isTrue()
         assertThat(resultLV1).isFalse()
         assertThat(resultLV2).isFalse()
     }
@@ -436,7 +436,7 @@ class SecurityServiceTest {
     }
 
     @Test
-    fun given_InvalidCommentId_when_CanDeleteComment_then_ReturnFalse() {
+    fun given_UserIsRegularAndInvalidCommentId_when_CanDeleteComment_then_ReturnFalse() {
         //Given
         every { commentRepository.findByIdOrNull(1L) } returns null
 
@@ -447,8 +447,8 @@ class SecurityServiceTest {
         val resultLV2 = securityService.canDeleteComment(level2Auth, 1)
 
         //Then
-        assertThat(resultAdmin).isFalse()
-        assertThat(resultStaff).isFalse()
+        assertThat(resultAdmin).isTrue()
+        assertThat(resultStaff).isTrue()
         assertThat(resultLV1).isFalse()
         assertThat(resultLV2).isFalse()
     }
