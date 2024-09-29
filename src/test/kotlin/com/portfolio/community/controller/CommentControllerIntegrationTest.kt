@@ -16,7 +16,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
-import org.springframework.security.test.context.support.WithUserDetails
 import org.springframework.test.context.TestPropertySource
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.servlet.MockMvc
@@ -111,10 +110,39 @@ class CommentControllerIntegrationTest {
     }
 
     @Test
+    fun given_Unauthorized_when_GetCommentsByPost_then_ReturnUnauthorized() {
+        //When
+        val result = mockMvc.perform(get("/posts/{postId}/comments", post.id)
+            .param("page", "0")
+            .param("size", "10"))
+
+        //Then
+        result.andExpect(status().isUnauthorized)
+            .andExpect(jsonPath("$.status").value(401))
+            .andExpect(jsonPath("$.message").value("Unauthorized"))
+            .andExpect(jsonPath("$.details").exists())
+    }
+
+    @Test
     fun given_NotReadableUser_when_GetCommentsByPost_then_ReturnForbidden() {
         //When
         val result = mockMvc.perform(get("/posts/{postId}/comments", post.id)
             .header(HttpHeaders.AUTHORIZATION, "Bearer $jwtLV0")
+            .param("page", "0")
+            .param("size", "10"))
+
+        //Then
+        result.andExpect(status().isForbidden)
+            .andExpect(jsonPath("$.status").value(403))
+            .andExpect(jsonPath("$.message").value("Access Denied"))
+            .andExpect(jsonPath("$.details").exists())
+    }
+
+    @Test
+    fun given_InvalidPostId_when_GetCommentsByPost_then_ReturnForbidden() {
+        //When
+        val result = mockMvc.perform(get("/posts/{postId}/comments", -1)
+            .header(HttpHeaders.AUTHORIZATION, "Bearer $jwtLV1")
             .param("page", "0")
             .param("size", "10"))
 
@@ -132,7 +160,6 @@ class CommentControllerIntegrationTest {
 
         //When
         val result = mockMvc.perform(get("/users/{userId}/comments", level1User.id)
-            .header(HttpHeaders.AUTHORIZATION, "Bearer $jwtLV0")
             .param("page", "0")
             .param("size", "10"))
 
@@ -148,12 +175,25 @@ class CommentControllerIntegrationTest {
     fun given_NoCommentExists_when_GetCommentsByAuthor_then_ReturnNoContent() {
         //When
         val result = mockMvc.perform(get("/users/{userId}/comments", level1User.id)
-            .header(HttpHeaders.AUTHORIZATION, "Bearer $jwtLV0")
             .param("page", "0")
             .param("size", "10"))
 
         //Then
         result.andExpect(status().isNoContent)
+    }
+
+    @Test
+    fun given_InvalidUserId_when_GetCommentsByAuthor_then_ReturnNotFound() {
+        //When
+        val result = mockMvc.perform(get("/users/{userId}/comments", -1)
+            .param("page", "0")
+            .param("size", "10"))
+
+        //Then
+        result.andExpect(status().isNotFound)
+            .andExpect(jsonPath("$.status").value(404))
+            .andExpect(jsonPath("$.message").value("User with ID -1 Not Found"))
+            .andExpect(jsonPath("$.details").exists())
     }
 
     @Test
@@ -279,7 +319,6 @@ class CommentControllerIntegrationTest {
     }
 
     @Test
-    @WithUserDetails("Staff")
     fun given_ValidRequestAndUserIsStaff_when_DeleteComment_then_ReturnNoContent() {
         //Given
         val testComment = commentRepository.save(CommentEntity(content = "Test Comment", author = level1User, post = post))
@@ -293,7 +332,6 @@ class CommentControllerIntegrationTest {
     }
 
     @Test
-    @WithUserDetails("LV2 User")
     fun given_UserIsNotAuthorOfComment_when_DeleteComment_then_ReturnForbidden() {
         //Given
         val testComment = commentRepository.save(CommentEntity(content = "Test Comment", author = level1User, post = post))
@@ -310,8 +348,7 @@ class CommentControllerIntegrationTest {
     }
 
      @Test
-     @WithUserDetails("LV1 User")
-     fun given_InvalidCommentId_when_DeleteComment_then_ReturnForbidden() {
+     fun given_UserIsAuthorOfCommentAndInvalidCommentId_when_DeleteComment_then_ReturnForbidden() {
          //When
          val result = mockMvc.perform(delete("/comments/{commentId}", -1)
              .header(HttpHeaders.AUTHORIZATION, "Bearer $jwtLV1"))
@@ -322,4 +359,17 @@ class CommentControllerIntegrationTest {
              .andExpect(jsonPath("$.message").value("Access Denied"))
              .andExpect(jsonPath("$.details").exists())
      }
+
+    @Test
+    fun given_UserIsStaffOrAdminAndInvalidCommentId_when_DeleteComment_then_ReturnForbidden() {
+        //When
+        val result = mockMvc.perform(delete("/comments/{commentId}", -1)
+            .header(HttpHeaders.AUTHORIZATION, "Bearer $jwtStaff"))
+
+        //Then
+        result.andExpect(status().isNotFound)
+            .andExpect(jsonPath("$.status").value(404))
+            .andExpect(jsonPath("$.message").value("Comment with ID -1 Not Found"))
+            .andExpect(jsonPath("$.details").exists())
+    }
 }

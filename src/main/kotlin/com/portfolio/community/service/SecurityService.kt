@@ -30,22 +30,23 @@ class SecurityService(
 
     fun canReadBoard(authentication: Authentication, boardId: Long): Boolean {
         val principal = authentication.principal as Principal
+        if (isAdminOrStaff(authentication)) return true
         val board = boardRepository.findByIdOrNull(boardId) ?: return false
-
-        return isAdminOrStaff(authentication) || board.readableRole.level <= principal.role.level
+        return board.readableRole.level <= principal.role.level
     }
 
     fun canReadPost(authentication: Authentication, postId: Long): Boolean{
         val principal = authentication.principal as Principal
+        if (isAdminOrStaff(authentication)) return true
         val post = postRepository.findByIdOrNull(postId) ?: return false
-
-        return isAdminOrStaff(authentication) || post.board.readableRole.level <= principal.role.level
+        return post.board.readableRole.level <= principal.role.level
     }
 
     fun canCreatePost(authentication: Authentication, boardId: Long): Boolean{
         val principal = authentication.principal as Principal
+        if (isAdminOrStaff(authentication)) return true
         val board = boardRepository.findByIdOrNull(boardId) ?: return false
-        return isAdminOrStaff(authentication) || board.readableRole.level <= principal.role.level
+        return board.readableRole.level <= principal.role.level
     }
 
     fun canUpdatePost(authentication: Authentication, postId: Long, boardId: Long): Boolean{
@@ -55,7 +56,6 @@ class SecurityService(
 
     fun canDeletePost(authentication: Authentication, postId: Long): Boolean{
         val principal = authentication.principal as Principal
-        postRepository.findByIdOrNull(postId) ?: return false
         return isAuthorOfPost(principal, postId) || isAdminOrStaff(authentication)
     }
 
@@ -70,7 +70,6 @@ class SecurityService(
 
     fun canDeleteComment(authentication: Authentication, commentId: Long): Boolean{
         val principal = authentication.principal as Principal
-        commentRepository.findByIdOrNull(commentId) ?: return false
         return isAuthorOfComment(principal, commentId) || isAdminOrStaff(authentication)
     }
 

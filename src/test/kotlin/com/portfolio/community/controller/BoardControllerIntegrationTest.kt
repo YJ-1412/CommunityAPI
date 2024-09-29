@@ -254,6 +254,23 @@ class BoardControllerIntegrationTest {
     }
 
     @Test
+    fun given_Unauthorized_when_CreateBoard_then_ReturnUnauthorized() {
+        //Given
+        val boardCreateRequest = BoardCreateRequest(name = "New Board", priority = 0, readableRoleId = level0Role.id)
+
+        //When
+        val result = mockMvc.perform(post("/boards")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(objectMapper.writeValueAsString(boardCreateRequest)))
+
+        //Then
+        result.andExpect(status().isUnauthorized)
+            .andExpect(jsonPath("$.status").value(401))
+            .andExpect(jsonPath("$.message").value("Unauthorized"))
+            .andExpect(jsonPath("$.details").exists())
+    }
+
+    @Test
     fun given_ValidRequest_when_UpdateBoard_then_BoardIsUpdated() {
         //Given
         val testBoard = boardRepository.save(BoardEntity("Test Board", priority = 0, readableRole = level0Role))
@@ -502,23 +519,6 @@ class BoardControllerIntegrationTest {
         result.andExpect(status().isNotFound)
             .andExpect(jsonPath("$.status").value(404))
             .andExpect(jsonPath("$.message").value("Board with ID -1 Not Found"))
-            .andExpect(jsonPath("$.details").exists())
-    }
-
-    @Test
-    fun given_Unauthorized_when_CreateBoard_then_ReturnForbidden() {
-        //Given
-        val boardCreateRequest = BoardCreateRequest(name = "New Board", priority = 0, readableRoleId = level0Role.id)
-
-        //When
-        val result = mockMvc.perform(post("/boards")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(boardCreateRequest)))
-
-        //Then
-        result.andExpect(status().isUnauthorized)
-            .andExpect(jsonPath("$.status").value(401))
-            .andExpect(jsonPath("$.message").value("Unauthorized"))
             .andExpect(jsonPath("$.details").exists())
     }
 

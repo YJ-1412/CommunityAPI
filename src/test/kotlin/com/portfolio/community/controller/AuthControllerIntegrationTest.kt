@@ -187,7 +187,7 @@ class AuthControllerIntegrationTest {
     }
 
     @Test
-    fun given_InvalidUsername_when_Login_then_ReturnOkAndJwtToken() {
+    fun given_InvalidUsername_when_Login_then_ReturnNotFound() {
         //Given
         val loginRequest = LoginRequest(username = "Test User", password = "password")
 
@@ -204,7 +204,7 @@ class AuthControllerIntegrationTest {
     }
 
     @Test
-    fun given_InvalidPassword_when_Login_then_ReturnOkAndJwtToken() {
+    fun given_InvalidPassword_when_Login_then_ReturnUnauthorized() {
         //Given
         userRepository.save(UserEntity(username = "Test User", password = BCryptPasswordEncoder().encode("password"), role = level0Role))
         val loginRequest = LoginRequest(username = "Test User", password = "wrongpassword")

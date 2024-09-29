@@ -36,7 +36,13 @@ class SecurityConfig(
                     "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html",
                     "/register", "/login", "/refresh-token"
                 ).permitAll()
-                .requestMatchers(HttpMethod.GET, "/boards", "/roles", "/boards/{boardId}/posts").permitAll()
+                .requestMatchers(HttpMethod.GET,
+                    "/boards",
+                    "/roles",
+                    "/posts", "/boards/{boardId}/posts", "/users/{userId}/posts", "/users/{userId}/liked-posts",
+                    "/users/{userId}",
+                    "/users/{userId}/comments"
+                ).permitAll()
                 .anyRequest().authenticated()
             }
             .formLogin { it.disable() }
