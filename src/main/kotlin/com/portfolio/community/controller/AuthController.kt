@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.responses.ApiResponse
+import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.AuthenticationManager
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 import java.net.URI
 
+@Tag(name = "auth", description = "계정 API")
 @RestController
 class AuthController(
     private val userService: UserService,
@@ -39,8 +41,8 @@ class AuthController(
             content = [Content(schema = Schema(implementation = UserCreateRequest::class))]
         ),
         responses = [
-            ApiResponse(responseCode = "400", description = "잘못된 요청 데이터"),
-            ApiResponse(responseCode = "201", description = "사용자 생성 성공", content = [Content(schema = Schema(implementation = UserResponse::class, contentMediaType = "application/json"))]),
+            ApiResponse(responseCode = "201", description = "사용자 생성 성공", content = [Content(schema = Schema(implementation = UserResponse::class), mediaType = "application/json")]),
+            ApiResponse(responseCode = "400", description = "잘못된 요청 데이터", content = []),
         ]
     )
     @PostMapping("/register")
