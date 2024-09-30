@@ -2,6 +2,7 @@ package com.portfolio.community.dto.board
 
 import io.swagger.v3.oas.annotations.media.Schema
 
+@Schema(description = "게시판 일괄 수정 요청 DTO")
 data class BoardBatchUpdateRequest(
     @Schema(
         description = "수정할 게시판 목록. 각 게시판의 ID와 함께 수정할 내용을 포함합니다.",

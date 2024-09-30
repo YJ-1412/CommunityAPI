@@ -66,7 +66,7 @@ class CommentController(
             Parameter(name = "size", description = "한 페이지에 보여줄 댓글 수", example = "100", required = false)
         ],
         responses = [
-            ApiResponse(responseCode = "200", description = "댓글 목록 조회 성공", content = [Content(schema = Schema(implementation = Page::class, subTypes = [CommentByPostResponse::class]), mediaType = "application/json")]),
+            ApiResponse(responseCode = "200", description = "댓글 목록 조회 성공", content = [Content(schema = Schema(implementation = Page::class, type = "array"), mediaType = "application/json")]),
             ApiResponse(responseCode = "204", description = "댓글 없음", content = [Content(schema = Schema(implementation = Void::class))]),
             ApiResponse(responseCode = "401", description = "인증되지 않은 사용자", content = [Content(schema = Schema(implementation = Void::class))]),
             ApiResponse(responseCode = "403", description = "권한 부족 - 게시글에 접근할 권한이 없음", content = [Content(schema = Schema(implementation = Void::class))]),
@@ -97,7 +97,7 @@ class CommentController(
             Parameter(name = "size", description = "한 페이지에 보여줄 댓글 수", example = "100", required = false)
         ],
         responses = [
-            ApiResponse(responseCode = "200", description = "댓글 목록 조회 성공", content = [Content(schema = Schema(implementation = Page::class, subTypes = [CommentByAuthorResponse::class]), mediaType = "application/json")]),
+            ApiResponse(responseCode = "200", description = "댓글 목록 조회 성공", content = [Content(schema = Schema(implementation = Page::class, type = "array"), mediaType = "application/json")]),
             ApiResponse(responseCode = "204", description = "댓글 없음", content = [Content(schema = Schema(implementation = Void::class))]),
             ApiResponse(responseCode = "404", description = "사용자를 찾을 수 없음", content = [Content(schema = Schema(implementation = Void::class))])
         ]

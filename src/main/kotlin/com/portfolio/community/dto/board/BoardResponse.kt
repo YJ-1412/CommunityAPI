@@ -4,6 +4,7 @@ import com.portfolio.community.dto.role.RoleResponse
 import com.portfolio.community.entity.BoardEntity
 import io.swagger.v3.oas.annotations.media.Schema
 
+@Schema(description = "게시판 응답 DTO")
 data class BoardResponse (
     @Schema(
         description = "게시판의 ID",

@@ -3,6 +3,7 @@ package com.portfolio.community.dto.comment
 import io.swagger.v3.oas.annotations.media.Schema
 import jakarta.validation.constraints.NotBlank
 
+@Schema(description = "댓글 수정 요청 DTO")
 data class CommentUpdateRequest(
     @Schema(
         description = "댓글의 내용",
