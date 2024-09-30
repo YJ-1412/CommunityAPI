@@ -42,7 +42,7 @@ class AuthController(
         ),
         responses = [
             ApiResponse(responseCode = "201", description = "사용자 생성 성공", content = [Content(schema = Schema(implementation = UserResponse::class), mediaType = "application/json")]),
-            ApiResponse(responseCode = "400", description = "잘못된 요청 데이터", content = []),
+            ApiResponse(responseCode = "400", description = "잘못된 요청 데이터")
         ]
     )
     @PostMapping("/register")
