@@ -37,8 +37,8 @@ class PostController(
             content = [Content(schema = Schema(implementation = PostCreateRequest::class))]
         ),
         responses = [
-            ApiResponse(responseCode = "201", description = "게시글 작성 성공", content = [Content(schema = Schema(implementation = PostResponse::class))]),
-            ApiResponse(responseCode = "400", description = "잘못된 요청 데이터"),
+            ApiResponse(responseCode = "201", description = "게시글 작성 성공", content = [Content(schema = Schema(implementation = PostResponse::class), mediaType = "application/json")]),
+            ApiResponse(responseCode = "400", description = "잘못된 요청 데이터", content = [Content(schema = Schema(implementation = Void::class))]),
             ApiResponse(responseCode = "401", description = "인증되지 않은 사용자"),
             ApiResponse(responseCode = "403", description = "권한 부족 - 게시판에 접근할 수 없음"),
             ApiResponse(responseCode = "404", description = "게시판을 찾을 수 없음")
@@ -64,8 +64,8 @@ class PostController(
             Parameter(name = "size", description = "페이지당 게시글 수", required = false, example = "20")
         ],
         responses = [
-            ApiResponse(responseCode = "200", description = "게시글 정보 조회 성공", content = [Content(schema = Schema(implementation = Page::class))]),
-            ApiResponse(responseCode = "204", description = "게시글 없음")
+            ApiResponse(responseCode = "200", description = "게시글 정보 조회 성공", content = [Content(schema = Schema(implementation = Page::class), mediaType = "application/json")]),
+            ApiResponse(responseCode = "204", description = "게시글 없음", content = [Content(schema = Schema(implementation = Void::class))])
         ]
     )
     @GetMapping("/posts")
@@ -90,8 +90,8 @@ class PostController(
             Parameter(name = "size", description = "페이지당 게시글 수", required = false, example = "20")
         ],
         responses = [
-            ApiResponse(responseCode = "200", description = "게시글 정보 조회 성공", content = [Content(schema = Schema(implementation = Page::class))]),
-            ApiResponse(responseCode = "204", description = "게시글 없음"),
+            ApiResponse(responseCode = "200", description = "게시글 정보 조회 성공", content = [Content(schema = Schema(implementation = Page::class), mediaType = "application/json")]),
+            ApiResponse(responseCode = "204", description = "게시글 없음", content = [Content(schema = Schema(implementation = Void::class))]),
             ApiResponse(responseCode = "404", description = "게시판을 찾을 수 없음")
         ]
     )
@@ -118,8 +118,8 @@ class PostController(
             Parameter(name = "size", description = "페이지당 게시글 수", required = false, example = "20")
         ],
         responses = [
-            ApiResponse(responseCode = "200", description = "게시글 정보 조회 성공", content = [Content(schema = Schema(implementation = Page::class))]),
-            ApiResponse(responseCode = "204", description = "게시글 없음"),
+            ApiResponse(responseCode = "200", description = "게시글 정보 조회 성공", content = [Content(schema = Schema(implementation = Page::class), mediaType = "application/json")]),
+            ApiResponse(responseCode = "204", description = "게시글 없음", content = [Content(schema = Schema(implementation = Void::class))]),
             ApiResponse(responseCode = "404", description = "사용자를 찾을 수 없음")
         ]
     )
@@ -146,8 +146,8 @@ class PostController(
             Parameter(name = "size", description = "페이지당 게시글 수", required = false, example = "20")
         ],
         responses = [
-            ApiResponse(responseCode = "200", description = "좋아요한 게시글 정보 조회 성공", content = [Content(schema = Schema(implementation = Page::class))]),
-            ApiResponse(responseCode = "204", description = "좋아요한 게시글 없음"),
+            ApiResponse(responseCode = "200", description = "좋아요한 게시글 정보 조회 성공", content = [Content(schema = Schema(implementation = Page::class), mediaType = "application/json")]),
+            ApiResponse(responseCode = "204", description = "좋아요한 게시글 없음", content = [Content(schema = Schema(implementation = Void::class))]),
             ApiResponse(responseCode = "404", description = "사용자를 찾을 수 없음")
         ]
     )
@@ -183,8 +183,8 @@ class PostController(
             Parameter(name = "postId", description = "게시글의 ID", required = true, example = "1")
         ],
         responses = [
-            ApiResponse(responseCode = "200", description = "게시글 조회 성공", content = [Content(schema = Schema(implementation = PostResponse::class))]),
-            ApiResponse(responseCode = "401", description = "인증되지 않은 사용자"),
+            ApiResponse(responseCode = "200", description = "게시글 조회 성공", content = [Content(schema = Schema(implementation = PostResponse::class), mediaType = "application/json")]),
+            ApiResponse(responseCode = "401", description = "인증되지 않은 사용자", content = [Content(schema = Schema(implementation = Void::class))]),
             ApiResponse(responseCode = "403", description = "권한 부족 - 게시글이 등록된 게시판에 접근할 수 없음"),
             ApiResponse(responseCode = "404", description = "게시글을 찾을 수 없음")
         ]
@@ -209,8 +209,8 @@ class PostController(
             content = [Content(schema = Schema(implementation = PostUpdateRequest::class))]
         ),
         responses = [
-            ApiResponse(responseCode = "200", description = "게시글 수정 성공", content = [Content(schema = Schema(implementation = PostResponse::class))]),
-            ApiResponse(responseCode = "400", description = "잘못된 요청 데이터"),
+            ApiResponse(responseCode = "200", description = "게시글 수정 성공", content = [Content(schema = Schema(implementation = PostResponse::class), mediaType = "application/json")]),
+            ApiResponse(responseCode = "400", description = "잘못된 요청 데이터", content = [Content(schema = Schema(implementation = Void::class))]),
             ApiResponse(responseCode = "401", description = "인증되지 않은 사용자"),
             ApiResponse(responseCode = "403", description = "권한 부족 - 작성자 권한 필요"),
             ApiResponse(responseCode = "404", description = "게시글을 찾을 수 없음")
@@ -233,8 +233,8 @@ class PostController(
             Parameter(name = "postId", description = "좋아요할 게시글의 ID", required = true, example = "1")
         ],
         responses = [
-            ApiResponse(responseCode = "200", description = "게시글 좋아요 성공", content = [Content(schema = Schema(implementation = PostResponse::class))]),
-            ApiResponse(responseCode = "401", description = "인증되지 않은 사용자"),
+            ApiResponse(responseCode = "200", description = "게시글 좋아요 성공", content = [Content(schema = Schema(implementation = PostResponse::class), mediaType = "application/json")]),
+            ApiResponse(responseCode = "401", description = "인증되지 않은 사용자", content = [Content(schema = Schema(implementation = Void::class))]),
             ApiResponse(responseCode = "403", description = "권한 부족 - 게시글에 접근할 수 없음"),
             ApiResponse(responseCode = "404", description = "게시글을 찾을 수 없음"),
             ApiResponse(responseCode = "409", description = "이미 좋아요한 게시글이거나 게시글의 작성자임")
@@ -255,8 +255,8 @@ class PostController(
             Parameter(name = "postId", description = "좋아요를 취소할 게시글의 ID", required = true, example = "1")
         ],
         responses = [
-            ApiResponse(responseCode = "200", description = "게시글 좋아요 취소 성공", content = [Content(schema = Schema(implementation = PostResponse::class))]),
-            ApiResponse(responseCode = "401", description = "인증되지 않은 사용자"),
+            ApiResponse(responseCode = "200", description = "게시글 좋아요 취소 성공", content = [Content(schema = Schema(implementation = PostResponse::class), mediaType = "application/json")]),
+            ApiResponse(responseCode = "401", description = "인증되지 않은 사용자", content = [Content(schema = Schema(implementation = Void::class))]),
             ApiResponse(responseCode = "403", description = "권한 부족 - 게시글에 접근할 수 없음"),
             ApiResponse(responseCode = "404", description = "게시글을 찾을 수 없음"),
             ApiResponse(responseCode = "409", description = "좋아요하지 않은 게시글")

@@ -31,8 +31,8 @@ class BoardController(
             content = [Content(schema = Schema(implementation = BoardCreateRequest::class))]
         ),
         responses = [
-            ApiResponse(responseCode = "201", description = "게시판 생성 성공", content = [Content(schema = Schema(implementation = BoardResponse::class))]),
-            ApiResponse(responseCode = "400", description = "잘못된 요청 데이터"),
+            ApiResponse(responseCode = "201", description = "게시판 생성 성공", content = [Content(schema = Schema(implementation = BoardResponse::class), mediaType = "application/json")]),
+            ApiResponse(responseCode = "400", description = "잘못된 요청 데이터", content = [Content(schema = Schema(implementation = Void::class))]),
             ApiResponse(responseCode = "401", description = "인증되지 않은 사용자"),
             ApiResponse(responseCode = "403", description = "권한 부족 - 관리자/스태프 권한 필요"),
             ApiResponse(responseCode = "404", description = "유효하지 않은 readableRoleId")
@@ -50,8 +50,8 @@ class BoardController(
         summary = "모든 게시판 조회",
         description = "등록된 모든 게시판 목록을 조회합니다.",
         responses = [
-            ApiResponse(responseCode = "200", description = "게시판 목록 조회 성공", content = [Content(schema = Schema(implementation = BoardResponse::class, type = "array"))]),
-            ApiResponse(responseCode = "204", description = "게시판 목록이 없음")
+            ApiResponse(responseCode = "200", description = "게시판 목록 조회 성공", content = [Content(schema = Schema(implementation = BoardResponse::class, type = "array"), mediaType = "application/json")]),
+            ApiResponse(responseCode = "204", description = "게시판 목록이 없음", content = [Content(schema = Schema(implementation = Void::class))])
         ]
     )
     @GetMapping("/boards")
@@ -77,8 +77,8 @@ class BoardController(
             content = [Content(schema = Schema(implementation = BoardUpdateRequest::class))]
         ),
         responses = [
-            ApiResponse(responseCode = "200", description = "게시판 수정 성공", content = [Content(schema = Schema(implementation = BoardResponse::class))]),
-            ApiResponse(responseCode = "400", description = "잘못된 요청 데이터"),
+            ApiResponse(responseCode = "200", description = "게시판 수정 성공", content = [Content(schema = Schema(implementation = BoardResponse::class), mediaType = "application/json")]),
+            ApiResponse(responseCode = "400", description = "잘못된 요청 데이터", content = [Content(schema = Schema(implementation = Void::class))]),
             ApiResponse(responseCode = "401", description = "인증되지 않은 사용자"),
             ApiResponse(responseCode = "403", description = "권한 부족 - 관리자/스태프 권한 필요"),
             ApiResponse(responseCode = "404", description = "게시판을 찾을 수 없음 또는 역할을 찾을 수 없음")
@@ -121,8 +121,8 @@ class BoardController(
             Parameter(name = "targetBoardId", description = "게시글을 이동할 대상 게시판의 ID", required = true, example = "2")
         ],
         responses = [
-            ApiResponse(responseCode = "200", description = "게시판 삭제 및 게시글 이동 성공", content = [Content(schema = Schema(implementation = BoardResponse::class))]),
-            ApiResponse(responseCode = "401", description = "인증되지 않은 사용자"),
+            ApiResponse(responseCode = "200", description = "게시판 삭제 및 게시글 이동 성공", content = [Content(schema = Schema(implementation = BoardResponse::class), mediaType = "application/json")]),
+            ApiResponse(responseCode = "401", description = "인증되지 않은 사용자", content = [Content(schema = Schema(implementation = Void::class))]),
             ApiResponse(responseCode = "403", description = "권한 부족 - 관리자/스태프 권한 필요"),
             ApiResponse(responseCode = "404", description = "게시판을 찾을 수 없음")
         ]
@@ -144,8 +144,8 @@ class BoardController(
             content = [Content(schema = Schema(implementation = BoardBatchUpdateRequest::class))]
         ),
         responses = [
-            ApiResponse(responseCode = "200", description = "게시판 일괄 수정 성공", content = [Content(schema = Schema(implementation = BoardResponse::class, type = "array"))]),
-            ApiResponse(responseCode = "204", description = "모든 게시판 삭제"),
+            ApiResponse(responseCode = "200", description = "게시판 일괄 수정 성공", content = [Content(schema = Schema(implementation = BoardResponse::class, type = "array"), mediaType = "application/json")]),
+            ApiResponse(responseCode = "204", description = "모든 게시판 삭제", content = [Content(schema = Schema(implementation = Void::class))]),
             ApiResponse(responseCode = "400", description = "잘못된 요청 데이터"),
             ApiResponse(responseCode = "401", description = "인증되지 않은 사용자"),
             ApiResponse(responseCode = "403", description = "권한 부족 - 관리자/스태프 권한 필요"),

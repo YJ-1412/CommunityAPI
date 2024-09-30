@@ -1,7 +1,6 @@
 package com.portfolio.community.controller
 
 import com.portfolio.community.configuration.JwtTokenProvider
-import com.portfolio.community.dto.ErrorResponse
 import com.portfolio.community.dto.RefreshTokenRequest
 import com.portfolio.community.dto.user.*
 import com.portfolio.community.entity.UserEntity
@@ -61,8 +60,8 @@ class AuthController(
             content = [Content(schema = Schema(implementation = LoginRequest::class))]
         ),
         responses = [
-            ApiResponse(responseCode = "200", description = "로그인 성공", content = [Content(schema = Schema(implementation = JwtResponse::class, contentMediaType = "application/json"))]),
-            ApiResponse(responseCode = "401", description = "인증 실패 - 잘못된 비밀번호", content = [Content(schema = Schema(implementation = ErrorResponse::class, contentMediaType = "application/json"))]),
+            ApiResponse(responseCode = "200", description = "로그인 성공", content = [Content(schema = Schema(implementation = JwtResponse::class), mediaType = "application/json")]),
+            ApiResponse(responseCode = "401", description = "인증 실패 - 잘못된 비밀번호", content = [Content(schema = Schema(implementation = Void::class))]),
             ApiResponse(responseCode = "404", description = "사용자를 찾을 수 없음")
         ]
     )
@@ -90,8 +89,8 @@ class AuthController(
             content = [Content(schema = Schema(implementation = RefreshTokenRequest::class))]
         ),
         responses = [
-            ApiResponse(responseCode = "200", description = "토큰 재발급 성공", content = [Content(schema = Schema(implementation = JwtResponse::class, contentMediaType = "application/json"))]),
-            ApiResponse(responseCode = "401", description = "유효하지 않은 리프레시 토큰", content = [Content(schema = Schema(implementation = ErrorResponse::class, contentMediaType = "application/json"))])
+            ApiResponse(responseCode = "200", description = "토큰 재발급 성공", content = [Content(schema = Schema(implementation = JwtResponse::class), mediaType = "application/json")]),
+            ApiResponse(responseCode = "401", description = "유효하지 않은 리프레시 토큰", content = [Content(schema = Schema(implementation = Void::class))])
         ]
     )
     @PostMapping("/refresh-token")
@@ -115,8 +114,8 @@ class AuthController(
         summary = "사용자 프로필 조회",
         description = "현재 인증된 사용자의 프로필 정보를 반환합니다.",
         responses = [
-            ApiResponse(responseCode = "200", description = "프로필 조회 성공", content = [Content(schema = Schema(implementation = Principal::class, contentMediaType = "application/json"))]),
-            ApiResponse(responseCode = "401", description = "유효하지 않은 액세스 토큰", content = [Content(schema = Schema(implementation = ErrorResponse::class, contentMediaType = "application/json"))])
+            ApiResponse(responseCode = "200", description = "프로필 조회 성공", content = [Content(schema = Schema(implementation = Principal::class), mediaType = "application/json")]),
+            ApiResponse(responseCode = "401", description = "유효하지 않은 액세스 토큰", content = [Content(schema = Schema(implementation = Void::class))])
         ]
     )
     @GetMapping("/profile")

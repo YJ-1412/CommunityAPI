@@ -31,8 +31,8 @@ class RoleController(
             content = [Content(schema = Schema(implementation = RoleCreateRequest::class))]
         ),
         responses = [
-            ApiResponse(responseCode = "201", description = "역할 생성 성공", content = [Content(schema = Schema(implementation = RoleResponse::class))]),
-            ApiResponse(responseCode = "400", description = "잘못된 요청 데이터"),
+            ApiResponse(responseCode = "201", description = "역할 생성 성공", content = [Content(schema = Schema(implementation = RoleResponse::class), mediaType = "application/json")]),
+            ApiResponse(responseCode = "400", description = "잘못된 요청 데이터", content = [Content(schema = Schema(implementation = Void::class))]),
             ApiResponse(responseCode = "401", description = "인증되지 않은 사용자"),
             ApiResponse(responseCode = "403", description = "권한 부족 - 관리자 권한 필요")
         ]
@@ -49,7 +49,7 @@ class RoleController(
         summary = "모든 역할 조회",
         description = "등록된 모든 역할을 조회합니다.",
         responses = [
-            ApiResponse(responseCode = "200", description = "역할 목록 조회 성공", content = [Content(schema = Schema(implementation = RoleResponse::class, type = "array"))]),
+            ApiResponse(responseCode = "200", description = "역할 목록 조회 성공", content = [Content(schema = Schema(implementation = RoleResponse::class, type = "array"), mediaType = "application/json")]),
             ApiResponse(responseCode = "204", description = "역할 없음")
         ]
     )
@@ -76,8 +76,8 @@ class RoleController(
             content = [Content(schema = Schema(implementation = RoleUpdateRequest::class))]
         ),
         responses = [
-            ApiResponse(responseCode = "200", description = "역할 수정 성공", content = [Content(schema = Schema(implementation = RoleResponse::class))]),
-            ApiResponse(responseCode = "400", description = "잘못된 요청 데이터"),
+            ApiResponse(responseCode = "200", description = "역할 수정 성공", content = [Content(schema = Schema(implementation = RoleResponse::class), mediaType = "application/json")]),
+            ApiResponse(responseCode = "400", description = "잘못된 요청 데이터", content = [Content(schema = Schema(implementation = Void::class))]),
             ApiResponse(responseCode = "401", description = "인증되지 않은 사용자"),
             ApiResponse(responseCode = "403", description = "권한 부족 - 관리자 권한 필요"),
             ApiResponse(responseCode = "404", description = "역할을 찾을 수 없음")
@@ -98,8 +98,8 @@ class RoleController(
             Parameter(name = "roleId", description = "삭제할 역할의 ID", required = true, example = "1")
         ],
         responses = [
-            ApiResponse(responseCode = "200", description = "역할 삭제 성공", content = [Content(schema = Schema(implementation = RoleResponse::class))]),
-            ApiResponse(responseCode = "401", description = "인증되지 않은 사용자"),
+            ApiResponse(responseCode = "200", description = "역할 삭제 성공", content = [Content(schema = Schema(implementation = RoleResponse::class), mediaType = "application/json")]),
+            ApiResponse(responseCode = "401", description = "인증되지 않은 사용자", content = [Content(schema = Schema(implementation = Void::class))]),
             ApiResponse(responseCode = "403", description = "권한 부족 - 관리자 권한 필요"),
             ApiResponse(responseCode = "404", description = "역할을 찾을 수 없음"),
             ApiResponse(responseCode = "409", description = "충돌 - 시스템에 최소한 하나의 역할이 남아야 합니다.")
@@ -121,8 +121,8 @@ class RoleController(
             Parameter(name = "targetRoleId", description = "이동할 역할의 ID", required = true, example = "2")
         ],
         responses = [
-            ApiResponse(responseCode = "200", description = "역할 삭제 및 게시판과 사용자 이동 성공", content = [Content(schema = Schema(implementation = RoleResponse::class))]),
-            ApiResponse(responseCode = "400", description = "sourceRoleId와 targetRoleId는 같을 수 없음"),
+            ApiResponse(responseCode = "200", description = "역할 삭제 및 게시판과 사용자 이동 성공", content = [Content(schema = Schema(implementation = RoleResponse::class), mediaType = "application/json")]),
+            ApiResponse(responseCode = "400", description = "sourceRoleId와 targetRoleId는 같을 수 없음", content = [Content(schema = Schema(implementation = Void::class))]),
             ApiResponse(responseCode = "401", description = "인증되지 않은 사용자"),
             ApiResponse(responseCode = "403", description = "권한 부족 - 관리자 권한 필요"),
             ApiResponse(responseCode = "404", description = "역할을 찾을 수 없음")
@@ -145,8 +145,8 @@ class RoleController(
             content = [Content(schema = Schema(implementation = RoleBatchUpdateRequest::class))]
         ),
         responses = [
-            ApiResponse(responseCode = "200", description = "역할 일괄 수정 성공", content = [Content(schema = Schema(implementation = RoleResponse::class, type = "array"))]),
-            ApiResponse(responseCode = "400", description = "잘못된 요청 데이터"),
+            ApiResponse(responseCode = "200", description = "역할 일괄 수정 성공", content = [Content(schema = Schema(implementation = RoleResponse::class, type = "array"), mediaType = "application/json")]),
+            ApiResponse(responseCode = "400", description = "잘못된 요청 데이터", content = [Content(schema = Schema(implementation = Void::class))]),
             ApiResponse(responseCode = "401", description = "인증되지 않은 사용자"),
             ApiResponse(responseCode = "403", description = "권한 부족 - 관리자 권한 필요"),
             ApiResponse(responseCode = "404", description = "역할을 찾을 수 없음"),
