@@ -10,7 +10,6 @@ import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.responses.ApiResponse
-import io.swagger.v3.oas.annotations.responses.ApiResponses
 import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
@@ -40,12 +39,10 @@ class AuthController(
             description = "회원가입 요청 DTO",
             required = true,
             content = [Content(schema = Schema(implementation = UserCreateRequest::class))]
-        )
-    )
-    @ApiResponses(
-        value = [
+        ),
+        responses = [
             ApiResponse(responseCode = "201", description = "사용자 생성 성공", content = [Content(schema = Schema(implementation = UserResponse::class), mediaType = "application/json")]),
-            ApiResponse(responseCode = "400", description = "잘못된 요청 데이터")
+            ApiResponse(responseCode = "400", description = "잘못된 요청 데이터", content = [Content(schema = Schema(implementation = Void::class))]),
         ]
     )
     @PostMapping("/register")
