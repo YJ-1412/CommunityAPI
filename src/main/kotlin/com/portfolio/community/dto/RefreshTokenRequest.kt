@@ -7,6 +7,7 @@ data class RefreshTokenRequest(
         description = "리프레시 토큰",
         required = true,
         nullable = false,
+        example = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOi..."
     )
     val refreshToken: String
 )
