@@ -123,9 +123,9 @@ class RoleController(
         responses = [
             ApiResponse(responseCode = "200", description = "역할 삭제 및 게시판과 사용자 이동 성공", content = [Content(schema = Schema(implementation = RoleResponse::class), mediaType = "application/json")]),
             ApiResponse(responseCode = "400", description = "sourceRoleId와 targetRoleId는 같을 수 없음", content = [Content(schema = Schema(implementation = Void::class))]),
-            ApiResponse(responseCode = "401", description = "인증되지 않은 사용자"),
-            ApiResponse(responseCode = "403", description = "권한 부족 - 관리자 권한 필요"),
-            ApiResponse(responseCode = "404", description = "역할을 찾을 수 없음")
+            ApiResponse(responseCode = "401", description = "인증되지 않은 사용자", content = [Content(schema = Schema(implementation = Void::class))]),
+            ApiResponse(responseCode = "403", description = "권한 부족 - 관리자 권한 필요", content = [Content(schema = Schema(implementation = Void::class))]),
+            ApiResponse(responseCode = "404", description = "역할을 찾을 수 없음", content = [Content(schema = Schema(implementation = Void::class))])
         ]
     )
     @DeleteMapping("/roles/{sourceRoleId}/transfer/{targetRoleId}")
@@ -147,10 +147,10 @@ class RoleController(
         responses = [
             ApiResponse(responseCode = "200", description = "역할 일괄 수정 성공", content = [Content(schema = Schema(implementation = RoleResponse::class, type = "array"), mediaType = "application/json")]),
             ApiResponse(responseCode = "400", description = "잘못된 요청 데이터", content = [Content(schema = Schema(implementation = Void::class))]),
-            ApiResponse(responseCode = "401", description = "인증되지 않은 사용자"),
-            ApiResponse(responseCode = "403", description = "권한 부족 - 관리자 권한 필요"),
-            ApiResponse(responseCode = "404", description = "역할을 찾을 수 없음"),
-            ApiResponse(responseCode = "409", description = "충돌 - 시스템에 최소한 하나의 역할이 남아야 합니다.")
+            ApiResponse(responseCode = "401", description = "인증되지 않은 사용자", content = [Content(schema = Schema(implementation = Void::class))]),
+            ApiResponse(responseCode = "403", description = "권한 부족 - 관리자 권한 필요", content = [Content(schema = Schema(implementation = Void::class))]),
+            ApiResponse(responseCode = "404", description = "역할을 찾을 수 없음", content = [Content(schema = Schema(implementation = Void::class))]),
+            ApiResponse(responseCode = "409", description = "충돌 - 시스템에 최소한 하나의 역할이 남아야 합니다.", content = [Content(schema = Schema(implementation = Void::class))])
         ]
     )
     @PutMapping("/roles")

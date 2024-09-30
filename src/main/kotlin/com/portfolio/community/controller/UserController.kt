@@ -52,9 +52,9 @@ class UserController(
         responses = [
             ApiResponse(responseCode = "200", description = "사용자 정보 수정 성공", content = [Content(schema = Schema(implementation = UserResponse::class), mediaType = "application/json")]),
             ApiResponse(responseCode = "400", description = "잘못된 요청 데이터", content = [Content(schema = Schema(implementation = Void::class))]),
-            ApiResponse(responseCode = "401", description = "인증되지 않은 사용자"),
-            ApiResponse(responseCode = "403", description = "권한 부족 - 본인만 수정 가능"),
-            ApiResponse(responseCode = "404", description = "사용자를 찾을 수 없음")
+            ApiResponse(responseCode = "401", description = "인증되지 않은 사용자", content = [Content(schema = Schema(implementation = Void::class))]),
+            ApiResponse(responseCode = "403", description = "권한 부족 - 본인만 수정 가능", content = [Content(schema = Schema(implementation = Void::class))]),
+            ApiResponse(responseCode = "404", description = "사용자를 찾을 수 없음", content = [Content(schema = Schema(implementation = Void::class))])
         ]
     )
     @PutMapping("/users/{userId}")
@@ -79,10 +79,10 @@ class UserController(
         responses = [
             ApiResponse(responseCode = "200", description = "사용자 역할 변경 성공", content = [Content(schema = Schema(implementation = UserResponse::class), mediaType = "application/json")]),
             ApiResponse(responseCode = "400", description = "잘못된 요청 데이터", content = [Content(schema = Schema(implementation = Void::class))]),
-            ApiResponse(responseCode = "401", description = "인증되지 않은 사용자"),
-            ApiResponse(responseCode = "403", description = "권한 부족 - 관리자/스태프 권한 필요"),
-            ApiResponse(responseCode = "404", description = "사용자 또는 역할을 찾을 수 없음"),
-            ApiResponse(responseCode = "409", description = "충돌 - 사용자가 이미 해당 역할을 가지고 있음")
+            ApiResponse(responseCode = "401", description = "인증되지 않은 사용자", content = [Content(schema = Schema(implementation = Void::class))]),
+            ApiResponse(responseCode = "403", description = "권한 부족 - 관리자/스태프 권한 필요", content = [Content(schema = Schema(implementation = Void::class))]),
+            ApiResponse(responseCode = "404", description = "사용자 또는 역할을 찾을 수 없음", content = [Content(schema = Schema(implementation = Void::class))]),
+            ApiResponse(responseCode = "409", description = "충돌 - 사용자가 이미 해당 역할을 가지고 있음", content = [Content(schema = Schema(implementation = Void::class))])
         ]
     )
     @PatchMapping("/users/{userId}/role")
@@ -104,9 +104,9 @@ class UserController(
         responses = [
             ApiResponse(responseCode = "200", description = "사용자 스태프 설정 성공", content = [Content(schema = Schema(implementation = UserResponse::class), mediaType = "application/json")]),
             ApiResponse(responseCode = "401", description = "인증되지 않은 사용자", content = [Content(schema = Schema(implementation = Void::class))]),
-            ApiResponse(responseCode = "403", description = "권한 부족 - 관리자 권한 필요"),
-            ApiResponse(responseCode = "404", description = "사용자를 찾을 수 없음"),
-            ApiResponse(responseCode = "409", description = "충돌 - 사용자가 이미 스태프임")
+            ApiResponse(responseCode = "403", description = "권한 부족 - 관리자 권한 필요", content = [Content(schema = Schema(implementation = Void::class))]),
+            ApiResponse(responseCode = "404", description = "사용자를 찾을 수 없음", content = [Content(schema = Schema(implementation = Void::class))]),
+            ApiResponse(responseCode = "409", description = "충돌 - 사용자가 이미 스태프임", content = [Content(schema = Schema(implementation = Void::class))])
         ]
     )
     @PostMapping("/staff")
@@ -126,9 +126,9 @@ class UserController(
         responses = [
             ApiResponse(responseCode = "200", description = "사용자 스태프 해제 성공", content = [Content(schema = Schema(implementation = UserResponse::class), mediaType = "application/json")]),
             ApiResponse(responseCode = "401", description = "인증되지 않은 사용자", content = [Content(schema = Schema(implementation = Void::class))]),
-            ApiResponse(responseCode = "403", description = "권한 부족 - 관리자 권한 필요"),
-            ApiResponse(responseCode = "404", description = "사용자를 찾을 수 없음"),
-            ApiResponse(responseCode = "409", description = "충돌 - 사용자가 스태프가 아님")
+            ApiResponse(responseCode = "403", description = "권한 부족 - 관리자 권한 필요", content = [Content(schema = Schema(implementation = Void::class))]),
+            ApiResponse(responseCode = "404", description = "사용자를 찾을 수 없음", content = [Content(schema = Schema(implementation = Void::class))]),
+            ApiResponse(responseCode = "409", description = "충돌 - 사용자가 스태프가 아님", content = [Content(schema = Schema(implementation = Void::class))])
         ]
     )
     @DeleteMapping("/staff/{userId}")

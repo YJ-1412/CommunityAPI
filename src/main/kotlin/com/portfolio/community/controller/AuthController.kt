@@ -62,7 +62,7 @@ class AuthController(
         responses = [
             ApiResponse(responseCode = "200", description = "로그인 성공", content = [Content(schema = Schema(implementation = JwtResponse::class), mediaType = "application/json")]),
             ApiResponse(responseCode = "401", description = "인증 실패 - 잘못된 비밀번호", content = [Content(schema = Schema(implementation = Void::class))]),
-            ApiResponse(responseCode = "404", description = "사용자를 찾을 수 없음")
+            ApiResponse(responseCode = "404", description = "사용자를 찾을 수 없음", content = [Content(schema = Schema(implementation = Void::class))])
         ]
     )
     @PostMapping("/login")

@@ -39,9 +39,9 @@ class CommentController(
         responses = [
             ApiResponse(responseCode = "201", description = "댓글 작성 성공", content = [Content(schema = Schema(implementation = CommentResponse::class), mediaType = "application/json")]),
             ApiResponse(responseCode = "400", description = "잘못된 요청 데이터", content = [Content(schema = Schema(implementation = Void::class))]),
-            ApiResponse(responseCode = "401", description = "인증되지 않은 사용자"),
-            ApiResponse(responseCode = "403", description = "권한 부족 - 게시글에 접근할 권한이 없음"),
-            ApiResponse(responseCode = "404", description = "게시글을 찾을 수 없음")
+            ApiResponse(responseCode = "401", description = "인증되지 않은 사용자", content = [Content(schema = Schema(implementation = Void::class))]),
+            ApiResponse(responseCode = "403", description = "권한 부족 - 게시글에 접근할 권한이 없음", content = [Content(schema = Schema(implementation = Void::class))]),
+            ApiResponse(responseCode = "404", description = "게시글을 찾을 수 없음", content = [Content(schema = Schema(implementation = Void::class))])
         ]
     )
     @PostMapping("/posts/{postId}/comments")
@@ -68,9 +68,9 @@ class CommentController(
         responses = [
             ApiResponse(responseCode = "200", description = "댓글 목록 조회 성공", content = [Content(schema = Schema(implementation = Page::class, type = "array"), mediaType = "application/json")]),
             ApiResponse(responseCode = "204", description = "댓글 없음", content = [Content(schema = Schema(implementation = Void::class))]),
-            ApiResponse(responseCode = "401", description = "인증되지 않은 사용자"),
-            ApiResponse(responseCode = "403", description = "권한 부족 - 게시글에 접근할 권한이 없음"),
-            ApiResponse(responseCode = "404", description = "게시글을 찾을 수 없음")
+            ApiResponse(responseCode = "401", description = "인증되지 않은 사용자", content = [Content(schema = Schema(implementation = Void::class))]),
+            ApiResponse(responseCode = "403", description = "권한 부족 - 게시글에 접근할 권한이 없음", content = [Content(schema = Schema(implementation = Void::class))]),
+            ApiResponse(responseCode = "404", description = "게시글을 찾을 수 없음", content = [Content(schema = Schema(implementation = Void::class))])
         ]
     )
     @GetMapping("/posts/{postId}/comments")
@@ -99,7 +99,7 @@ class CommentController(
         responses = [
             ApiResponse(responseCode = "200", description = "댓글 목록 조회 성공", content = [Content(schema = Schema(implementation = Page::class, type = "array"), mediaType = "application/json")]),
             ApiResponse(responseCode = "204", description = "댓글 없음", content = [Content(schema = Schema(implementation = Void::class))]),
-            ApiResponse(responseCode = "404", description = "사용자를 찾을 수 없음")
+            ApiResponse(responseCode = "404", description = "사용자를 찾을 수 없음", content = [Content(schema = Schema(implementation = Void::class))])
         ]
     )
     @GetMapping("/users/{userId}/comments")
@@ -131,9 +131,9 @@ class CommentController(
         responses = [
             ApiResponse(responseCode = "200", description = "댓글 수정 성공", content = [Content(schema = Schema(implementation = CommentResponse::class), mediaType = "application/json")]),
             ApiResponse(responseCode = "400", description = "잘못된 요청 데이터", content = [Content(schema = Schema(implementation = Void::class))]),
-            ApiResponse(responseCode = "401", description = "인증되지 않은 사용자"),
-            ApiResponse(responseCode = "403", description = "권한 부족 - 작성자 권한 필요"),
-            ApiResponse(responseCode = "404", description = "댓글을 찾을 수 없음")
+            ApiResponse(responseCode = "401", description = "인증되지 않은 사용자", content = [Content(schema = Schema(implementation = Void::class))]),
+            ApiResponse(responseCode = "403", description = "권한 부족 - 작성자 권한 필요", content = [Content(schema = Schema(implementation = Void::class))]),
+            ApiResponse(responseCode = "404", description = "댓글을 찾을 수 없음", content = [Content(schema = Schema(implementation = Void::class))])
         ]
     )
     @PutMapping("/comments/{commentId}")
