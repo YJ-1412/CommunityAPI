@@ -64,7 +64,7 @@ class PostController(
             Parameter(name = "size", description = "페이지당 게시글 수", required = false, example = "20")
         ],
         responses = [
-            ApiResponse(responseCode = "200", description = "게시글 정보 조회 성공", content = [Content(schema = Schema(implementation = Page::class), mediaType = "application/json")]),
+            ApiResponse(responseCode = "200", description = "게시글 정보 조회 성공", content = [Content(schema = Schema(implementation = Page::class, subTypes = [PostResponse::class]), mediaType = "application/json")]),
             ApiResponse(responseCode = "204", description = "게시글 없음", content = [Content(schema = Schema(implementation = Void::class))])
         ]
     )
@@ -90,7 +90,7 @@ class PostController(
             Parameter(name = "size", description = "페이지당 게시글 수", required = false, example = "20")
         ],
         responses = [
-            ApiResponse(responseCode = "200", description = "게시글 정보 조회 성공", content = [Content(schema = Schema(implementation = Page::class), mediaType = "application/json")]),
+            ApiResponse(responseCode = "200", description = "게시글 정보 조회 성공", content = [Content(schema = Schema(implementation = Page::class, subTypes = [PostResponse::class]), mediaType = "application/json")]),
             ApiResponse(responseCode = "204", description = "게시글 없음", content = [Content(schema = Schema(implementation = Void::class))]),
             ApiResponse(responseCode = "404", description = "게시판을 찾을 수 없음", content = [Content(schema = Schema(implementation = Void::class))])
         ]
@@ -118,7 +118,7 @@ class PostController(
             Parameter(name = "size", description = "페이지당 게시글 수", required = false, example = "20")
         ],
         responses = [
-            ApiResponse(responseCode = "200", description = "게시글 정보 조회 성공", content = [Content(schema = Schema(implementation = Page::class), mediaType = "application/json")]),
+            ApiResponse(responseCode = "200", description = "게시글 정보 조회 성공", content = [Content(schema = Schema(implementation = Page::class, subTypes = [PostResponse::class]), mediaType = "application/json")]),
             ApiResponse(responseCode = "204", description = "게시글 없음", content = [Content(schema = Schema(implementation = Void::class))]),
             ApiResponse(responseCode = "404", description = "사용자를 찾을 수 없음", content = [Content(schema = Schema(implementation = Void::class))])
         ]
@@ -146,7 +146,7 @@ class PostController(
             Parameter(name = "size", description = "페이지당 게시글 수", required = false, example = "20")
         ],
         responses = [
-            ApiResponse(responseCode = "200", description = "좋아요한 게시글 정보 조회 성공", content = [Content(schema = Schema(implementation = Page::class), mediaType = "application/json")]),
+            ApiResponse(responseCode = "200", description = "좋아요한 게시글 정보 조회 성공", content = [Content(schema = Schema(implementation = Page::class, subTypes = [PostResponse::class]), mediaType = "application/json")]),
             ApiResponse(responseCode = "204", description = "좋아요한 게시글 없음", content = [Content(schema = Schema(implementation = Void::class))]),
             ApiResponse(responseCode = "404", description = "사용자를 찾을 수 없음", content = [Content(schema = Schema(implementation = Void::class))])
         ]
