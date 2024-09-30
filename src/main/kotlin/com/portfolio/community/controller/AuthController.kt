@@ -1,7 +1,7 @@
 package com.portfolio.community.controller
 
 import com.portfolio.community.configuration.JwtTokenProvider
-import com.portfolio.community.dto.RefreshTokenRequest
+import com.portfolio.community.dto.user.RefreshTokenRequest
 import com.portfolio.community.dto.user.*
 import com.portfolio.community.entity.UserEntity
 import com.portfolio.community.service.UserService

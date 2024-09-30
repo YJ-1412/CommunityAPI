@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Size
 
+@Schema(description = "사용자 수정 요청 DTO")
 data class UserUpdateRequest (
     @Schema(
         description = "사용자의 이름. 중복되지 않는 고유한 값이어야 합니다.",

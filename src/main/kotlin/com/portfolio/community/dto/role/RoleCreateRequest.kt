@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Min
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotNull
 
+@Schema(description = "역할 생성 요청 DTO")
 data class RoleCreateRequest (
     @Schema(
         description = "역할의 이름. 중복되지 않는 고유한 값이어야 합니다.",

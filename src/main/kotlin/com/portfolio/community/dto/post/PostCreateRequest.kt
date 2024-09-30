@@ -3,6 +3,8 @@ package com.portfolio.community.dto.post
 import io.swagger.v3.oas.annotations.media.Schema
 import jakarta.validation.constraints.NotBlank
 
+
+@Schema(description = "게시글 생성 요청 DTO")
 data class PostCreateRequest(
 
     @Schema(

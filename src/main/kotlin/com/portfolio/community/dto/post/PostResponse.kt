@@ -6,6 +6,7 @@ import com.portfolio.community.entity.PostEntity
 import io.swagger.v3.oas.annotations.media.Schema
 import java.time.LocalDateTime
 
+@Schema(description = "게시글 응답 DTO")
 data class PostResponse (
     @Schema(
         description = "게시글의 ID",

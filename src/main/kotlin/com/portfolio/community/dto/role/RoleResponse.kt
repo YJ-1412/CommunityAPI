@@ -3,6 +3,7 @@ package com.portfolio.community.dto.role
 import com.portfolio.community.entity.Role
 import io.swagger.v3.oas.annotations.media.Schema
 
+@Schema(description = "역할 응답 DTO")
 data class RoleResponse(
     @Schema(
         description = "역할의 ID",

@@ -2,7 +2,7 @@ package com.portfolio.community.controller
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.portfolio.community.configuration.JwtTokenProvider
-import com.portfolio.community.dto.RefreshTokenRequest
+import com.portfolio.community.dto.user.RefreshTokenRequest
 import com.portfolio.community.dto.user.LoginRequest
 import com.portfolio.community.dto.user.UserCreateRequest
 import com.portfolio.community.entity.Role

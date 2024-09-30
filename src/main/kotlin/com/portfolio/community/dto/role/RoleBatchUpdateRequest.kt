@@ -2,6 +2,7 @@ package com.portfolio.community.dto.role
 
 import io.swagger.v3.oas.annotations.media.Schema
 
+@Schema(description = "역할 일괄 수정 요청 DTO")
 data class RoleBatchUpdateRequest(
     @Schema(
         description = "수정할 역할 목록. 각 역할의 ID와 함께 수정할 내용을 포함합니다.",

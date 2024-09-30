@@ -5,6 +5,7 @@ import com.portfolio.community.entity.CommentEntity
 import io.swagger.v3.oas.annotations.media.Schema
 import java.time.LocalDateTime
 
+@Schema(description = "댓글 응답 DTO(게시글 정보 제외)")
 data class CommentByPostResponse(
     @Schema(
         description = "댓글의 ID",

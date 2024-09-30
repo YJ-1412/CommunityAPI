@@ -2,6 +2,7 @@ package com.portfolio.community.dto.user
 
 import io.swagger.v3.oas.annotations.media.Schema
 
+@Schema(description = "JWT 응답 DTO")
 data class JwtResponse(
     @Schema(
         description = "액세스 토큰",

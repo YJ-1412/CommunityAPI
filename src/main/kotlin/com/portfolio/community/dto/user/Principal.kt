@@ -4,6 +4,7 @@ import com.portfolio.community.dto.role.RoleResponse
 import com.portfolio.community.entity.UserEntity
 import io.swagger.v3.oas.annotations.media.Schema
 
+@Schema(description = "사용자 정보 DTO")
 data class Principal(
     @Schema(
         description = "사용자의 ID",
