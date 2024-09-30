@@ -3,7 +3,6 @@ package com.portfolio.community.configuration
 import io.swagger.v3.oas.annotations.OpenAPIDefinition
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType
 import io.swagger.v3.oas.annotations.info.Info
-import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import io.swagger.v3.oas.annotations.security.SecurityScheme
 import org.springframework.context.annotation.Configuration
 
@@ -13,8 +12,7 @@ import org.springframework.context.annotation.Configuration
         title = "Community API",
         version = "1.0",
         description = "백엔드를 공부하기 위하여 만드는 커뮤니티 API 프로젝트",
-    ),
-    security = [SecurityRequirement(name = "Bearer Authentication")]
+    )
 )
 @SecurityScheme(
     name = "Bearer Authentication",  // 인증 스키마 이름
