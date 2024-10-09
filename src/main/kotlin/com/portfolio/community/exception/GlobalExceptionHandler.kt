@@ -33,6 +33,7 @@ class GlobalExceptionHandler: ResponseEntityExceptionHandler() {
     }
 
     //401 Unauthorized
+    //로그인 시 잘못된 비밀번호를 입력한 경우
     @ExceptionHandler(BadCredentialsException::class)
     fun clientUnauthorized(ex: BadCredentialsException, request: WebRequest): ResponseEntity<Any> {
         val errorDetails = ErrorResponse(HttpStatus.UNAUTHORIZED.value(), ex.message, request.getDescription(false))
@@ -57,6 +58,11 @@ class GlobalExceptionHandler: ResponseEntityExceptionHandler() {
     }
 
     //500 Internal Server Error
+    @ExceptionHandler(Exception::class)
+    fun internalServerError(ex: Exception, request: WebRequest): ResponseEntity<Any> {
+        val errorDetails = ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.localizedMessage, request.getDescription(false))
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorDetails as Any)
+    }
     //503 Service Unavailable
 
 }
