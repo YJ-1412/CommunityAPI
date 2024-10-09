@@ -58,11 +58,6 @@ class GlobalExceptionHandler: ResponseEntityExceptionHandler() {
     }
 
     //500 Internal Server Error
-    @ExceptionHandler(Exception::class)
-    fun internalServerError(ex: Exception, request: WebRequest): ResponseEntity<Any> {
-        val errorDetails = ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.localizedMessage, request.getDescription(false))
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorDetails as Any)
-    }
     //503 Service Unavailable
 
 }
