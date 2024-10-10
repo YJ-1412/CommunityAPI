@@ -7,7 +7,7 @@ class UserLikePost (
     user: UserEntity,
     post: PostEntity,
     id: Long = 0
-) : BaseTimeEntity() {
+){
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = id
