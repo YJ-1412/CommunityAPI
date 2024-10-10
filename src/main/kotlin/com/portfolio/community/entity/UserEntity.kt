@@ -10,7 +10,7 @@ class UserEntity (
     password: String,
     role: RoleEntity,
     id: Long = 0
-) : BaseTimeEntity(), UserDetails {
+) : UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = id
