@@ -79,9 +79,9 @@ class BoardController(
         responses = [
             ApiResponse(responseCode = "200", description = "게시판 수정 성공", content = [Content(schema = Schema(implementation = BoardResponse::class), mediaType = "application/json")]),
             ApiResponse(responseCode = "400", description = "잘못된 요청 데이터", content = [Content(schema = Schema(implementation = Void::class))]),
-            ApiResponse(responseCode = "401", description = "인증되지 않은 사용자"),
-            ApiResponse(responseCode = "403", description = "권한 부족 - 관리자/스태프 권한 필요"),
-            ApiResponse(responseCode = "404", description = "게시판을 찾을 수 없음 또는 역할을 찾을 수 없음")
+            ApiResponse(responseCode = "401", description = "인증되지 않은 사용자", content = [Content(schema = Schema(implementation = Void::class))]),
+            ApiResponse(responseCode = "403", description = "권한 부족 - 관리자/스태프 권한 필요", content = [Content(schema = Schema(implementation = Void::class))]),
+            ApiResponse(responseCode = "404", description = "게시판을 찾을 수 없음 또는 역할을 찾을 수 없음", content = [Content(schema = Schema(implementation = Void::class))])
         ]
     )
     @PutMapping("/boards/{boardId}")
@@ -123,8 +123,8 @@ class BoardController(
         responses = [
             ApiResponse(responseCode = "200", description = "게시판 삭제 및 게시글 이동 성공", content = [Content(schema = Schema(implementation = BoardResponse::class), mediaType = "application/json")]),
             ApiResponse(responseCode = "401", description = "인증되지 않은 사용자", content = [Content(schema = Schema(implementation = Void::class))]),
-            ApiResponse(responseCode = "403", description = "권한 부족 - 관리자/스태프 권한 필요"),
-            ApiResponse(responseCode = "404", description = "게시판을 찾을 수 없음")
+            ApiResponse(responseCode = "403", description = "권한 부족 - 관리자/스태프 권한 필요", content = [Content(schema = Schema(implementation = Void::class))]),
+            ApiResponse(responseCode = "404", description = "게시판을 찾을 수 없음", content = [Content(schema = Schema(implementation = Void::class))])
         ]
     )
     @DeleteMapping("/boards/{sourceBoardId}/posts/transfer/{targetBoardId}")
