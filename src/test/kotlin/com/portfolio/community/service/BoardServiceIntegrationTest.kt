@@ -5,7 +5,7 @@ import com.portfolio.community.dto.board.BoardCreateRequest
 import com.portfolio.community.dto.board.BoardUpdateRequest
 import com.portfolio.community.entity.BoardEntity
 import com.portfolio.community.entity.PostEntity
-import com.portfolio.community.entity.Role
+import com.portfolio.community.entity.RoleEntity
 import com.portfolio.community.entity.UserEntity
 import com.portfolio.community.exception.NotFoundException
 import com.portfolio.community.repository.BoardRepository
@@ -34,14 +34,14 @@ class BoardServiceIntegrationTest {
     @Autowired private lateinit var roleRepository: RoleRepository
     @Autowired private lateinit var postRepository: PostRepository
 
-    private lateinit var defaultRole: Role
+    private lateinit var defaultRole: RoleEntity
 
     @BeforeEach
     fun setup() {
         boardRepository.deleteAll()
         userRepository.deleteAll()
         roleRepository.deleteAll()
-        defaultRole = roleRepository.save(Role(name = "User", level = 0))
+        defaultRole = roleRepository.save(RoleEntity(name = "User", level = 0))
     }
 
     @Test

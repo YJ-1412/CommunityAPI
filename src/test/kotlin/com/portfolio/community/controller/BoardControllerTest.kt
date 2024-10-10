@@ -4,7 +4,7 @@ import com.portfolio.community.dto.board.BoardCreateRequest
 import com.portfolio.community.dto.board.BoardResponse
 import com.portfolio.community.dto.board.BoardUpdateRequest
 import com.portfolio.community.entity.BoardEntity
-import com.portfolio.community.entity.Role
+import com.portfolio.community.entity.RoleEntity
 import com.portfolio.community.service.BoardService
 import io.mockk.every
 import io.mockk.just
@@ -20,7 +20,7 @@ class BoardControllerTest {
     private lateinit var boardController: BoardController
     private lateinit var boardService: BoardService
 
-    private val defaultRole = Role(name = "User", level = 0, id = 1)
+    private val defaultRole = RoleEntity(name = "User", level = 0, id = 1)
 
     @BeforeEach
     fun setUp() {

@@ -4,11 +4,11 @@ import jakarta.persistence.*
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 
-@Entity
+@Entity(name = "users")
 class UserEntity (
     username: String,
     password: String,
-    role: Role,
+    role: RoleEntity,
     id: Long = 0
 ) : BaseTimeEntity(), UserDetails {
     @Id
@@ -35,7 +35,7 @@ class UserEntity (
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "role_id")
-    var role: Role = role
+    var role: RoleEntity = role
         protected set
 
     @OneToMany(mappedBy = "author", cascade = [(CascadeType.ALL)], orphanRemoval = true)
@@ -72,7 +72,7 @@ class UserEntity (
         isAdmin = false
     }
 
-    fun updateRole(role: Role) {
+    fun updateRole(role: RoleEntity) {
         this.role.users.remove(this)
         this.role = role
         role.users.add(this)

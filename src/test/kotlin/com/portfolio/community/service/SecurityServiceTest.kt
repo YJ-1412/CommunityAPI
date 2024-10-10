@@ -22,8 +22,8 @@ class SecurityServiceTest {
     private lateinit var boardRepository: BoardRepository
     private lateinit var userRepository: UserRepository
 
-    private val level1 = Role(name = "LV1", level = 1)
-    private val level2 = Role(name = "LV1", level = 2)
+    private val level1 = RoleEntity(name = "LV1", level = 1)
+    private val level2 = RoleEntity(name = "LV1", level = 2)
 
     private lateinit var adminUser: UserEntity
     private lateinit var staffUser: UserEntity

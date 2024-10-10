@@ -37,9 +37,9 @@ class CommentControllerIntegrationTest {
     @Autowired private lateinit var postRepository: PostRepository
     @Autowired private lateinit var commentRepository: CommentRepository
 
-    private lateinit var level0Role: Role
-    private lateinit var level1Role: Role
-    private lateinit var level2Role: Role
+    private lateinit var level0Role: RoleEntity
+    private lateinit var level1Role: RoleEntity
+    private lateinit var level2Role: RoleEntity
     private lateinit var board: BoardEntity
     private lateinit var authorOfPost: UserEntity
     private lateinit var level0User: UserEntity
@@ -61,9 +61,9 @@ class CommentControllerIntegrationTest {
         postRepository.deleteAll()
         commentRepository.deleteAll()
 
-        level0Role = roleRepository.save(Role(name = "LV0", level = 0))
-        level1Role = roleRepository.save(Role(name = "LV1", level = 1))
-        level2Role = roleRepository.save(Role(name = "LV2", level = 2))
+        level0Role = roleRepository.save(RoleEntity(name = "LV0", level = 0))
+        level1Role = roleRepository.save(RoleEntity(name = "LV1", level = 1))
+        level2Role = roleRepository.save(RoleEntity(name = "LV2", level = 2))
         board = boardRepository.save(BoardEntity(name = "Test Board", priority = 0, readableRole = level1Role))
         authorOfPost = userRepository.save(UserEntity(username = "Author Of Post", password = "password", role = level1Role))
         level0User = userRepository.save(UserEntity(username = "LV0 User", password = "password", role = level0Role))

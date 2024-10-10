@@ -28,7 +28,7 @@ class CommentServiceIntegrationTest {
     @Autowired private lateinit var userRepository: UserRepository
     @Autowired private lateinit var postRepository: PostRepository
 
-    private lateinit var defaultRole: Role
+    private lateinit var defaultRole: RoleEntity
     private lateinit var board: BoardEntity
     private lateinit var authorOfPost: UserEntity
     private lateinit var authorOfComment: UserEntity
@@ -42,7 +42,7 @@ class CommentServiceIntegrationTest {
         boardRepository.deleteAll()
         roleRepository.deleteAll()
 
-        defaultRole = roleRepository.save(Role(name = "User", level = 0))
+        defaultRole = roleRepository.save(RoleEntity(name = "User", level = 0))
         board = boardRepository.save(BoardEntity(name = "Board", priority = 0, readableRole = defaultRole))
         authorOfPost = userRepository.save(UserEntity(username = "Author of Post", password = "password", role = defaultRole))
         authorOfComment = userRepository.save(UserEntity(username = "Author of Comment", password = "password", role = defaultRole))

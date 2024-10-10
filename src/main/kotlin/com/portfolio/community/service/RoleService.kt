@@ -4,7 +4,7 @@ import com.portfolio.community.dto.role.RoleCreateRequest
 import com.portfolio.community.dto.role.RoleResponse
 import com.portfolio.community.dto.role.RoleBatchUpdateRequest
 import com.portfolio.community.dto.role.RoleUpdateRequest
-import com.portfolio.community.entity.Role
+import com.portfolio.community.entity.RoleEntity
 import com.portfolio.community.exception.NotFoundException
 import com.portfolio.community.repository.RoleRepository
 import jakarta.persistence.EntityManager
@@ -32,7 +32,7 @@ class RoleService(
         if(roleRepository.existsByName(roleCreateRequest.name!!)) throw IllegalArgumentException("Role with name already exists")
         if(roleRepository.existsByLevel(roleCreateRequest.level!!)) throw IllegalArgumentException("Role with level already exists")
 
-        val role = Role(
+        val role = RoleEntity(
             name = roleCreateRequest.name,
             level = roleCreateRequest.level,
         )
@@ -79,7 +79,7 @@ class RoleService(
         return RoleResponse(targetRole)
     }
 
-    private fun moveBoardsAndUsers(sourceRole: Role, targetRole: Role) {
+    private fun moveBoardsAndUsers(sourceRole: RoleEntity, targetRole: RoleEntity) {
         val boardIterator = sourceRole.readableBoards.iterator()
         while (boardIterator.hasNext()) {
             val board = boardIterator.next()

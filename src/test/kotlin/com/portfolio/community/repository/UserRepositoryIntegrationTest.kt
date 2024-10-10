@@ -1,6 +1,6 @@
 package com.portfolio.community.repository
 
-import com.portfolio.community.entity.Role
+import com.portfolio.community.entity.RoleEntity
 import com.portfolio.community.entity.UserEntity
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
@@ -21,7 +21,7 @@ class UserRepositoryIntegrationTest {
     fun setUp() {
         userRepository.deleteAll()
 
-        val role = Role(name = "User", level = 0)
+        val role = RoleEntity(name = "User", level = 0)
         roleRepository.save(role)
 
         val user1 = UserEntity(username = "user1", password = "password1", role = role)

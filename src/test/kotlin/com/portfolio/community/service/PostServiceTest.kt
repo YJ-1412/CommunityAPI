@@ -29,7 +29,7 @@ class PostServiceTest {
 
     private lateinit var author: UserEntity
     private lateinit var board: BoardEntity
-    private lateinit var role: Role
+    private lateinit var role: RoleEntity
 
     @BeforeEach
     fun setUp() {
@@ -39,7 +39,7 @@ class PostServiceTest {
         likeRepository = mockk()
         postService = PostService(postRepository, boardRepository, userRepository, likeRepository)
 
-        role = Role(name = "User", level = 0)
+        role = RoleEntity(name = "User", level = 0)
         author = UserEntity(username = "Author", password = "password", role = role, id = 1L)
         board = BoardEntity(name = "Board 1", priority = 1, readableRole = role, id = 1L)
     }

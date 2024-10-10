@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: 7
+      id: 6
       author: y1412
       changes:
         - createTable:
-            tableName: user_like_post
+            tableName: comments
             columns:
               - column:
                   name: id
@@ -13,7 +13,12 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
               - column:
-                  name: user_id
+                  name: content
+                  type: TEXT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: author_id
                   type: BIGINT
                   constraints:
                     nullable: false
@@ -22,17 +27,23 @@ databaseChangeLog:
                   type: BIGINT
                   constraints:
                     nullable: false
+              - column:
+                  name: created_date
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
         - addForeignKeyConstraint:
-            baseTableName: user_like_post
-            baseColumnNames: user_id
+            baseTableName: comments
+            baseColumnNames: author_id
             referencedTableName: users
             referencedColumnNames: id
             onDelete: CASCADE
-            constraintName: fk_user_like_post_user
+            constraintName: fk_comment_author
         - addForeignKeyConstraint:
-            baseTableName: user_like_post
+            baseTableName: comments
             baseColumnNames: post_id
             referencedTableName: posts
             referencedColumnNames: id
             onDelete: CASCADE
-            constraintName: fk_user_like_post_post
+            constraintName: fk_comment_post

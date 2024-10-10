@@ -3,7 +3,7 @@ package com.portfolio.community.controller
 import com.portfolio.community.dto.role.RoleCreateRequest
 import com.portfolio.community.dto.role.RoleResponse
 import com.portfolio.community.dto.role.RoleUpdateRequest
-import com.portfolio.community.entity.Role
+import com.portfolio.community.entity.RoleEntity
 import com.portfolio.community.service.RoleService
 import io.mockk.every
 import io.mockk.mockk
@@ -12,7 +12,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.http.HttpStatus
 
-class RoleControllerTest {
+class RoleEntityControllerTest {
 
     private lateinit var roleController: RoleController
     private lateinit var roleService: RoleService
@@ -26,7 +26,7 @@ class RoleControllerTest {
     @Test
     fun given_RoleExists_when_GetAllRoles_then_ReturnOkAndRoleList() {
         //Given
-        val roles = (1..10).map { RoleResponse(Role(name = "User Lv$it", level = it - 1, id = it.toLong())) }
+        val roles = (1..10).map { RoleResponse(RoleEntity(name = "User Lv$it", level = it - 1, id = it.toLong())) }
         every { roleService.getAllRoles() } returns roles
 
         //When
@@ -55,7 +55,7 @@ class RoleControllerTest {
     fun given_ValidData_when_CreateRole_then_ReturnCreatedAndNewRole() {
         //Given
         val roleCreateRequest = RoleCreateRequest(name = "User", level = 0)
-        val newRole = RoleResponse(Role(name = "User", level = 0, id = 1))
+        val newRole = RoleResponse(RoleEntity(name = "User", level = 0, id = 1))
         every { roleService.createRole(roleCreateRequest) } returns newRole
 
         //When
@@ -72,7 +72,7 @@ class RoleControllerTest {
     fun given_ValidData_when_UpdateRole_then_ReturnOkAndUpdatedRole() {
         //Given
         val roleUpdateRequest = RoleUpdateRequest(name = "Updated", level = 0)
-        val updatedRole = RoleResponse(Role(name = "Updated", level = 0, id = 1))
+        val updatedRole = RoleResponse(RoleEntity(name = "Updated", level = 0, id = 1))
         every { roleService.updateRole(1, roleUpdateRequest) } returns updatedRole
 
         //When

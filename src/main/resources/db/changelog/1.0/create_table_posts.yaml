@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: 6
+      id: 5
       author: y1412
       changes:
         - createTable:
-            tableName: comment
+            tableName: posts
             columns:
               - column:
                   name: id
@@ -13,8 +13,18 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
               - column:
+                  name: title
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+              - column:
                   name: content
                   type: TEXT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: view_count
+                  type: INT
                   constraints:
                     nullable: false
               - column:
@@ -23,21 +33,27 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: post_id
+                  name: board_id
                   type: BIGINT
                   constraints:
                     nullable: false
+              - column:
+                  name: created_date
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
         - addForeignKeyConstraint:
-            baseTableName: comment
+            baseTableName: posts
             baseColumnNames: author_id
-            referencedTableName: user
+            referencedTableName: users
             referencedColumnNames: id
             onDelete: CASCADE
-            constraintName: fk_comment_author
+            constraintName: fk_post_author
         - addForeignKeyConstraint:
-            baseTableName: comment
-            baseColumnNames: post_id
-            referencedTableName: post
+            baseTableName: posts
+            baseColumnNames: board_id
+            referencedTableName: boards
             referencedColumnNames: id
             onDelete: CASCADE
-            constraintName: fk_comment_post
+            constraintName: fk_post_board

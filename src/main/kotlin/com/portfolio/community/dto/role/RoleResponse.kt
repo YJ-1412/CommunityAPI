@@ -1,6 +1,6 @@
 package com.portfolio.community.dto.role
 
-import com.portfolio.community.entity.Role
+import com.portfolio.community.entity.RoleEntity
 import io.swagger.v3.oas.annotations.media.Schema
 
 @Schema(description = "역할 응답 DTO")
@@ -27,7 +27,7 @@ data class RoleResponse(
     )
     val level: Int,
 ) {
-    constructor(role: Role) : this(
+    constructor(role: RoleEntity) : this(
         id = role.id,
         name = role.name,
         level = role.level

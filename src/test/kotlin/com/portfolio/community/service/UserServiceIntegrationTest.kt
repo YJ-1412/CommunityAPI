@@ -2,7 +2,7 @@ package com.portfolio.community.service
 
 import com.portfolio.community.dto.user.UserCreateRequest
 import com.portfolio.community.dto.user.UserUpdateRequest
-import com.portfolio.community.entity.Role
+import com.portfolio.community.entity.RoleEntity
 import com.portfolio.community.entity.UserEntity
 import com.portfolio.community.exception.NotFoundException
 import com.portfolio.community.repository.BoardRepository
@@ -29,14 +29,14 @@ class UserServiceIntegrationTest {
     @Autowired private lateinit var boardRepository: BoardRepository
     @Autowired private lateinit var roleRepository: RoleRepository
 
-    private lateinit var defaultRole: Role
+    private lateinit var defaultRole: RoleEntity
 
     @BeforeEach
     fun setup() {
         userRepository.deleteAll()
         boardRepository.deleteAll()
         roleRepository.deleteAll()
-        defaultRole = roleRepository.save(Role(name = "User LV0", level = 0))
+        defaultRole = roleRepository.save(RoleEntity(name = "User LV0", level = 0))
     }
 
     @Test
@@ -141,7 +141,7 @@ class UserServiceIntegrationTest {
     fun given_ValidData_when_ChangeRole_then_ChangeRoleAndReturnUpdatedUser() {
         //Given
         val testUser = userRepository.save(UserEntity(username = "Test User", password = "password", role = defaultRole))
-        val targetRole = roleRepository.save(Role(name = "User LV1", level = 1))
+        val targetRole = roleRepository.save(RoleEntity(name = "User LV1", level = 1))
 
         //When
         val result = userService.changeRole(testUser.id, targetRole.id)
@@ -154,7 +154,7 @@ class UserServiceIntegrationTest {
     @Test
     fun given_InvalidUserId_when_ChangeRole_then_ThrowNotFoundException() {
         //Given
-        val targetRole = roleRepository.save(Role(name = "User LV1", level = 1))
+        val targetRole = roleRepository.save(RoleEntity(name = "User LV1", level = 1))
 
         //When & Then
         val ex = assertThrows<NotFoundException> {

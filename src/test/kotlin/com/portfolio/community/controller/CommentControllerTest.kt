@@ -20,7 +20,7 @@ class CommentControllerTest {
     private lateinit var commentController: CommentController
     private lateinit var commentService: CommentService
 
-    private val defaultRole = Role(name = "User", level = 0, id = 1L)
+    private val defaultRole = RoleEntity(name = "User", level = 0, id = 1L)
     private val board = BoardEntity(name = "Board", priority = 0, readableRole = defaultRole, id = 1L)
     private val author = UserEntity(username = "Author", password = "password", role = defaultRole, id = 1L)
     private val post = PostEntity(title = "Post", content = "Content", author = author, board = board, id = 1L)

@@ -6,7 +6,7 @@ import com.portfolio.community.dto.board.*
 import com.portfolio.community.dto.user.Principal
 import com.portfolio.community.entity.BoardEntity
 import com.portfolio.community.entity.PostEntity
-import com.portfolio.community.entity.Role
+import com.portfolio.community.entity.RoleEntity
 import com.portfolio.community.entity.UserEntity
 import com.portfolio.community.repository.BoardRepository
 import com.portfolio.community.repository.PostRepository
@@ -41,8 +41,8 @@ class BoardControllerIntegrationTest {
     @Autowired private lateinit var roleRepository: RoleRepository
     @Autowired private lateinit var postRepository: PostRepository
 
-    private lateinit var level0Role: Role
-    private lateinit var level1Role: Role
+    private lateinit var level0Role: RoleEntity
+    private lateinit var level1Role: RoleEntity
     private lateinit var regular: UserEntity
     private lateinit var admin: UserEntity
 
@@ -55,8 +55,8 @@ class BoardControllerIntegrationTest {
         userRepository.deleteAll()
         roleRepository.deleteAll()
 
-        level0Role = roleRepository.save(Role(name = "LV0", level = 0))
-        level1Role = roleRepository.save(Role(name = "LV1", level = 1))
+        level0Role = roleRepository.save(RoleEntity(name = "LV0", level = 0))
+        level1Role = roleRepository.save(RoleEntity(name = "LV1", level = 1))
 
         admin = userRepository.save(UserEntity(username = "Admin", password = "00000000", role = level0Role).apply { setAdmin() })
         regular = userRepository.save(UserEntity(username = "User", password = "00000000", role = level0Role))

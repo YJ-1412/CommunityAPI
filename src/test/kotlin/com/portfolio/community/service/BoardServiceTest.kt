@@ -2,7 +2,7 @@ package com.portfolio.community.service
 
 import com.portfolio.community.dto.board.*
 import com.portfolio.community.entity.BoardEntity
-import com.portfolio.community.entity.Role
+import com.portfolio.community.entity.RoleEntity
 import com.portfolio.community.exception.NotFoundException
 import com.portfolio.community.repository.BoardRepository
 import com.portfolio.community.repository.RoleRepository
@@ -33,7 +33,7 @@ class BoardServiceTest {
     @DisplayName("Given boards exists When getAllBoards Then return all boards in priority order")
     fun given_BoardExists_when_GetAllBoards_then_ReturnAllBoards() {
         // Given
-        val role = Role(name = "User", level = 0)
+        val role = RoleEntity(name = "User", level = 0)
         val boards = listOf(
             BoardEntity(name = "Board 1", priority = 1, role),
             BoardEntity(name = "Board 2", priority = 2, role)
@@ -55,7 +55,7 @@ class BoardServiceTest {
     fun given_ValidBoardData_when_CreateBoard_then_CreateAndReturnNewBoard() {
         // Given
         val boardCreateRequest = BoardCreateRequest(name = "New Board", priority = 1, readableRoleId = 1L)
-        val role = Role(name = "User", level = 0)
+        val role = RoleEntity(name = "User", level = 0)
         val board = BoardEntity(name = "New Board", priority = 1, readableRole = role)
         every { roleRepository.findByIdOrNull(1L) } returns role
         every { boardRepository.existsByName("New Board") } returns false
@@ -120,7 +120,7 @@ class BoardServiceTest {
     fun given_ValidBoardData_when_UpdateBoard_then_UpdateAndReturnUpdatedBoard() {
         // Given
         val boardUpdateRequest = BoardUpdateRequest(name = "Updated Board", priority = 2, readableRoleId = 1L)
-        val role = Role(name = "User", level = 0)
+        val role = RoleEntity(name = "User", level = 0)
         val board = BoardEntity(name = "Old Board", priority = 1, readableRole = role)
         every { boardRepository.findByIdOrNull(1L) } returns board
         every { boardRepository.findByName("Updated Board") } returns null
@@ -154,8 +154,8 @@ class BoardServiceTest {
     @DisplayName("Given duplicate board name When updateBoard Then throw IllegalArgumentException")
     fun given_DuplicateBoardName_when_UpdateBoard_then_ThrowIllegalArgumentException() {
         // Given
-        val testBoard = BoardEntity(name = "Test Board", priority = 1, readableRole = Role(name = "User", level = 0), id = 1L)
-        val boardFindWithName = BoardEntity(name = "Updated Board", priority = 2, readableRole = Role(name = "User", level = 0), id = 2L)
+        val testBoard = BoardEntity(name = "Test Board", priority = 1, readableRole = RoleEntity(name = "User", level = 0), id = 1L)
+        val boardFindWithName = BoardEntity(name = "Updated Board", priority = 2, readableRole = RoleEntity(name = "User", level = 0), id = 2L)
         val boardUpdateRequest = BoardUpdateRequest(name = "Updated Board", priority = 1, readableRoleId = 1L)
         every { boardRepository.findByIdOrNull(1L) } returns testBoard
         every { boardRepository.findByName("Updated Board") } returns boardFindWithName
@@ -171,8 +171,8 @@ class BoardServiceTest {
     @DisplayName("Given duplicate board priority When updateBoard Then throw IllegalArgumentException")
     fun given_DuplicateBoardPriority_when_UpdateBoard_then_ThrowIllegalArgumentException() {
         // Given
-        val testBoard = BoardEntity(name = "Test Board", priority = 1, readableRole = Role(name = "User", level = 0), id = 1L)
-        val boardFindWithPriority = BoardEntity(name = "Test Board 2", priority = 2, readableRole = Role(name = "User", level = 0), id = 2L)
+        val testBoard = BoardEntity(name = "Test Board", priority = 1, readableRole = RoleEntity(name = "User", level = 0), id = 1L)
+        val boardFindWithPriority = BoardEntity(name = "Test Board 2", priority = 2, readableRole = RoleEntity(name = "User", level = 0), id = 2L)
         val boardUpdateRequest = BoardUpdateRequest(name = "Updated Board", priority = 2, readableRoleId = 1L)
         every { boardRepository.findByIdOrNull(1L) } returns testBoard
         every { boardRepository.findByName("Updated Board") } returns null
@@ -190,7 +190,7 @@ class BoardServiceTest {
     fun given_InvalidReadableRole_when_UpdateBoard_then_ThrowNotFoundException() {
         //Given
         val boardUpdateRequest = BoardUpdateRequest(name = "Updated Board", priority = 2, readableRoleId = 1L)
-        val role = Role(name = "User", level = 0)
+        val role = RoleEntity(name = "User", level = 0)
         val board = BoardEntity(name = "Old Board", priority = 1, readableRole = role)
         every { boardRepository.findByIdOrNull(1L) } returns board
         every { boardRepository.findByName("Updated Board") } returns null
@@ -208,7 +208,7 @@ class BoardServiceTest {
     @DisplayName("Given existing board When deleteBoard Then delete the board")
     fun given_ExistingBoard_when_DeleteBoard_then_DeleteTheBoard() {
         // Given
-        val role = Role(name = "User", level = 0)
+        val role = RoleEntity(name = "User", level = 0)
         val board = BoardEntity(name = "Board to Delete", priority = 1, readableRole = role)
         every { boardRepository.findByIdOrNull(1L) } returns board
         every { boardRepository.delete(any<BoardEntity>()) } returns Unit

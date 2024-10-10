@@ -1,15 +1,15 @@
 package com.portfolio.community.repository
 
-import com.portfolio.community.entity.Role
+import com.portfolio.community.entity.RoleEntity
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface RoleRepository : JpaRepository<Role, Long> {
-    fun findByLevel(level: Int): Role?
-    fun findFirstByOrderByLevel(): Role?
-    fun findByName(name: String): Role?
-    fun findAllByOrderByLevel(): List<Role>
+interface RoleRepository : JpaRepository<RoleEntity, Long> {
+    fun findByLevel(level: Int): RoleEntity?
+    fun findFirstByOrderByLevel(): RoleEntity?
+    fun findByName(name: String): RoleEntity?
+    fun findAllByOrderByLevel(): List<RoleEntity>
     fun existsByLevel(level: Int): Boolean
     fun existsByName(name: String): Boolean
 }

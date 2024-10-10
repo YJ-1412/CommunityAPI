@@ -2,7 +2,7 @@ package com.portfolio.community.service
 
 import com.portfolio.community.dto.user.UserCreateRequest
 import com.portfolio.community.dto.user.UserUpdateRequest
-import com.portfolio.community.entity.Role
+import com.portfolio.community.entity.RoleEntity
 import com.portfolio.community.entity.UserEntity
 import com.portfolio.community.exception.NotFoundException
 import com.portfolio.community.repository.RoleRepository
@@ -24,7 +24,7 @@ class UserServiceTest {
     private lateinit var passwordEncoder: PasswordEncoder
     private lateinit var roleRepository: RoleRepository
 
-    private val defaultRole = Role(name = "User", level = 0)
+    private val defaultRole = RoleEntity(name = "User", level = 0)
 
     @BeforeEach
     fun setUp() {
@@ -141,7 +141,7 @@ class UserServiceTest {
     fun given_ValidData_when_ChangeRole_then_ChangeRoleAndReturnUpdatedRole() {
         //Given
         val testUser = UserEntity(username = "Test User", password = "password", role = defaultRole, id = 1L)
-        val targetRole = Role(name = "User LV2", level = 1, id = 2L)
+        val targetRole = RoleEntity(name = "User LV2", level = 1, id = 2L)
         every { userRepository.findByIdOrNull(1L) } returns testUser
         every { roleRepository.findByIdOrNull(2L) } returns targetRole
 

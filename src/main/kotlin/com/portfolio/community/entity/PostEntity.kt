@@ -2,7 +2,7 @@ package com.portfolio.community.entity
 
 import jakarta.persistence.*
 
-@Entity
+@Entity(name = "posts")
 class PostEntity (
     title: String,
     content: String,

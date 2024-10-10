@@ -2,8 +2,8 @@ package com.portfolio.community.entity
 
 import jakarta.persistence.*
 
-@Entity
-class Role(
+@Entity(name = "roles")
+class RoleEntity(
     name: String,
     level: Int,
     id: Long = 0

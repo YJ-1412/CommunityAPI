@@ -35,7 +35,7 @@ class CommentServiceTest {
         userRepository = mockk()
         commentService = CommentService(commentRepository, postRepository, userRepository)
 
-        val role = Role(name = "User", level = 0)
+        val role = RoleEntity(name = "User", level = 0)
         val board = BoardEntity(name = "Board 1", priority = 1, readableRole = role)
 
         author = UserEntity(username =  "User 1", password = "password", role = role)

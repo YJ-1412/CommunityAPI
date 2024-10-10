@@ -28,7 +28,7 @@ class CommentRepositoryIntegrationTest {
         userRepository.deleteAll()
         roleRepository.deleteAll()
 
-        val role = Role(name = "User", level = 0)
+        val role = RoleEntity(name = "User", level = 0)
         roleRepository.save(role)
 
         val user = UserEntity(username = "user1", password = "password", role = role)

@@ -1,6 +1,6 @@
 package com.portfolio.community.repository
 
-import com.portfolio.community.entity.Role
+import com.portfolio.community.entity.RoleEntity
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -10,7 +10,7 @@ import org.springframework.test.context.TestPropertySource
 
 @DataJpaTest
 @TestPropertySource(locations = ["classpath:application-test.properties"])
-class RoleRepositoryIntegrationTest {
+class RoleEntityRepositoryIntegrationTest {
 
     @Autowired
     private lateinit var roleRepository: RoleRepository
@@ -19,8 +19,8 @@ class RoleRepositoryIntegrationTest {
     fun setUp() {
         roleRepository.deleteAll()
 
-        val level1Role = Role(name = "Lv1", level = 0)
-        val level2Role = Role(name = "Lv2", level = 1)
+        val level1Role = RoleEntity(name = "Lv1", level = 0)
+        val level2Role = RoleEntity(name = "Lv2", level = 1)
         roleRepository.save(level1Role)
         roleRepository.save(level2Role)
     }

@@ -2,7 +2,7 @@ package com.portfolio.community.repository
 
 import com.portfolio.community.entity.BoardEntity
 import com.portfolio.community.entity.PostEntity
-import com.portfolio.community.entity.Role
+import com.portfolio.community.entity.RoleEntity
 import com.portfolio.community.entity.UserEntity
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
@@ -22,7 +22,7 @@ class PostRepositoryIntegrationTest {
     @Autowired private lateinit var userRepository: UserRepository
     @Autowired private lateinit var boardRepository: BoardRepository
 
-    private lateinit var role: Role
+    private lateinit var role: RoleEntity
     private lateinit var user: UserEntity
     private lateinit var board: BoardEntity
 
@@ -33,7 +33,7 @@ class PostRepositoryIntegrationTest {
         userRepository.deleteAll()
         boardRepository.deleteAll()
 
-        role = Role(name = "User", level = 0)
+        role = RoleEntity(name = "User", level = 0)
         roleRepository.save(role)
 
         user = UserEntity(username = "user1", password = "password", role = role)

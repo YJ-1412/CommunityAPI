@@ -4,7 +4,7 @@ import com.portfolio.community.dto.post.PostCreateRequest
 import com.portfolio.community.dto.post.PostUpdateRequest
 import com.portfolio.community.entity.BoardEntity
 import com.portfolio.community.entity.PostEntity
-import com.portfolio.community.entity.Role
+import com.portfolio.community.entity.RoleEntity
 import com.portfolio.community.entity.UserEntity
 import com.portfolio.community.exception.NotFoundException
 import com.portfolio.community.repository.*
@@ -30,7 +30,7 @@ class PostServiceIntegrationTest {
     @Autowired private lateinit var userRepository: UserRepository
     @Autowired private lateinit var roleRepository: RoleRepository
 
-    private lateinit var defaultRole: Role
+    private lateinit var defaultRole: RoleEntity
     private lateinit var board: BoardEntity
     private lateinit var author: UserEntity
 
@@ -41,7 +41,7 @@ class PostServiceIntegrationTest {
         userRepository.deleteAll()
         roleRepository.deleteAll()
 
-        defaultRole = roleRepository.save(Role("User", level = 0))
+        defaultRole = roleRepository.save(RoleEntity("User", level = 0))
         board = boardRepository.save(BoardEntity(name = "Board", priority = 0, readableRole = defaultRole))
         author = userRepository.save(UserEntity(username = "Author", password = "password", role = defaultRole))
     }

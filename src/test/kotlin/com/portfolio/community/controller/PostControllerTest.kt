@@ -7,7 +7,7 @@ import com.portfolio.community.dto.post.PostUpdateRequest
 import com.portfolio.community.dto.user.Principal
 import com.portfolio.community.entity.BoardEntity
 import com.portfolio.community.entity.PostEntity
-import com.portfolio.community.entity.Role
+import com.portfolio.community.entity.RoleEntity
 import com.portfolio.community.entity.UserEntity
 import com.portfolio.community.service.PostService
 import io.mockk.Runs
@@ -26,7 +26,7 @@ class PostControllerTest {
     private lateinit var postController: PostController
     private lateinit var postService: PostService
 
-    private val defaultRole = Role(name = "User", level = 0, id = 1)
+    private val defaultRole = RoleEntity(name = "User", level = 0, id = 1)
     private val board = BoardEntity(name = "Board", priority = 0 , readableRole = defaultRole, id = 1)
     private val author = UserEntity(username = "Author", password = "password", role = defaultRole, id = 1)
 

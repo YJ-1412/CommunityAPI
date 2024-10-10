@@ -1,7 +1,7 @@
 package com.portfolio.community.configuration
 
 import com.portfolio.community.entity.AppConfig
-import com.portfolio.community.entity.Role
+import com.portfolio.community.entity.RoleEntity
 import com.portfolio.community.entity.UserEntity
 import com.portfolio.community.repository.AppConfigRepository
 import com.portfolio.community.repository.RoleRepository
@@ -25,7 +25,7 @@ class DataInitializer(
 
             var defaultRole = roleRepository.findFirstByOrderByLevel()
             if (defaultRole == null) {
-                defaultRole = roleRepository.save(Role(name = "LV0", level = 0))
+                defaultRole = roleRepository.save(RoleEntity(name = "LV0", level = 0))
             }
 
             val adminId = appConfigRepository.findByKey("admin_id")

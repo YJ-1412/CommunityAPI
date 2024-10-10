@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.portfolio.community.JwtTestUtils
 import com.portfolio.community.dto.user.Principal
 import com.portfolio.community.dto.user.UserUpdateRequest
-import com.portfolio.community.entity.Role
+import com.portfolio.community.entity.RoleEntity
 import com.portfolio.community.entity.UserEntity
 import com.portfolio.community.repository.*
 import org.junit.jupiter.api.BeforeEach
@@ -37,8 +37,8 @@ class UserControllerIntegrationTest {
     @Autowired private lateinit var postRepository: PostRepository
     @Autowired private lateinit var commentRepository: CommentRepository
 
-    private lateinit var level0Role: Role
-    private lateinit var level1Role: Role
+    private lateinit var level0Role: RoleEntity
+    private lateinit var level1Role: RoleEntity
     private lateinit var level0User: UserEntity
     private lateinit var level1User: UserEntity
     private lateinit var staff: UserEntity
@@ -57,8 +57,8 @@ class UserControllerIntegrationTest {
         postRepository.deleteAll()
         commentRepository.deleteAll()
 
-        level0Role = roleRepository.save(Role(name = "LV0", level = 0))
-        level1Role = roleRepository.save(Role(name = "LV1", level = 1))
+        level0Role = roleRepository.save(RoleEntity(name = "LV0", level = 0))
+        level1Role = roleRepository.save(RoleEntity(name = "LV1", level = 1))
         level0User = userRepository.save(UserEntity(username = "LV0 User", password = "password", role = level0Role))
         level1User = userRepository.save(UserEntity(username = "LV1 User", password = "password", role = level1Role))
         staff = userRepository.save(UserEntity(username = "Staff", password = "password", role = level0Role).apply { setStaff() })

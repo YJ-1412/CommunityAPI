@@ -2,7 +2,7 @@ package com.portfolio.community.service
 
 import com.portfolio.community.dto.role.RoleCreateRequest
 import com.portfolio.community.dto.role.RoleUpdateRequest
-import com.portfolio.community.entity.Role
+import com.portfolio.community.entity.RoleEntity
 import com.portfolio.community.exception.NotFoundException
 import com.portfolio.community.repository.RoleRepository
 import io.mockk.*
@@ -12,7 +12,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.data.repository.findByIdOrNull
 
-class RoleServiceTest {
+class RoleEntityServiceTest {
     private lateinit var roleService: RoleService
     private lateinit var roleRepository: RoleRepository
 
@@ -25,7 +25,7 @@ class RoleServiceTest {
     @Test
     fun given_RoleExists_when_GetAllRoles_then_ReturnRoleList() {
         //Given
-        val roles = (1..10).map { Role(name = "Level$it", level = it, id = it.toLong()) }
+        val roles = (1..10).map { RoleEntity(name = "Level$it", level = it, id = it.toLong()) }
         every { roleRepository.findAllByOrderByLevel() } returns roles
 
         //When
@@ -40,7 +40,7 @@ class RoleServiceTest {
     fun given_ValidData_when_CreateRole_then_CreateAndReturnNewRole() {
         //Given
         val roleCreateRequest = RoleCreateRequest(name = "New Role", level = 1)
-        val newRole = Role(name = "New Role", level = 1)
+        val newRole = RoleEntity(name = "New Role", level = 1)
         every { roleRepository.existsByName("New Role") } returns false
         every { roleRepository.existsByLevel(1) } returns false
         every { roleRepository.save(any()) } returns newRole
@@ -85,7 +85,7 @@ class RoleServiceTest {
     fun given_ValidData_when_UpdateRole_then_UpdateAndReturnUpdatedRole() {
         //Given
         val roleUpdateRequest = RoleUpdateRequest(name = "Updated Role", level = 1)
-        val oldRole = Role(name = "Old Role", level = 1, id = 1L)
+        val oldRole = RoleEntity(name = "Old Role", level = 1, id = 1L)
         every { roleRepository.findByIdOrNull(1L) } returns oldRole
         every { roleRepository.findByName("Updated Role") } returns null
         every { roleRepository.findByLevel(1)} returns oldRole
@@ -115,8 +115,8 @@ class RoleServiceTest {
     fun given_DuplicateName_when_UpdateRole_then_ThrowIllegalArgumentException() {
         //Given
         val roleUpdateRequest = RoleUpdateRequest(name = "Updated Role", level = 1)
-        val oldRole = Role(name = "Old Role", level = 1, id = 1L)
-        val roleWithDuplicateName = Role(name = "Updated Role", level = 2, id = 2L)
+        val oldRole = RoleEntity(name = "Old Role", level = 1, id = 1L)
+        val roleWithDuplicateName = RoleEntity(name = "Updated Role", level = 2, id = 2L)
         every { roleRepository.findByIdOrNull(1L) } returns oldRole
         every { roleRepository.findByName("Updated Role") } returns roleWithDuplicateName
 
@@ -131,8 +131,8 @@ class RoleServiceTest {
     fun given_DuplicateLevel_when_UpdateRole_then_ThrowIllegalArgumentException() {
         //Given
         val roleUpdateRequest = RoleUpdateRequest(name = "Updated Role", level = 2)
-        val oldRole = Role(name = "Old Role", level = 1, id = 1L)
-        val roleWithDuplicateLevel = Role(name = "Other Role", level = 2, id = 2L)
+        val oldRole = RoleEntity(name = "Old Role", level = 1, id = 1L)
+        val roleWithDuplicateLevel = RoleEntity(name = "Other Role", level = 2, id = 2L)
         every { roleRepository.findByIdOrNull(1L) } returns oldRole
         every { roleRepository.findByName("Updated Role") } returns null
         every { roleRepository.findByLevel(2) } returns roleWithDuplicateLevel

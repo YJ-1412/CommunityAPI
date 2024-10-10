@@ -1,7 +1,7 @@
 package com.portfolio.community.repository
 
 import com.portfolio.community.entity.BoardEntity
-import com.portfolio.community.entity.Role
+import com.portfolio.community.entity.RoleEntity
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
@@ -23,7 +23,7 @@ class BoardRepositoryIntegrationTest {
         boardRepository.deleteAll()
         roleRepository.deleteAll()
 
-        val role = Role(name = "User", level = 0)
+        val role = RoleEntity(name = "User", level = 0)
         roleRepository.save(role)
 
         val board1 = BoardEntity(name = "Board 1", priority = 1, role)

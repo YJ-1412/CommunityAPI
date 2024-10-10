@@ -3,7 +3,7 @@ package com.portfolio.community.controller
 import com.portfolio.community.configuration.JwtTokenProvider
 import com.portfolio.community.dto.user.UserResponse
 import com.portfolio.community.dto.user.UserUpdateRequest
-import com.portfolio.community.entity.Role
+import com.portfolio.community.entity.RoleEntity
 import com.portfolio.community.entity.UserEntity
 import com.portfolio.community.service.UserService
 import io.mockk.Runs
@@ -23,7 +23,7 @@ class UserControllerTest {
     private lateinit var jwtTokenProvider: JwtTokenProvider
     private lateinit var authenticationManager: AuthenticationManager
 
-    private val defaultRole = Role(name = "User", level = 0, id = 1)
+    private val defaultRole = RoleEntity(name = "User", level = 0, id = 1)
 
     @BeforeEach
     fun setup() {
@@ -65,7 +65,7 @@ class UserControllerTest {
     @Test
     fun given_ValidData_when_ChangeRole_then_ReturnOkAndUpdatedUser() {
         //Given
-        val targetRole = Role(name = "User Lv2", level = 1, id = 2)
+        val targetRole = RoleEntity(name = "User Lv2", level = 1, id = 2)
         val updatedUser = UserResponse(UserEntity(username = "Test User", password = "password", role = targetRole, id = 1))
         every { userService.changeRole(1, 2) } returns updatedUser
 

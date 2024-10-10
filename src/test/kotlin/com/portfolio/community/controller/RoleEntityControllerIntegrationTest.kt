@@ -7,7 +7,7 @@ import com.portfolio.community.dto.role.RoleCreateRequest
 import com.portfolio.community.dto.role.RoleUpdateRequest
 import com.portfolio.community.dto.user.Principal
 import com.portfolio.community.entity.BoardEntity
-import com.portfolio.community.entity.Role
+import com.portfolio.community.entity.RoleEntity
 import com.portfolio.community.entity.UserEntity
 import com.portfolio.community.repository.BoardRepository
 import com.portfolio.community.repository.RoleRepository
@@ -33,7 +33,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 @SpringBootTest
 @AutoConfigureMockMvc
 @TestPropertySource(locations = ["classpath:application-test.properties"])
-class RoleControllerIntegrationTest {
+class RoleEntityControllerIntegrationTest {
 
     @Autowired private lateinit var mockMvc: MockMvc
     @Value("\${jwt.secret}") private lateinit var secretKey: String
@@ -42,7 +42,7 @@ class RoleControllerIntegrationTest {
     @Autowired private lateinit var userRepository: UserRepository
     @Autowired private lateinit var roleRepository: RoleRepository
 
-    private lateinit var level0Role: Role
+    private lateinit var level0Role: RoleEntity
     private lateinit var level0User: UserEntity
     private lateinit var staff: UserEntity
     private lateinit var admin: UserEntity
@@ -57,7 +57,7 @@ class RoleControllerIntegrationTest {
         userRepository.deleteAll()
         roleRepository.deleteAll()
 
-        level0Role = roleRepository.save(Role(name = "LV0", level = 0))
+        level0Role = roleRepository.save(RoleEntity(name = "LV0", level = 0))
         admin = userRepository.save(UserEntity(username = "Admin", password = "00000000", role = level0Role).apply { setAdmin() })
         staff = userRepository.save(UserEntity(username = "Staff", password = "00000000", role = level0Role).apply { setStaff() })
         level0User = userRepository.save(UserEntity(username = "LV0 User", password = "00000000", role = level0Role))
@@ -70,7 +70,7 @@ class RoleControllerIntegrationTest {
     @Test
     fun given_RoleExists_when_GetAllRoles_then_ReturnOkAndRoleList() {
         //Given
-        roleRepository.saveAll((1..5).map { Role(name = "LV$it", level = it) })
+        roleRepository.saveAll((1..5).map { RoleEntity(name = "LV$it", level = it) })
 
         //When
         val result = mockMvc.perform(get("/roles"))
@@ -212,7 +212,7 @@ class RoleControllerIntegrationTest {
     @Test
     fun given_ValidRequest_when_UpdateRole_then_ReturnOkAndUpdatedRole() {
         //Given
-        val testRole = roleRepository.save(Role(name = "LV1", level = 1))
+        val testRole = roleRepository.save(RoleEntity(name = "LV1", level = 1))
         val roleUpdateRequest = RoleUpdateRequest(name = "LV2", level = 2)
 
         //When
@@ -248,7 +248,7 @@ class RoleControllerIntegrationTest {
     @Test
     fun given_DuplicateName_when_UpdateRole_then_ReturnBadRequest() {
         //Given
-        val testRole = roleRepository.save(Role(name = "LV1", level = 1))
+        val testRole = roleRepository.save(RoleEntity(name = "LV1", level = 1))
         val roleUpdateRequest = RoleUpdateRequest(name = "LV0", level = 2)
 
         //When
@@ -268,7 +268,7 @@ class RoleControllerIntegrationTest {
     @Test
     fun given_BlankName_when_UpdateRole_then_ReturnBadRequest() {
         //Given
-        val testRole = roleRepository.save(Role(name = "LV1", level = 1))
+        val testRole = roleRepository.save(RoleEntity(name = "LV1", level = 1))
         val roleUpdateRequest = RoleUpdateRequest(name = "", level = 2)
 
         //When
@@ -287,7 +287,7 @@ class RoleControllerIntegrationTest {
     @Test
     fun given_DuplicateLevel_when_UpdateRole_then_ReturnBadRequest() {
         //Given
-        val testRole = roleRepository.save(Role(name = "LV1", level = 1))
+        val testRole = roleRepository.save(RoleEntity(name = "LV1", level = 1))
         val roleUpdateRequest = RoleUpdateRequest(name = "LV2", level = 0)
 
         //When
@@ -307,7 +307,7 @@ class RoleControllerIntegrationTest {
     @Test
     fun given_NullLevel_when_UpdateRole_then_ReturnBadRequest() {
         //Given
-        val testRole = roleRepository.save(Role(name = "LV1", level = 1))
+        val testRole = roleRepository.save(RoleEntity(name = "LV1", level = 1))
         val roleUpdateRequest = RoleUpdateRequest(name = "LV2", level = null)
 
         //When
@@ -326,7 +326,7 @@ class RoleControllerIntegrationTest {
     @Test
     fun given_UserIsNotAdmin_when_UpdateRole_then_ReturnForbidden() {
         //Given
-        val testRole = roleRepository.save(Role(name = "LV1", level = 1))
+        val testRole = roleRepository.save(RoleEntity(name = "LV1", level = 1))
         val roleUpdateRequest = RoleUpdateRequest(name = "LV2", level = 2)
 
         //When
@@ -345,7 +345,7 @@ class RoleControllerIntegrationTest {
     @Test
     fun given_ValidRequest_when_DeleteRole_then_ReturnOkAndMoveToDefaultRole() {
         //Given
-        val testRole = roleRepository.save(Role(name = "LV1", level = 1))
+        val testRole = roleRepository.save(RoleEntity(name = "LV1", level = 1))
         userRepository.saveAll((1..5).map { UserEntity(username = "User $it", password = "password", role = testRole) })
         boardRepository.saveAll((1..5).map { BoardEntity(name = "Board $it", priority = it-1, readableRole = testRole) })
 
@@ -392,10 +392,10 @@ class RoleControllerIntegrationTest {
     @Test
     fun given_ValidRequest_when_DeleteRoleAndMoveBoardsAndUsers_then_ReturnOkAndReturnTargetRole() {
         //Given
-        val sourceRole = roleRepository.save(Role(name = "LV1", level = 1))
+        val sourceRole = roleRepository.save(RoleEntity(name = "LV1", level = 1))
         userRepository.saveAll((1..5).map { UserEntity(username = "User $it", password = "password", role = sourceRole) })
         boardRepository.saveAll((1..5).map { BoardEntity(name = "Board $it", priority = it-1, readableRole = sourceRole) })
-        val targetRole = roleRepository.save(Role(name = "LV2", level = 2))
+        val targetRole = roleRepository.save(RoleEntity(name = "LV2", level = 2))
 
         //When
         val result = mockMvc.perform(delete("/roles/{sourceRoleId}/transfer/{targetRoleId}", sourceRole.id, targetRole.id)
@@ -414,7 +414,7 @@ class RoleControllerIntegrationTest {
     @Test
     fun given_SourceAndTargetEquals_when_DeleteRoleAndMoveBoardsAndUsers_then_ReturnBadRequest() {
         //Given
-        val sourceRole = roleRepository.save(Role(name = "LV1", level = 1))
+        val sourceRole = roleRepository.save(RoleEntity(name = "LV1", level = 1))
         userRepository.saveAll((1..5).map { UserEntity(username = "User $it", password = "password", role = sourceRole) })
         boardRepository.saveAll((1..5).map { BoardEntity(name = "Board $it", priority = it-1, readableRole = sourceRole) })
 
@@ -431,7 +431,7 @@ class RoleControllerIntegrationTest {
 
     @Test
     fun given_InvalidSourceRoleId_when_DeleteRoleAndMoveBoardsAndUsers_then_ReturnNotFound() {
-        val targetRole = roleRepository.save(Role(name = "LV2", level = 2))
+        val targetRole = roleRepository.save(RoleEntity(name = "LV2", level = 2))
 
         //When
         val result = mockMvc.perform(delete("/roles/{sourceRoleId}/transfer/{targetRoleId}", -1, targetRole.id)
@@ -447,7 +447,7 @@ class RoleControllerIntegrationTest {
     @Test
     fun given_InvalidTargetRoleId_when_DeleteRoleAndMoveBoardsAndUsers_then_ReturnNotFound() {
         //Given
-        val sourceRole = roleRepository.save(Role(name = "LV1", level = 1))
+        val sourceRole = roleRepository.save(RoleEntity(name = "LV1", level = 1))
         userRepository.saveAll((1..5).map { UserEntity(username = "User $it", password = "password", role = sourceRole) })
         boardRepository.saveAll((1..5).map { BoardEntity(name = "Board $it", priority = it-1, readableRole = sourceRole) })
 
@@ -465,10 +465,10 @@ class RoleControllerIntegrationTest {
     @Test
     fun given_UserIsNotAdmin_when_DeleteRoleAndMoveBoardsAndUsers_then_ReturnForbidden() {
         //Given
-        val sourceRole = roleRepository.save(Role(name = "LV1", level = 1))
+        val sourceRole = roleRepository.save(RoleEntity(name = "LV1", level = 1))
         userRepository.saveAll((1..5).map { UserEntity(username = "User $it", password = "password", role = sourceRole) })
         boardRepository.saveAll((1..5).map { BoardEntity(name = "Board $it", priority = it-1, readableRole = sourceRole) })
-        val targetRole = roleRepository.save(Role(name = "LV2", level = 2))
+        val targetRole = roleRepository.save(RoleEntity(name = "LV2", level = 2))
 
         //When
         val result = mockMvc.perform(delete("/roles/{sourceRoleId}/transfer/{targetRoleId}", sourceRole.id, targetRole.id)
@@ -486,7 +486,7 @@ class RoleControllerIntegrationTest {
         //Given
         //level 0~6까지 존재. 0~4를 1씩 올린 뒤, 새로운 0을 생성, 그리고 5는 삭제하며 6에 병합
         val roles = mutableListOf(level0Role)
-        roles.addAll(roleRepository.saveAll((1..6).map { Role(name = "LV$it", level = it) }))
+        roles.addAll(roleRepository.saveAll((1..6).map { RoleEntity(name = "LV$it", level = it) }))
         val batchUpdateRequest = RoleBatchUpdateRequest(
             updates = (0..4).map { Pair(roles[it].id, RoleUpdateRequest(name = "Updated LV${it+1}", level = it+1)) },
             creates = listOf(RoleCreateRequest(name = "New LV0", level = 0)),

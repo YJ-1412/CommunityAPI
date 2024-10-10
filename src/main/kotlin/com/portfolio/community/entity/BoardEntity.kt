@@ -2,11 +2,11 @@ package com.portfolio.community.entity
 
 import jakarta.persistence.*
 
-@Entity
+@Entity(name = "boards")
 class BoardEntity(
     name: String,
     priority: Int,
-    readableRole: Role,
+    readableRole: RoleEntity,
     id: Long = 0
 ) {
     @Id
@@ -29,10 +29,10 @@ class BoardEntity(
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "role_id")
-    var readableRole: Role = readableRole
+    var readableRole: RoleEntity = readableRole
         protected set
 
-    fun update(name: String = this.name, priority: Int = this.priority, readableRole: Role = this.readableRole) {
+    fun update(name: String = this.name, priority: Int = this.priority, readableRole: RoleEntity = this.readableRole) {
         this.name = name
         this.priority = priority
 

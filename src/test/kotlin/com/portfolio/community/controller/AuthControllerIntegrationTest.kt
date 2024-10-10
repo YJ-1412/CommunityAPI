@@ -5,7 +5,7 @@ import com.portfolio.community.configuration.JwtTokenProvider
 import com.portfolio.community.dto.user.RefreshTokenRequest
 import com.portfolio.community.dto.user.LoginRequest
 import com.portfolio.community.dto.user.UserCreateRequest
-import com.portfolio.community.entity.Role
+import com.portfolio.community.entity.RoleEntity
 import com.portfolio.community.entity.UserEntity
 import com.portfolio.community.repository.RoleRepository
 import com.portfolio.community.repository.UserRepository
@@ -38,14 +38,14 @@ class AuthControllerIntegrationTest {
     @Autowired private lateinit var userRepository: UserRepository
     @Autowired private lateinit var roleRepository: RoleRepository
 
-    private lateinit var level0Role: Role
+    private lateinit var level0Role: RoleEntity
 
     @BeforeEach
     fun setup() {
         userRepository.deleteAll()
         roleRepository.deleteAll()
 
-        level0Role = roleRepository.save(Role(name = "LV0", level = 0))
+        level0Role = roleRepository.save(RoleEntity(name = "LV0", level = 0))
     }
 
     @Test

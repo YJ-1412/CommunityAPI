@@ -2,7 +2,7 @@ package com.portfolio.community.entity
 
 import jakarta.persistence.*
 
-@Entity
+@Entity(name = "comments")
 class CommentEntity (
     content: String,
     author: UserEntity,

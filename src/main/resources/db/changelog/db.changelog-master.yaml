@@ -2,14 +2,14 @@ databaseChangeLog:
   - include:
       file: db/changelog/1.0/create_table_app_config.yaml
   - include:
-      file: db/changelog/1.0/create_table_role.yaml
+      file: db/changelog/1.0/create_table_roles.yaml
   - include:
-      file: db/changelog/1.0/create_table_board.yaml
+      file: db/changelog/1.0/create_table_boards.yaml
   - include:
-      file: db/changelog/1.0/create_table_user.yaml
+      file: db/changelog/1.0/create_table_users.yaml
   - include:
-      file: db/changelog/1.0/create_table_post.yaml
+      file: db/changelog/1.0/create_table_posts.yaml
   - include:
-      file: db/changelog/1.0/create_table_comment.yaml
+      file: db/changelog/1.0/create_table_comments.yaml
   - include:
       file: db/changelog/1.0/create_table_user_like_post.yaml
